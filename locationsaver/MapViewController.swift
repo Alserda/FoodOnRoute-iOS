@@ -12,7 +12,6 @@ import MapKit
 class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
     let mapView = MKMapView()
-    var currentLocation = CLLocationCoordinate2D()
     var timer : NSTimer? = nil
     
     
@@ -22,10 +21,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         locationManager.start()
         addMapView()
         
-        print(currentLocation)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "getCurrentCoordinates", userInfo: nil, repeats: true)
-        
-        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateMapWithCurrentLocation", userInfo: nil, repeats: true)
     }
     
     func addMapView() {
@@ -36,22 +32,12 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 
     }
     
-    func updateMapRegion(coordinates: CLLocationCoordinate2D) {
+    func updateMapWithCurrentLocation() {
         let spanX = 0.007
         let spanY = 0.007
         
-        let newRegion = MKCoordinateRegionMake(coordinates, MKCoordinateSpanMake(spanX, spanY))
+        let newRegion = MKCoordinateRegionMake(locationManager.retrieveCurrentLocation(), MKCoordinateSpanMake(spanX, spanY))
         
         mapView.setRegion(newRegion, animated: true)
-    }
-    
-    func timerFunc() {
-        print("timerFunc()")
-    }
-    
-    func getCurrentCoordinates() {
-        currentLocation = locationManager.retrieveCurrentLocation()
-        print(currentLocation)
-        updateMapRegion(currentLocation)
     }
 }

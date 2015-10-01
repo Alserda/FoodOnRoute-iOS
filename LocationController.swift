@@ -19,12 +19,9 @@ class LocationController : NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        print("\(__FUNCTION__)")
-        
     }
     
     func start() {
-        print("\(__FUNCTION__)")
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -32,22 +29,11 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     
     func stop() {
         locationManager.stopUpdatingLocation()
-        print("\(__FUNCTION__)")
     }
     
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print("\(__FUNCTION__)")
-
         currentLocation = (manager.location?.coordinate)!
-        
-//        print(currentLocation)
-
-
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("\(__error())")
     }
     
     func retrieveCurrentLocation() -> CLLocationCoordinate2D {
