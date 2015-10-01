@@ -11,7 +11,7 @@ import CoreLocation
 
 class LocationController : NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    var currentLocation = NSDictionary()
+    var currentLocation = CLLocationCoordinate2D()
     var pinnedLocations = NSMutableArray()
     
     override init() {
@@ -35,19 +35,11 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        print("\(__FUNCTION__)")
-        print("\(locations[0])")
-        
-        let currentLocationLatitiude : Double = (manager.location?.coordinate.latitude)!
-        let currentLocationLongitude : Double = (manager.location?.coordinate.longitude)!
-        
-        let currentCoordinate : CLLocationCoordinate2D = (manager.location?.coordinate)!
-        
-        currentLocation = ["latitude": currentLocationLatitiude, "longitude": currentLocationLongitude]
+
+        currentLocation = (manager.location?.coordinate)!
         
         print(currentLocation)
-        
 
-        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
