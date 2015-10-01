@@ -6,7 +6,7 @@
 //  Copyright © 2015 Peter Alserda. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 class LocationController : NSObject, CLLocationManagerDelegate {
@@ -36,9 +36,21 @@ class LocationController : NSObject, CLLocationManagerDelegate {
         currentLocation = (manager.location?.coordinate)!
     }
     
+    func registerCurrentLocation(sender: UIButton!) {
+        let currentLocationDictionary : NSDictionary = ["latitude": currentLocation.latitude, "longitude": currentLocation.longitude]
+        
+        if pinnedLocations.containsObject(currentLocationDictionary) {
+            print("Already contains this coordinate")
+        }
+        else {
+            print("Does not contain yet, adding it now!")
+            self.pinnedLocations.addObject(currentLocationDictionary)
+            print(pinnedLocations.count)
+        }
+    }
+    
     func retrieveCurrentLocation() -> CLLocationCoordinate2D {
         return currentLocation
-
     }
     
 }

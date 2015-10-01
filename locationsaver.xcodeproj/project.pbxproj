@@ -15,6 +15,7 @@
 		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; settings = {ASSET_TAGS = (); }; };
 		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
+		A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsaverTests.swift; sourceTree = "<group>"; };
 		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = ../LocationController.swift; sourceTree = "<group>"; };
 		A899B48A1BBD8C770070C07F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A899B48D1BBDD0AB0070C07F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
 				A889B2F91BA186DB0030AFB9 /* ViewController.swift */,
+				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
 				A899B4881BBD8B380070C07F /* LocationController.swift */,
 				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
 				A889B2FE1BA186DB0030AFB9 /* Images.xcassets */,
@@ -224,6 +227,7 @@
 			files = (
 				A889B2FA1BA186DB0030AFB9 /* ViewController.swift in Sources */,
 				A899B4891BBD8B380070C07F /* LocationController.swift in Sources */,
+				A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */,
 				A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */,
 				A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */,
 			);
@@ -348,6 +352,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = locationsaver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -362,6 +367,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = locationsaver/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
