@@ -44,7 +44,7 @@ class LocationController : NSObject, CLLocationManagerDelegate {
         }
         else {
             print("Does not contain yet, adding it now!")
-            self.pinnedLocations.addObject(currentLocationDictionary)
+            pinnedLocations.addObject(currentLocationDictionary)
             print(pinnedLocations.count)
         }
     }

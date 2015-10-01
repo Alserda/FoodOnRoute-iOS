@@ -44,14 +44,11 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         sendLocationButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
         sendLocationButton.addTarget(locationManager, action: "registerCurrentLocation:", forControlEvents: .TouchUpInside)
         mapView.addSubview(sendLocationButton)
-
-        
-        
     }
     
     
     
-    func updateMapWithCurrentLocation() {9
+    func updateMapWithCurrentLocation() {
         let newRegion = MKCoordinateRegionMake(locationManager.retrieveCurrentLocation(), MKCoordinateSpanMake(0.007, 0.007))
         
         mapView.setRegion(newRegion, animated: true)
