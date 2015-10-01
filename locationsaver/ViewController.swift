@@ -27,7 +27,6 @@ extension UIColor {
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     var locationManager:CLLocationManager!
-    var myLocations: [CLLocation] = []
     var locationDict = NSDictionary()
     var registeredLocations = NSMutableArray()
     
@@ -99,18 +98,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func locationManager(manager:CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        print("\(locations[0])")
-        myLocations.append(locations[0])
         
         let lat : NSNumber = NSNumber(double: manager.location!.coordinate.latitude)
         let lng : NSNumber = NSNumber(double: manager.location!.coordinate.longitude)
         
         self.locationDict = ["lat": lat, "lng": lng]
-        
-        
-
-        
-//        print(self.locationDict)
-        
+  
         let spanX = 0.007
         let spanY = 0.007
         
@@ -119,17 +112,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
         
         mapView.setRegion(newRegion, animated: true)
-        
-        if (myLocations.count > 1){
-            let sourceIndex = myLocations.count - 1
-            let destinationIndex = myLocations.count - 2
-            
-            let c1 = myLocations[sourceIndex].coordinate
-            let c2 = myLocations[destinationIndex].coordinate
-            var a = [c1, c2]
-            let polyline = MKPolyline(coordinates: &a, count: a.count)
-            mapView.addOverlay(polyline)
-        }
     }
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {

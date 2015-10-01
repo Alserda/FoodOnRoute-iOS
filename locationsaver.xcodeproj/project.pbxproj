@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A837CCB91BA6B4C8007B811F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
-		A837CCBB1BA6B4CE007B811F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCBA1BA6B4CE007B811F /* MapKit.framework */; };
 		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
 		A889B2FA1BA186DB0030AFB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F91BA186DB0030AFB9 /* ViewController.swift */; };
 		A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A889B2FE1BA186DB0030AFB9 /* Images.xcassets */; };
 		A889B3021BA186DB0030AFB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A889B3001BA186DB0030AFB9 /* LaunchScreen.xib */; };
 		A889B30E1BA186DB0030AFB9 /* locationsaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */; };
+		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; settings = {ASSET_TAGS = (); }; };
+		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		A889B3071BA186DB0030AFB9 /* locationsaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationsaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsaverTests.swift; sourceTree = "<group>"; };
+		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = ../LocationController.swift; sourceTree = "<group>"; };
+		A899B48A1BBD8C770070C07F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,8 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A837CCBB1BA6B4CE007B811F /* MapKit.framework in Frameworks */,
-				A837CCB91BA6B4C8007B811F /* CoreLocation.framework in Frameworks */,
+				A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,8 @@
 			children = (
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
 				A889B2F91BA186DB0030AFB9 /* ViewController.swift */,
+				A899B4881BBD8B380070C07F /* LocationController.swift */,
+				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
 				A889B2FE1BA186DB0030AFB9 /* Images.xcassets */,
 				A889B3001BA186DB0030AFB9 /* LaunchScreen.xib */,
 				A889B2F51BA186DB0030AFB9 /* Supporting Files */,
@@ -162,7 +166,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Peter Alserda";
 				TargetAttributes = {
 					A889B2F11BA186DB0030AFB9 = {
@@ -219,7 +223,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A889B2FA1BA186DB0030AFB9 /* ViewController.swift in Sources */,
+				A899B4891BBD8B380070C07F /* LocationController.swift in Sources */,
 				A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */,
+				A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +280,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -342,6 +349,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = locationsaver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -355,6 +363,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = locationsaver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -374,6 +383,7 @@
 				);
 				INFOPLIST_FILE = locationsaverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locationsaver.app/locationsaver";
 			};
@@ -389,6 +399,7 @@
 				);
 				INFOPLIST_FILE = locationsaverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "peter.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/locationsaver.app/locationsaver";
 			};
