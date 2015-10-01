@@ -40,6 +40,8 @@ class LocationController : NSObject, CLLocationManagerDelegate {
         let currentLocationLatitiude : Double = (manager.location?.coordinate.latitude)!
         let currentLocationLongitude : Double = (manager.location?.coordinate.longitude)!
         
+        let currentCoordinate : CLLocationCoordinate2D = (manager.location?.coordinate)!
+        
         currentLocation = ["latitude": currentLocationLatitiude, "longitude": currentLocationLongitude]
         
         print(currentLocation)

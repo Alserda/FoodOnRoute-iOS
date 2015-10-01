@@ -107,9 +107,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let spanX = 0.007
         let spanY = 0.007
         
+        let currentCoordinate : CLLocationCoordinate2D = (manager.location?.coordinate)!
         
-        
-        let newRegion = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: MKCoordinateSpanMake(spanX, spanY))
+        let newRegion = MKCoordinateRegionMake(currentCoordinate, MKCoordinateSpanMake(spanX, spanY))
         
         mapView.setRegion(newRegion, animated: true)
     }
