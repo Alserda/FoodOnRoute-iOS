@@ -6,7 +6,7 @@
 //  Copyright © 2015 Peter Alserda. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import CoreLocation
 
 class LocationController : NSObject, CLLocationManagerDelegate {
@@ -21,34 +21,37 @@ class LocationController : NSObject, CLLocationManagerDelegate {
         
     }
     
+    /* Starts the process of retrieving locations. */
     func start() {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        
     }
     
+    /* Stops retrieving locations. */
     func stop() {
         locationManager.stopUpdatingLocation()
     }
     
-    
+    /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = (manager.location?.coordinate)!
     }
     
-    func registerCurrentLocation(sender: UIButton!) {
+    /* Registers the current coordinate with the rest of the registered coordinates. */
+    func registerCurrentLocation(afterLogin: (success: Bool) -> Void) {
         let currentLocationDictionary : NSDictionary = ["latitude": currentLocation.latitude, "longitude": currentLocation.longitude]
         
         if pinnedLocations.containsObject(currentLocationDictionary) {
-            print("Already contains this coordinate")
+            afterLogin(success: false)
         }
         else {
-            print("Does not contain yet, adding it now!")
+            afterLogin(success: true)
             pinnedLocations.addObject(currentLocationDictionary)
             print(pinnedLocations.count)
         }
     }
     
+    /* Sends back the last-updated coordinates. */
     func retrieveCurrentLocation() -> CLLocationCoordinate2D {
         return currentLocation
     }
