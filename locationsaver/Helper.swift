@@ -26,5 +26,5 @@ extension UIColor {
 
 /* Collects debug messages and displays this in DebugViewController */
 struct Debugger {
-    static var Messages : [String] = [String]()
+    static var messages : [String] = [String]()
 }

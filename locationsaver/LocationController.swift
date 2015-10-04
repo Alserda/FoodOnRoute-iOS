@@ -35,8 +35,8 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = (manager.location?.coordinate)!
-        Debugger.Messages.append("Last location: \(currentLocation)")
-        print(Debugger.Messages.last!)
+        Debugger.messages.append("Lat: \(currentLocation.latitude) - Long: \(currentLocation.longitude) ")
+        print(Debugger.messages.last!)
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */

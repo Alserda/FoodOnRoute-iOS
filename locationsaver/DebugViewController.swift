@@ -26,13 +26,14 @@ class DebugViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Debugger.Messages.count
+        return Debugger.messages.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         
-        cell?.textLabel?.text = Debugger.Messages.first
+        cell?.textLabel?.text = Debugger.messages.reverse()[indexPath.row]
+        cell?.textLabel?.font = UIFont.systemFontOfSize(15)
         return cell!
         
     }
