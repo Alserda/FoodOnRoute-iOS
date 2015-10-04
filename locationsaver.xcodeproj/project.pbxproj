@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* DebugViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
 		A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A889B2FE1BA186DB0030AFB9 /* Images.xcassets */; };
 		A889B3021BA186DB0030AFB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A889B3001BA186DB0030AFB9 /* LaunchScreen.xib */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A82E11BB1BC1B1C30031558C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		A837CCB81BA6B4C8007B811F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A837CCBA1BA6B4CE007B811F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A889B2F21BA186DB0030AFB9 /* locationsaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locationsaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
+				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
 				A899B4881BBD8B380070C07F /* LocationController.swift */,
 				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
@@ -226,6 +229,7 @@
 				A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */,
 				A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */,
 				A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */,
+				A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
