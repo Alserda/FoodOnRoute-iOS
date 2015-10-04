@@ -11,9 +11,10 @@ import UIKit
 class DebugViewController : UITableViewController {
     let locationManager = LocationController()
     var timer : NSTimer? = nil
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Debugger"
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "refreshTable", userInfo: nil, repeats: true)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")

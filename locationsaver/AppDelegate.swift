@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
         let tabBarController = UITabBarController()
+//        let animatedTabBar = tabBarController as! RAMAnimatedTabBarController
         
         let mapViewController = MapViewController()
         let debugViewController = DebugViewController()

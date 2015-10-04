@@ -15,9 +15,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     let mapView = MKMapView()
     var timer : NSTimer? = nil
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Map"
         
         locationManager.start()
         addMapView()
