@@ -12,13 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let locationManager = LocationController()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//        window?.rootViewController = MapViewController()
-        window?.rootViewController = DebugViewController()
+
+        let tabBarController = UITabBarController()
+        
+        let mapViewController = MapViewController()
+        let debugViewController = DebugViewController()
+        
+        tabBarController.viewControllers = [mapViewController, debugViewController]
+        tabBarController.selectedIndex = 0
+        
+        window?.rootViewController = tabBarController
         
         window?.makeKeyAndVisible()
         return true

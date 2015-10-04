@@ -14,15 +14,12 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     var currentLocation = CLLocationCoordinate2D()
     var pinnedLocations = NSMutableArray()
     
-    override init() {
-        super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-    }
     
     /* Starts the process of retrieving locations. */
     func start() {
+        print("Start Triggered")
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
     }
@@ -36,7 +33,7 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = (manager.location?.coordinate)!
         Debugger.messages.append("Lat: \(currentLocation.latitude) - Long: \(currentLocation.longitude) ")
-        print(Debugger.messages.last!)
+//        print(Debugger.messages.last!)
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */

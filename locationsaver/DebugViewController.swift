@@ -15,7 +15,6 @@ class DebugViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.start()
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "refreshTable", userInfo: nil, repeats: true)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         

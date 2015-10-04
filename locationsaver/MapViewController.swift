@@ -52,8 +52,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     /* Updates the users real-time location on the MapView. */
     func updateMapWithCurrentLocation() {
+
         let newRegion = MKCoordinateRegionMake(locationManager.retrieveCurrentLocation(), MKCoordinateSpanMake(0.007, 0.007))
-        
+//        print("New Region: \(newRegion)")
         mapView.setRegion(newRegion, animated: true)
     }
     
