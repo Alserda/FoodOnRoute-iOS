@@ -38,7 +38,7 @@
 		A889B3071BA186DB0030AFB9 /* locationsaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationsaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsaverTests.swift; sourceTree = "<group>"; };
-		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = ../LocationController.swift; sourceTree = "<group>"; };
+		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		A899B48A1BBD8C770070C07F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A899B48D1BBDD0AB0070C07F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
