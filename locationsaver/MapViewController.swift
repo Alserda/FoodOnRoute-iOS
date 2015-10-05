@@ -59,13 +59,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     /* Stores this location and adds an annotation to the MapView. */
     func pinThisLocation(sender: UIButton!) {
-        locationManager.registerCurrentLocation { (success) -> Void in
-            if (success) {
+        locationManager.registerCurrentLocation { (recievedParameters) -> Void in
+            if (recievedParameters.success) {
                 print(true)
                 
                 /* Add an annotation to the map if the registration was successful. */
                 let annotation = MKPointAnnotation()
-                annotation.coordinate = LastUpdatedLocation.lastLocation
+                annotation.coordinate = recievedParameters.coordinates
                 self.mapView.addAnnotation(annotation)
             }
             else {

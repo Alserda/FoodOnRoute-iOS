@@ -36,14 +36,15 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */
-    func registerCurrentLocation(afterLogin: (success: Bool) -> Void) {
-        let currentLocationDictionary : NSDictionary = ["latitude": LastUpdatedLocation.lastLocation.latitude, "longitude": LastUpdatedLocation.lastLocation.longitude]
+    func registerCurrentLocation(sentParameters: (success: Bool, coordinates: CLLocationCoordinate2D) -> Void) {
+        let lastCoordinates = LastUpdatedLocation.lastLocation
+        let currentLocationDictionary : NSDictionary = ["latitude": lastCoordinates.latitude, "longitude": lastCoordinates.longitude]
         
         if pinnedLocations.containsObject(currentLocationDictionary) {
-            afterLogin(success: false)
+            sentParameters(success: false, coordinates: lastCoordinates)
         }
         else {
-            afterLogin(success: true)
+            sentParameters(success: true, coordinates: lastCoordinates)
             pinnedLocations.addObject(currentLocationDictionary)
             print(pinnedLocations.count)
         }
