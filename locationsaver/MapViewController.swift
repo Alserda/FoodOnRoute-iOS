@@ -17,12 +17,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         
         addMapView()
         addSaveButton()
         
         /* A timer which retrieves the current location and updates it to the MapView. */
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateMapWithCurrentLocation", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "updateMapWithCurrentLocation", userInfo: nil, repeats: true)
     }
     
     /* Adds the MapView to the view. */
@@ -52,7 +53,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func updateMapWithCurrentLocation() {
 
         let newRegion = MKCoordinateRegionMake(Locations.lastLocation, MKCoordinateSpanMake(0.007, 0.007))
-//        print("New Region: \(newRegion)")
         mapView.setRegion(newRegion, animated: true)
     }
     
@@ -77,4 +77,26 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             }
         }
     }
+    
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+//        print("\(__FUNCTION__)")
+    }
+    
+    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+//        print("\(__FUNCTION__)")
+    }
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func mapViewWillStartLocatingUser(mapView: MKMapView) {
+//        print("\(__FUNCTION__)")
+    }
+    
+    func mapViewDidStopLocatingUser(mapView: MKMapView) {
+//        print("\(__FUNCTION__)")
+    }
+    
 }
