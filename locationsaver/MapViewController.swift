@@ -66,6 +66,10 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = recievedParameters.coordinates
                 self.mapView.addAnnotation(annotation)
+                
+                /* Debug purposes */
+                let coordinateLatitude = recievedParameters.coordinates.latitude, coordinateLongitude = recievedParameters.coordinates.longitude
+                Debugger.messages.append("Pinned || lat \(coordinateLatitude.format()), long \(coordinateLongitude.format())")
             }
             else {
                 /* Do nothing if the registration failed. */

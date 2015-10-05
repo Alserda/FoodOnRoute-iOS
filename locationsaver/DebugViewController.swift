@@ -30,7 +30,7 @@ class DebugViewController : UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         
-        cell?.textLabel?.text = Debugger.messages.reverse()[indexPath.row]
+        cell?.textLabel?.text = Debugger.messages[indexPath.row]
         cell?.textLabel?.font = UIFont.systemFontOfSize(15)
         return cell!
         

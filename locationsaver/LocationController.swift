@@ -29,7 +29,6 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Locations.lastLocation = (manager.location?.coordinate)!
-        Debugger.messages.append("Lat: \(Locations.lastLocation.latitude) - Long: \(Locations.lastLocation.longitude) ")
         print(Locations.lastLocation)
     }
     

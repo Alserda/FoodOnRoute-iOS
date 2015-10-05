@@ -31,6 +31,13 @@ extension CLLocationCoordinate2D {
     }
 }
 
+/* Formats Double */
+extension Double {
+    func format() -> String {
+        return NSString(format: "%0.4f", self) as String
+    }
+}
+
 /* Collects debug messages and displays this in DebugViewController. */
 struct Debugger {
     static var messages : [String] = [String]()
