@@ -19,7 +19,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         self.title = "Map"
         
-        locationManager.start()
         addMapView()
         addSaveButton()
         
@@ -53,7 +52,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     /* Updates the users real-time location on the MapView. */
     func updateMapWithCurrentLocation() {
 
-        let newRegion = MKCoordinateRegionMake(locationManager.retrieveCurrentLocation(), MKCoordinateSpanMake(0.007, 0.007))
+        let newRegion = MKCoordinateRegionMake(LastUpdatedLocation.lastLocation, MKCoordinateSpanMake(0.007, 0.007))
 //        print("New Region: \(newRegion)")
         mapView.setRegion(newRegion, animated: true)
     }
@@ -66,7 +65,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                 
                 /* Add an annotation to the map if the registration was successful. */
                 let annotation = MKPointAnnotation()
-                annotation.coordinate = self.locationManager.retrieveCurrentLocation()
+                annotation.coordinate = LastUpdatedLocation.lastLocation
                 self.mapView.addAnnotation(annotation)
             }
             else {

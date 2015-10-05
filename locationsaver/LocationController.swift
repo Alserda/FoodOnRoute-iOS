@@ -11,7 +11,6 @@ import CoreLocation
 
 class LocationController : NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    var currentLocation = CLLocationCoordinate2D()
     var pinnedLocations = NSMutableArray()
     
     
@@ -31,14 +30,14 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     
     /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = (manager.location?.coordinate)!
-        Debugger.messages.append("Lat: \(currentLocation.latitude) - Long: \(currentLocation.longitude) ")
-//        print(Debugger.messages.last!)
+        LastUpdatedLocation.lastLocation = (manager.location?.coordinate)!
+        Debugger.messages.append("Lat: \(LastUpdatedLocation.lastLocation.latitude) - Long: \(LastUpdatedLocation.lastLocation.longitude) ")
+        print(LastUpdatedLocation.lastLocation)
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */
     func registerCurrentLocation(afterLogin: (success: Bool) -> Void) {
-        let currentLocationDictionary : NSDictionary = ["latitude": currentLocation.latitude, "longitude": currentLocation.longitude]
+        let currentLocationDictionary : NSDictionary = ["latitude": LastUpdatedLocation.lastLocation.latitude, "longitude": LastUpdatedLocation.lastLocation.longitude]
         
         if pinnedLocations.containsObject(currentLocationDictionary) {
             afterLogin(success: false)
@@ -49,10 +48,5 @@ class LocationController : NSObject, CLLocationManagerDelegate {
             print(pinnedLocations.count)
         }
     }
-    
-    /* Sends back the last-updated coordinates. */
-    func retrieveCurrentLocation() -> CLLocationCoordinate2D {
-        return currentLocation
-    }
-    
+
 }

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabBarController.viewControllers = [mapViewController, debugViewController]
         tabBarController.selectedIndex = 0
-        
+        locationManager.start()
         window?.rootViewController = tabBarController
         
         window?.makeKeyAndVisible()

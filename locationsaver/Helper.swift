@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 /* Makes the use of hex colors possible */
 
@@ -27,4 +28,8 @@ extension UIColor {
 /* Collects debug messages and displays this in DebugViewController */
 struct Debugger {
     static var messages : [String] = [String]()
+}
+
+struct LastUpdatedLocation {
+    static var lastLocation : CLLocationCoordinate2D = CLLocationCoordinate2D()
 }
