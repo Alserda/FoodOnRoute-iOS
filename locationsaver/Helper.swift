@@ -9,8 +9,7 @@
 import UIKit
 import CoreLocation
 
-/* Makes the use of hex colors possible */
-
+/* Makes the use of hex colors possible. */
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
@@ -25,11 +24,20 @@ extension UIColor {
     }
 }
 
-/* Collects debug messages and displays this in DebugViewController */
+/* Makes it possible to compare coordinates. */
+extension CLLocationCoordinate2D {
+    func equals (c: CLLocationCoordinate2D) -> Bool {
+        return c.latitude == self.latitude && c.longitude == self.longitude
+    }
+}
+
+/* Collects debug messages and displays this in DebugViewController. */
 struct Debugger {
     static var messages : [String] = [String]()
 }
 
-struct LastUpdatedLocation {
+/* Handles location-related variables. */
+struct Locations {
     static var lastLocation : CLLocationCoordinate2D = CLLocationCoordinate2D()
+    static var pinnedLocations : [CLLocationCoordinate2D] = []
 }

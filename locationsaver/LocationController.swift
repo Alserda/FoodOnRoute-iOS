@@ -11,8 +11,6 @@ import CoreLocation
 
 class LocationController : NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-    var pinnedLocations = NSMutableArray()
-    
     
     /* Starts the process of retrieving locations. */
     func start() {
@@ -30,24 +28,26 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     
     /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        LastUpdatedLocation.lastLocation = (manager.location?.coordinate)!
-        Debugger.messages.append("Lat: \(LastUpdatedLocation.lastLocation.latitude) - Long: \(LastUpdatedLocation.lastLocation.longitude) ")
-        print(LastUpdatedLocation.lastLocation)
+        Locations.lastLocation = (manager.location?.coordinate)!
+        Debugger.messages.append("Lat: \(Locations.lastLocation.latitude) - Long: \(Locations.lastLocation.longitude) ")
+        print(Locations.lastLocation)
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */
     func registerCurrentLocation(sentParameters: (success: Bool, coordinates: CLLocationCoordinate2D) -> Void) {
-        let lastCoordinates = LastUpdatedLocation.lastLocation
-        let currentLocationDictionary : NSDictionary = ["latitude": lastCoordinates.latitude, "longitude": lastCoordinates.longitude]
-        
-        if pinnedLocations.containsObject(currentLocationDictionary) {
+        let lastCoordinates : CLLocationCoordinate2D = Locations.lastLocation
+
+        if (Locations.pinnedLocations.contains {$0.equals(lastCoordinates)}) {
             sentParameters(success: false, coordinates: lastCoordinates)
         }
         else {
+            Locations.pinnedLocations.append(lastCoordinates)
+            print(Locations.pinnedLocations.count)
             sentParameters(success: true, coordinates: lastCoordinates)
-            pinnedLocations.addObject(currentLocationDictionary)
-            print(pinnedLocations.count)
         }
     }
 
 }
+
+
+
