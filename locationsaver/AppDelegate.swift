@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mapViewController = MapViewController()
         let debugViewController = DebugViewController()
+        mapViewController.tabBarItem.title = "Map"
+        debugViewController.tabBarItem.title = "Debugger"
         
         tabBarController.viewControllers = [mapViewController, debugViewController]
         tabBarController.selectedIndex = 0

@@ -14,11 +14,9 @@ class DebugViewController : UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Debugger"
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "refreshTable", userInfo: nil, repeats: true)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
