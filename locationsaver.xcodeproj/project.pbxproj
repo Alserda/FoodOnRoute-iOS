@@ -7,21 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* DebugViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11CE1BC1D0370031558C /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C31BC1D0370031558C /* RAMBounceAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11CF1BC1D0370031558C /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C51BC1D0370031558C /* RAMFrameItemAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11D01BC1D0370031558C /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C71BC1D0370031558C /* RAMFumeAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11D11BC1D0370031558C /* RAMRotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C91BC1D0370031558C /* RAMRotationAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11D21BC1D0370031558C /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CB1BC1D0370031558C /* RAMTransitionItemAnimation.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11D31BC1D0370031558C /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CC1BC1D0370031558C /* RAMAnimatedTabBarController.swift */; settings = {ASSET_TAGS = (); }; };
-		A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CD1BC1D0370031558C /* RAMItemAnimationProtocol.swift */; settings = {ASSET_TAGS = (); }; };
+		A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* DebugViewController.swift */; };
+		A82E11CE1BC1D0370031558C /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C31BC1D0370031558C /* RAMBounceAnimation.swift */; };
+		A82E11CF1BC1D0370031558C /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C51BC1D0370031558C /* RAMFrameItemAnimation.swift */; };
+		A82E11D01BC1D0370031558C /* RAMFumeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C71BC1D0370031558C /* RAMFumeAnimation.swift */; };
+		A82E11D11BC1D0370031558C /* RAMRotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C91BC1D0370031558C /* RAMRotationAnimation.swift */; };
+		A82E11D21BC1D0370031558C /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CB1BC1D0370031558C /* RAMTransitionItemAnimation.swift */; };
+		A82E11D31BC1D0370031558C /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CC1BC1D0370031558C /* RAMAnimatedTabBarController.swift */; };
+		A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CD1BC1D0370031558C /* RAMItemAnimationProtocol.swift */; };
 		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
 		A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A889B2FE1BA186DB0030AFB9 /* Images.xcassets */; };
 		A889B30E1BA186DB0030AFB9 /* locationsaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */; };
-		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; settings = {ASSET_TAGS = (); }; };
-		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; };
+		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; };
 		A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
-		A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
+		A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* Helper.swift */; };
+		DE7AD940F41DB718B68493C8 /* Pods_locationsaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094176F64C5182F89F67257F /* Pods_locationsaver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		094176F64C5182F89F67257F /* Pods_locationsaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locationsaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EE031A0DB1F546DA03FE653 /* Pods-locationsaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.release.xcconfig"; sourceTree = "<group>"; };
 		A82E11BB1BC1B1C30031558C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		A82E11C31BC1D0370031558C /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		A82E11C51BC1D0370031558C /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		A899B48A1BBD8C770070C07F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A899B48D1BBDD0AB0070C07F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */,
+				DE7AD940F41DB718B68493C8 /* Pods_locationsaver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +160,8 @@
 				A889B2F41BA186DB0030AFB9 /* locationsaver */,
 				A889B30A1BA186DB0030AFB9 /* locationsaverTests */,
 				A889B2F31BA186DB0030AFB9 /* Products */,
+				EF2CF96A37C47FE0630FBD9C /* Pods */,
+				E8E555868DF04BD3BF8E746E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +214,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E8E555868DF04BD3BF8E746E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				094176F64C5182F89F67257F /* Pods_locationsaver.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF2CF96A37C47FE0630FBD9C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */,
+				5EE031A0DB1F546DA03FE653 /* Pods-locationsaver.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -214,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A889B3111BA186DB0030AFB9 /* Build configuration list for PBXNativeTarget "locationsaver" */;
 			buildPhases = (
+				D171EE9BC90879117E95F176 /* Check Pods Manifest.lock */,
 				A889B2EE1BA186DB0030AFB9 /* Sources */,
 				A889B2EF1BA186DB0030AFB9 /* Frameworks */,
 				A889B2F01BA186DB0030AFB9 /* Resources */,
+				3EFC305606F76E6E3226C6E5 /* Embed Pods Frameworks */,
+				040006CBC5E0F53AB9AB8E1E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,6 +328,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		040006CBC5E0F53AB9AB8E1E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3EFC305606F76E6E3226C6E5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D171EE9BC90879117E95F176 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A889B2EE1BA186DB0030AFB9 /* Sources */ = {
@@ -425,6 +500,7 @@
 		};
 		A889B3121BA186DB0030AFB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -440,6 +516,7 @@
 		};
 		A889B3131BA186DB0030AFB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EE031A0DB1F546DA03FE653 /* Pods-locationsaver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
