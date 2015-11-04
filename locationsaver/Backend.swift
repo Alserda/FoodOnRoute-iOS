@@ -18,18 +18,16 @@ let standsIndex = "\(baseURL)stands.json"
 
 class Backend {
 
-    class func getStandsData() {
+    class func getStandsData(sentParameters: (success: Bool, json: JSON) -> Void) {
         print("\(__FUNCTION__)")
         
         Alamofire.request(.GET, standsIndex)
-            .validate().responseJSON { response in
+            .validate()
+            .responseJSON { response in
                 switch response.result {
                 case .Success:
-                    print("Validation Succesful")
-                    
-                    let JSON = response.result.value!
-                    print("JSON: \(JSON)")
-                    
+                    let henk = JSON(response.result.value!)
+                    sentParameters(success: true, json: henk)
                     
                 case .Failure(let error):
                     print(error)

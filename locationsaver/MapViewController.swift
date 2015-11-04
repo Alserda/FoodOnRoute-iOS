@@ -9,6 +9,7 @@
 
 import UIKit
 import MapKit
+import SwiftyJSON
 
 class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
@@ -16,6 +17,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var timer : NSTimer? = nil
     var followButton = UIButton()
     var following : Bool = false
+    var retrievedData : JSON = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addMapView()
         addSaveButton()
         addFollowButton()
+        retrieveRequest()
+        
         
 //        let touch = UITapGestureRecognizer(target:self, action:"handleTouch:")
 //        mapView.addGestureRecognizer(touch)
@@ -174,5 +178,21 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 //    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
 //        print("\(__FUNCTION__)")
 //    }
+    
+    func retrieveRequest() {
+        print("\(__FUNCTION__)")
+        Backend.getStandsData { (retrievedParameters) -> Void in
+            if (retrievedParameters.success) {
+                print(true)
+                
+                self.retrievedData = retrievedParameters.json
+                print(self.retrievedData)
+            }
+            else {
+                print(false)
+            }
+        }
+        
+    }
     
 }
