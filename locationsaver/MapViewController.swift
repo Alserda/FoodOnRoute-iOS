@@ -14,6 +14,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
     let mapView = MKMapView()
     var timer : NSTimer? = nil
+    var followButton = UIButton()
+    var following : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +23,21 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         addMapView()
         addSaveButton()
+        addFollowButton()
         
-        /* A timer which retrieves the current location and updates it to the MapView. */
-        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateMapWithCurrentLocation", userInfo: nil, repeats: true)
+//        let touch = UITapGestureRecognizer(target:self, action:"handleTouch:")
+//        mapView.addGestureRecognizer(touch)
+        
+//    func handleTouch(sender:UITapGestureRecognizer) {
+//        followButton.backgroundColor = UIColor.brownColor()
+//        print("Touch triggered")
+//    }
     }
-    
     /* Adds the MapView to the view. */
     func addMapView() {
         mapView.mapType = .Standard
         mapView.showsUserLocation = true
+        mapView.userTrackingMode = .FollowWithHeading
         mapView.frame = self.view.frame
         view.addSubview(mapView)
     }
@@ -47,6 +55,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         sendLocationButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
         sendLocationButton.addTarget(self, action: "pinThisLocation:", forControlEvents: .TouchUpInside)
         mapView.addSubview(sendLocationButton)
+    }
+    
+    func addFollowButton() {
+        followButton.frame = CGRectMake(0, 0, 75, 75)
+        followButton.center = CGPointMake(self.view.frame.width / 2, CGRectGetMaxY(self.view.frame) - 500)
+        followButton.backgroundColor = UIColor.brownColor()
+        followButton.setTitle("Follow", forState: UIControlState.Normal)
+        followButton.setTitleColor(UIColor(netHex:0x00aced), forState: UIControlState.Normal)
+        followButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
+        followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
+        mapView.addSubview(followButton)
     }
     
     /* Updates the users real-time location on the MapView. */
@@ -78,25 +97,82 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         }
     }
     
-    
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-//        print("\(__FUNCTION__)")
+    func followUser(sender: UIButton!) {
+        if (following) {
+            mapView.userTrackingMode = .FollowWithHeading
+            followButton.backgroundColor = UIColor.blackColor()
+        } else {
+            
+
+        mapView.userTrackingMode = .Follow
+        following = true
+        print("following again")
+        followButton.backgroundColor = UIColor.brownColor()
+        }
     }
     
-    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-//        print("\(__FUNCTION__)")
-    }
-    
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+    func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
         print("\(__FUNCTION__)")
+        print("stopped following")
+        following = false
+        followButton.backgroundColor = UIColor.blueColor()
     }
+    
+    
+//    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+////        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+////        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+////        print("\(__FUNCTION__)")
+//    }
     
     func mapViewWillStartLocatingUser(mapView: MKMapView) {
-//        print("\(__FUNCTION__)")
+        print("\(__FUNCTION__)")
+        following = true
     }
-    
-    func mapViewDidStopLocatingUser(mapView: MKMapView) {
+//
+//    func mapViewDidStopLocatingUser(mapView: MKMapView) {
 //        print("\(__FUNCTION__)")
-    }
+//    }
+//    
+//    func mapViewWillStartLoadingMap(mapView: MKMapView) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: NSError) {
+//        print(error)
+//    }
+//    
+//    func mapViewWillStartRenderingMap(mapView: MKMapView) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+//    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+//        print("\(__FUNCTION__)")
+//    }
+//    
+////    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+////    }
+//    
+//    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
+//        print("\(__FUNCTION__)")
+//    }
     
 }
