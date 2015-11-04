@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
+    let backend = Backend()
     let mapView = MKMapView()
     var timer : NSTimer? = nil
     var followButton = UIButton()
@@ -178,21 +179,37 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 //    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
 //        print("\(__FUNCTION__)")
 //    }
+
+
+    
+    
+    //    func retrieveRequest() {
+//        print("\(__FUNCTION__)")
+//        Backend.getStandsData { (retrievedParameters) -> Void in
+//            if (retrievedParameters.success) {
+//                print(true)
+//
+//                self.retrievedData = retrievedParameters.json
+//                print(self.retrievedData)
+//            }
+//            else {
+//                print(false)
+//            }
+//        }
+//
+//    }
+    
+    
+    
+    
     
     func retrieveRequest() {
-        print("\(__FUNCTION__)")
-        Backend.getStandsData { (retrievedParameters) -> Void in
-            if (retrievedParameters.success) {
-                print(true)
-                
-                self.retrievedData = retrievedParameters.json
-                print(self.retrievedData)
-            }
-            else {
-                print(false)
-            }
+        backend.get("google") { (response) -> () in
+            print(response)
         }
         
     }
+
+    
     
 }

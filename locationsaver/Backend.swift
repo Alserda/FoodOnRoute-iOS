@@ -16,23 +16,52 @@ import SwiftyJSON
 let baseURL = "http://staging.foodonrouteapp.nl/"
 let standsIndex = "\(baseURL)stands.json"
 
+class ResponsePackage {
+    var success = false
+    var response: AnyObject? = nil
+    var error: NSError? = nil
+}
+
 class Backend {
 
-    class func getStandsData(sentParameters: (success: Bool, json: JSON) -> Void) {
-        print("\(__FUNCTION__)")
+//    class func getStandsData(sentParameters: (success: Bool, json: JSON) -> Void) {
+//        print("\(__FUNCTION__)")
+//        
+//        Alamofire.request(.GET, standsIndex)
+//            .validate()
+//            .responseJSON { response in
+//                switch response.result {
+//                case .Success:
+//                    let henk = JSON(response.result.value!)
+//                    sentParameters(success: true, json: henk)
+//                    
+//                case .Failure(let error):
+//                    print(error)
+//                }
+//        }
+//    }
+//    
+//    func getStandsData(sentParameters: (success: Bool, json: JSON) -> Void) {
+//        print("\(__FUNCTION__)")
+//        
+//        Alamofire.request(.GET, standsIndex)
+//            .validate()
+//            .responseJSON { response in
+//                switch response.result {
+//                case .Success:
+//                    let henk = JSON(response.result.value!)
+//                    sentParameters(success: true, json: henk)
+//                    
+//                case .Failure(let error):
+//                    print(error)
+//                }
+//        }
+//    }
+    
+    func get(apiEndPoint: NSString, completion: (response: Bool) -> ()) -> Void {
+        print(apiEndPoint)
+        completion(response: false)
         
-        Alamofire.request(.GET, standsIndex)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .Success:
-                    let henk = JSON(response.result.value!)
-                    sentParameters(success: true, json: henk)
-                    
-                case .Failure(let error):
-                    print(error)
-                }
-        }
     }
 }
 
