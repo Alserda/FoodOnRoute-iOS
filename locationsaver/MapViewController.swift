@@ -28,16 +28,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addSaveButton()
         addFollowButton()
         retrieveRequest()
-        
-        
-//        let touch = UITapGestureRecognizer(target:self, action:"handleTouch:")
-//        mapView.addGestureRecognizer(touch)
-        
-//    func handleTouch(sender:UITapGestureRecognizer) {
-//        followButton.backgroundColor = UIColor.brownColor()
-//        print("Touch triggered")
-//    }
     }
+    
     /* Adds the MapView to the view. */
     func addMapView() {
         mapView.mapType = .Standard
@@ -182,34 +174,10 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 
 
     
-    
-    //    func retrieveRequest() {
-//        print("\(__FUNCTION__)")
-//        Backend.getStandsData { (retrievedParameters) -> Void in
-//            if (retrievedParameters.success) {
-//                print(true)
-//
-//                self.retrievedData = retrievedParameters.json
-//                print(self.retrievedData)
-//            }
-//            else {
-//                print(false)
-//            }
-//        }
-//
-//    }
-    
-    
-    
-    
-    
     func retrieveRequest() {
-        backend.get("google") { (response) -> () in
+        backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
             print(response)
         }
         
     }
-
-    
-    
 }
