@@ -19,15 +19,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var followButton = UIButton()
     var following : Bool = false
     var retrievedData : JSON = []
+//    var standCoordinates : MKPointAnnotation = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
+        retrieveRequest()
         addMapView()
         addSaveButton()
         addFollowButton()
-        retrieveRequest()
+
+//        postStands()
     }
     
     /* Adds the MapView to the view. */
@@ -127,23 +129,23 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 //    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
 ////        print("\(__FUNCTION__)")
 //    }
-    
+//    
     func mapViewWillStartLocatingUser(mapView: MKMapView) {
         print("\(__FUNCTION__)")
         following = true
     }
-//
+
 //    func mapViewDidStopLocatingUser(mapView: MKMapView) {
 //        print("\(__FUNCTION__)")
 //    }
 //    
-//    func mapViewWillStartLoadingMap(mapView: MKMapView) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
-//        print("\(__FUNCTION__)")
-//    }
+    func mapViewWillStartLoadingMap(mapView: MKMapView) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
+        print("\(__FUNCTION__)")
+    }
 //    
 //    func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: NSError) {
 //        print(error)
@@ -171,13 +173,47 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 //    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
 //        print("\(__FUNCTION__)")
 //    }
-
-
+//
+//
     
     func retrieveRequest() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
+            self.retrievedData = response
+//            print(self.retrievedData)
+            self.placeAnnotations()
+        }
+    }
+    
+    func placeAnnotations() {
+
+        
+        for (key, value) in self.retrievedData {
+            print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
+            
+            let annotation = MKPointAnnotation()
+            
+            annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
+            annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
+            
+            self.mapView.addAnnotation(annotation)
+        }
+
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = recievedParameters.coordinates
+//        self.mapView.addAnnotation(annotation)
+    }
+    
+    func postStands() {
+        let parameters = [
+            "stand": [
+                "name": "Anne",
+                "street": "Zegge4",
+                "housenumber": 4,
+                "postalcode": "9285LS"
+            ]
+        ]
+        backend.postRequest(endpoint.foodOnRouteStandsIndex, params: parameters) { (response) -> () in
             print(response)
         }
-        
     }
 }

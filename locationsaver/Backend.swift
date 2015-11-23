@@ -15,8 +15,10 @@ import SwiftyJSON
 //let baseURL = "http://192.168.99.100/"
 
 struct endpoint {
-    static let foodOnRouteBaseURL : String = "http://staging.foodonrouteapp.nl/"
-    static let foodOnRouteStandsIndex : String = endpoint.foodOnRouteBaseURL + "stands.json"
+//    static let foodOnRouteBaseURL : String = "http://staging.foodonrouteapp.nl/"
+    static let foodOnRouteBaseURL : String = "http://staging.foodonrouteapp.nl/api/"
+//    static let foodOnRouteStandsIndex : String = endpoint.foodOnRouteBaseURL + "stands.json"
+    static let foodOnRouteStandsIndex : String = endpoint.foodOnRouteBaseURL + "stands"
 }
 
 class Backend {
@@ -31,6 +33,31 @@ class Backend {
                         let retrievedJSON = JSON(response.result.value!)
                         completion(response: retrievedJSON)
                     }
+        }
+    }
+    
+    func postRequest(endpoint: URLStringConvertible, params: [String : NSObject], completion: (response: JSON) -> ()) -> Void {
+        Alamofire
+            .request(.POST, endpoint, parameters: params, encoding: .JSON)
+            .responseJSON { response in
+//                print("RESULT:\(response.result)")
+//                print("DATA:\(response.data)")
+//                print("DEBUGDESCRIPTION:\(response.debugDescription)")
+//                print("DESCRIPTION:\(response.description)")
+//                print("REQUEST:\(response.request)")
+//                print("RESPONSE:\(response.response)")
+                
+                switch response.result {
+
+                case .Failure(let error):
+                    print(error)
+                case .Success:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        completion(response: json)
+                        print("JSON: \(json)")
+                    }
+                }
         }
     }
 }
