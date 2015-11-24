@@ -9,14 +9,12 @@
 
 import UIKit
 import MapKit
-import SwiftyJSON
 import RealmSwift
 
 class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
     let backend = Backend()
     let mapView = MKMapView()
-    var timer : NSTimer? = nil
     var followButton = UIButton()
     var following : Bool = false
     let realm = try! Realm()
@@ -24,15 +22,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        
+        /* Prints the Realm file location */
+        print(Realm.Configuration.defaultConfiguration.path)
+        
+        
         retrieveAndCacheStands()
         addMapView()
         addSaveButton()
         addFollowButton()
 //        postStands()
-        
-        print(Realm.Configuration.defaultConfiguration.path)
 
-        
     }
     
     /* Adds the MapView to the view. */
@@ -154,8 +154,41 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                     }
                 }
             })
+            self.placeAnnotations()
         }
     }
+    
+    func placeAnnotations() {
+        for value in self.realm.objects(Stand) {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+            annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+            self.mapView.addAnnotation(annotation)
+            print("Pin placed on \(value.id)")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func postStands() {
         let parameters = [
@@ -172,15 +205,15 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     
     func notepad() {
-        //            for (key, value) in response {
-        //                print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
-        //
-        //                let annotation = MKPointAnnotation()
-        //
-        //                annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
-        //                annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
-        //
-        //                self.mapView.addAnnotation(annotation)
-        //            }
+//                    for (key, value) in response {
+//                        print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
+//        
+//                        let annotation = MKPointAnnotation()
+//        
+//                        annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
+//                        annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
+//        
+//                        self.mapView.addAnnotation(annotation)
+//                    }
     }
 }
