@@ -11,7 +11,7 @@ import RealmSwift
 
 
 class Stand: Object {
-    dynamic var id = ""
+    dynamic var id: Int = 0
     dynamic var name = ""
     dynamic var latitude = 0.0
     dynamic var longitude = 0.0

@@ -19,6 +19,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var timer : NSTimer? = nil
     var followButton = UIButton()
     var following : Bool = false
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 
 //        postStands()
         print(Realm.Configuration.defaultConfiguration.path)
+        print(self.realm.objects(Stand))
     }
     
     /* Adds the MapView to the view. */
@@ -132,39 +134,16 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func retrieveRequest() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
-//            let realm = try! Realm()
-//            try! realm.write({ () -> Void in
-//                for (key, value) in response {
-//                    print(key, value)
-//                    let stand = response as! [NSDictionary]
-//                    print(stand)
-////                    print(value)
-////                    print(value["name"])
-//                }
-//            })
-            print(response)
-            let realm = try! Realm()
-            try! realm.write({ () -> Void in
+            try! self.realm.write({ () -> Void in
                 for (key, value) in response {
-//                    print(value["id"])
-//                    print(value["id"].string)
-//                    print(value["id"].int!)
-//                    let id = value["id"].string!
-//                    let name = value["name"].string!
-//                    let latitude = value["latitude"].double!
-//                    let longitude = value["longitude"].double!
-//                    print(key, id, name, latitude, longitude)
-                    
                     let stand = Stand()
-                    stand.id = key
+                    stand.id = value["id"].intValue
                     stand.name = value["name"].string!
                     stand.latitude = value["latitude"].double!
                     stand.longitude = value["longitude"].double!
-                    print(stand)
-                    realm.create(Stand.self, value: stand, update: true)
+                    self.realm.create(Stand.self, value: stand, update: true)
                 }
             })
-            
         }
     }
     
