@@ -10,6 +10,7 @@
 import UIKit
 import MapKit
 import SwiftyJSON
+import RealmSwift
 
 class MapViewController : UIViewController, MKMapViewDelegate {
     let locationManager = LocationController()
@@ -22,12 +23,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        retrieveRequest()
+//        retrieveRequest()
         addMapView()
         addSaveButton()
         addFollowButton()
 
 //        postStands()
+        print(Realm.Configuration.defaultConfiguration.path)
     }
     
     /* Adds the MapView to the view. */
@@ -130,16 +132,39 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func retrieveRequest() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
-            for (key, value) in response {
-                print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
-                
-                let annotation = MKPointAnnotation()
-                
-                annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
-                annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
-                
-                self.mapView.addAnnotation(annotation)
-            }
+//            let realm = try! Realm()
+//            try! realm.write({ () -> Void in
+//                for (key, value) in response {
+//                    print(key, value)
+//                    let stand = response as! [NSDictionary]
+//                    print(stand)
+////                    print(value)
+////                    print(value["name"])
+//                }
+//            })
+            print(response)
+            let realm = try! Realm()
+            try! realm.write({ () -> Void in
+                for (key, value) in response {
+//                    print(value["id"])
+//                    print(value["id"].string)
+//                    print(value["id"].int!)
+//                    let id = value["id"].string!
+//                    let name = value["name"].string!
+//                    let latitude = value["latitude"].double!
+//                    let longitude = value["longitude"].double!
+//                    print(key, id, name, latitude, longitude)
+                    
+                    let stand = Stand()
+                    stand.id = key
+                    stand.name = value["name"].string!
+                    stand.latitude = value["latitude"].double!
+                    stand.longitude = value["longitude"].double!
+                    print(stand)
+                    realm.create(Stand.self, value: stand, update: true)
+                }
+            })
+            
         }
     }
     
@@ -155,5 +180,18 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         backend.postRequest(endpoint.foodOnRouteStandsIndex, params: parameters) { (response) -> () in
             print(response)
         }
+    }
+    
+    func notepad() {
+        //            for (key, value) in response {
+        //                print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
+        //
+        //                let annotation = MKPointAnnotation()
+        //
+        //                annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
+        //                annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
+        //
+        //                self.mapView.addAnnotation(annotation)
+        //            }
     }
 }

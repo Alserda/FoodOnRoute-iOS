@@ -15,6 +15,7 @@
 		A82E11D21BC1D0370031558C /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CB1BC1D0370031558C /* RAMTransitionItemAnimation.swift */; };
 		A82E11D31BC1D0370031558C /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CC1BC1D0370031558C /* RAMAnimatedTabBarController.swift */; };
 		A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CD1BC1D0370031558C /* RAMItemAnimationProtocol.swift */; };
+		A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87CBFB91C0468D500C4E9AD /* Realm.swift */; };
 		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
 		A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A889B2FE1BA186DB0030AFB9 /* Images.xcassets */; };
 		A889B30E1BA186DB0030AFB9 /* locationsaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */; };
@@ -49,6 +50,7 @@
 		A82E11CD1BC1D0370031558C /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		A837CCB81BA6B4C8007B811F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A837CCBA1BA6B4CE007B811F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A87CBFB91C0468D500C4E9AD /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		A889B2F21BA186DB0030AFB9 /* locationsaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locationsaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B2F61BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
 				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
+				A87CBFB91C0468D500C4E9AD /* Realm.swift */,
 				A899B4881BBD8B380070C07F /* LocationController.swift */,
 				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
@@ -386,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A899B4891BBD8B380070C07F /* LocationController.swift in Sources */,
+				A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */,
 				A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */,
 				A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */,
 				A82E11D31BC1D0370031558C /* RAMAnimatedTabBarController.swift in Sources */,
