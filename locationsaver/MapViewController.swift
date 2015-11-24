@@ -18,8 +18,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var timer : NSTimer? = nil
     var followButton = UIButton()
     var following : Bool = false
-    var retrievedData : JSON = []
-//    var standCoordinates : MKPointAnnotation = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,28 +115,11 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         followButton.backgroundColor = UIColor.blueColor()
     }
     
-    
-//    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-////        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-////        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-////        print("\(__FUNCTION__)")
-//    }
-//    
     func mapViewWillStartLocatingUser(mapView: MKMapView) {
         print("\(__FUNCTION__)")
         following = true
     }
 
-//    func mapViewDidStopLocatingUser(mapView: MKMapView) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
     func mapViewWillStartLoadingMap(mapView: MKMapView) {
         print("\(__FUNCTION__)")
     }
@@ -146,61 +127,20 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func mapViewDidFinishLoadingMap(mapView: MKMapView) {
         print("\(__FUNCTION__)")
     }
-//    
-//    func mapViewDidFailLoadingMap(mapView: MKMapView, withError error: NSError) {
-//        print(error)
-//    }
-//    
-//    func mapViewWillStartRenderingMap(mapView: MKMapView) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapViewDidFinishRenderingMap(mapView: MKMapView, fullyRendered: Bool) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapView(mapView: MKMapView, didFailToLocateUserWithError error: NSError) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
-//    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-//        print("\(__FUNCTION__)")
-//    }
-//    
-////    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-////    }
-//    
-//    func mapView(mapView: MKMapView, didAddOverlayRenderers renderers: [MKOverlayRenderer]) {
-//        print("\(__FUNCTION__)")
-//    }
-//
-//
     
     func retrieveRequest() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
-            self.retrievedData = response
-//            print(self.retrievedData)
-            self.placeAnnotations()
+            for (key, value) in response {
+                print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
+                
+                let annotation = MKPointAnnotation()
+                
+                annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
+                annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
+                
+                self.mapView.addAnnotation(annotation)
+            }
         }
-    }
-    
-    func placeAnnotations() {
-
-        
-        for (key, value) in self.retrievedData {
-            print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
-            
-            let annotation = MKPointAnnotation()
-            
-            annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
-            annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
-            
-            self.mapView.addAnnotation(annotation)
-        }
-
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = recievedParameters.coordinates
-//        self.mapView.addAnnotation(annotation)
     }
     
     func postStands() {
