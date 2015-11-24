@@ -31,6 +31,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addMapView()
         addSaveButton()
         addFollowButton()
+        placeAnnotations()
 //        postStands()
 
     }
@@ -154,7 +155,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                     }
                 }
             })
-            self.placeAnnotations()
+//            self.placeAnnotations()
         }
     }
     
