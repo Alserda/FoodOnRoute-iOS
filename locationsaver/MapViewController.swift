@@ -24,26 +24,14 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        retrieveRequest()
+        retrieveAndCacheStands()
         addMapView()
         addSaveButton()
         addFollowButton()
-
 //        postStands()
+        
         print(Realm.Configuration.defaultConfiguration.path)
-        
-//        let query = self.realm.objects(Stand).filter("id = %@", 555)
-//        print(query)
-//        print(query.count)
-//        if (query.count != 0) {
-//            print(true)
-//            print("Bestaat al")
-//        }
-//        else {
-//            print(false)
-//            print("Maak nieuwe aan")
-//        }
-        
+
         
     }
     
@@ -145,39 +133,25 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         print("\(__FUNCTION__)")
     }
     
-    func retrieveRequest() {
+    func retrieveAndCacheStands() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
             try! self.realm.write({ () -> Void in
                 for (_, value) in response {
-                    let stand = Stand()
-                    stand.id = value["id"].intValue
-                    stand.name = value["name"].string!
-                    stand.latitude = value["latitude"].double!
-                    stand.longitude = value["longitude"].double!
+                    let query = self.realm.objects(Stand).filter("id = %@", value["id"].intValue)
 
-//                    self.realm.create(Stand.self, value: stand, update: true)
-                    
-                    
-                    let query = self.realm.objects(Stand).filter("id = %@", stand.id)
-//                    print(query)
-//                    print(query.count)
                     if (query.count != 0) {
-                        print("\(stand.id) Bestaat al")
+                        print("\(value["id"].intValue) Bestaat al")
                     }
                     else {
+                        let stand = Stand()
+                        stand.id = value["id"].intValue
+                        stand.name = value["name"].string!
+                        stand.latitude = value["latitude"].double!
+                        stand.longitude = value["longitude"].double!
                         print("\(stand.id) Bestaat nog niet, maak nieuwe aan")
                         self.realm.create(Stand.self, value: stand, update: true)
-                        print(self.realm.objects(Stand))
+                        print("\(self.realm.objects(Stand))")
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 }
             })
         }
