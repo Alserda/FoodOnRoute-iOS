@@ -24,14 +24,27 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-//        retrieveRequest()
+        retrieveRequest()
         addMapView()
         addSaveButton()
         addFollowButton()
 
 //        postStands()
         print(Realm.Configuration.defaultConfiguration.path)
-        print(self.realm.objects(Stand))
+        
+//        let query = self.realm.objects(Stand).filter("id = %@", 555)
+//        print(query)
+//        print(query.count)
+//        if (query.count != 0) {
+//            print(true)
+//            print("Bestaat al")
+//        }
+//        else {
+//            print(false)
+//            print("Maak nieuwe aan")
+//        }
+        
+        
     }
     
     /* Adds the MapView to the view. */
@@ -135,13 +148,36 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func retrieveRequest() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
             try! self.realm.write({ () -> Void in
-                for (key, value) in response {
+                for (_, value) in response {
                     let stand = Stand()
                     stand.id = value["id"].intValue
                     stand.name = value["name"].string!
                     stand.latitude = value["latitude"].double!
                     stand.longitude = value["longitude"].double!
-                    self.realm.create(Stand.self, value: stand, update: true)
+
+//                    self.realm.create(Stand.self, value: stand, update: true)
+                    
+                    
+                    let query = self.realm.objects(Stand).filter("id = %@", stand.id)
+//                    print(query)
+//                    print(query.count)
+                    if (query.count != 0) {
+                        print("\(stand.id) Bestaat al")
+                    }
+                    else {
+                        print("\(stand.id) Bestaat nog niet, maak nieuwe aan")
+                        self.realm.create(Stand.self, value: stand, update: true)
+                        print(self.realm.objects(Stand))
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             })
         }
