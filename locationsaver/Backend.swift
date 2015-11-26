@@ -22,13 +22,15 @@ struct endpoint {
 }
 
 class Backend {
-    func retrievePath(endpoint: URLStringConvertible, completion: (response: JSON) -> ()) -> Void {
+    func retrievePath(endpoint: URLStringConvertible, completion: (response: JSON) -> (), failed: (error: NSError) -> ()) -> Void {
         Alamofire
             .request(.GET, endpoint, encoding: .JSON)
             .responseJSON { response in
                 switch response.result {
                     case .Failure(let error):
                         print(error)
+                        print("Hij dut nait")
+                        failed(error: error)
                     case .Success:
                         let retrievedJSON = JSON(response.result.value!)
                         completion(response: retrievedJSON)

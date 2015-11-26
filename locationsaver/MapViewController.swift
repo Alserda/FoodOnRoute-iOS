@@ -24,14 +24,15 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         /* Prints the Realm file location */
-        print(Realm.Configuration.defaultConfiguration.path)
+        print(Realm.Configuration.defaultConfiguration.path!)
         
         
         retrieveAndCacheStands()
         addMapView()
         addSaveButton()
         addFollowButton()
-        placeAnnotations()
+        placeAnnotations(false)
+
 //        postStands()
 
     }
@@ -105,12 +106,10 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             mapView.userTrackingMode = .FollowWithHeading
             followButton.backgroundColor = UIColor.blackColor()
         } else {
-            
-
-        mapView.userTrackingMode = .Follow
-        following = true
-        print("following again")
-        followButton.backgroundColor = UIColor.brownColor()
+            mapView.userTrackingMode = .Follow
+            following = true
+            print("following again")
+            followButton.backgroundColor = UIColor.brownColor()
         }
     }
     
@@ -121,74 +120,67 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         followButton.backgroundColor = UIColor.blueColor()
     }
     
-    func mapViewWillStartLocatingUser(mapView: MKMapView) {
-        print("\(__FUNCTION__)")
-        following = true
-    }
-
-    func mapViewWillStartLoadingMap(mapView: MKMapView) {
-        print("\(__FUNCTION__)")
+    
+    
+    func viewForAnnotation(annotation: MKAnnotation) -> MKAnnotationView? {
+        return nil
     }
     
-    func mapViewDidFinishLoadingMap(mapView: MKMapView) {
-        print("\(__FUNCTION__)")
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func retrieveAndCacheStands() {
-        backend.retrievePath(endpoint.foodOnRouteStandsIndex) { (response) -> () in
+        backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
+            print(response)
             try! self.realm.write({ () -> Void in
                 for (_, value) in response {
-                    let query = self.realm.objects(Stand).filter("id = %@", value["id"].intValue)
-
-                    if (query.count != 0) {
-                        print("\(value["id"].intValue) Bestaat al")
-                    }
-                    else {
-                        let stand = Stand()
-                        stand.id = value["id"].intValue
-                        stand.name = value["name"].string!
-                        stand.latitude = value["latitude"].double!
-                        stand.longitude = value["longitude"].double!
-                        print("\(stand.id) Bestaat nog niet, maak nieuwe aan")
-                        self.realm.create(Stand.self, value: stand, update: true)
-                        print("\(self.realm.objects(Stand))")
-                    }
+                    let stand = Stand()
+                    stand.id = value["id"].intValue
+                    stand.name = value["name"].string!
+                    stand.latitude = value["latitude"].double!
+                    stand.longitude = value["longitude"].double!
+                    self.realm.create(Stand.self, value: stand, update: true)
                 }
+                self.placeAnnotations(true)
             })
-//            self.placeAnnotations()
+            }) { (error) -> () in
+                print(error)
+                // Show the user that new stands could not be loaded
         }
     }
-    
-    func placeAnnotations() {
+
+    func placeAnnotations(refresh: Bool) {
+        if (refresh) {
+            mapView.removeAnnotations(mapView.annotations)
+        }
         for value in self.realm.objects(Stand) {
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+            annotation.title = "Henk"
+            annotation.subtitle = "Holtrop"
             self.mapView.addAnnotation(annotation)
             print("Pin placed on \(value.id)")
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     func postStands() {
@@ -203,18 +195,5 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         backend.postRequest(endpoint.foodOnRouteStandsIndex, params: parameters) { (response) -> () in
             print(response)
         }
-    }
-    
-    func notepad() {
-//                    for (key, value) in response {
-//                        print("Key:\(key)", "Latitude:\(value["latitude"]) & Longitude:\(value["longitude"])")
-//        
-//                        let annotation = MKPointAnnotation()
-//        
-//                        annotation.coordinate.latitude = Double(value["latitude"].stringValue)! as CLLocationDegrees
-//                        annotation.coordinate.longitude = Double(value["longitude"].stringValue)! as CLLocationDegrees
-//        
-//                        self.mapView.addAnnotation(annotation)
-//                    }
     }
 }
