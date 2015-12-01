@@ -29,7 +29,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         retrieveAndCacheStands()
         addMapView()
-        addSaveButton()
         addFollowButton()
         placeAnnotations(false)
 
@@ -44,21 +43,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         mapView.userTrackingMode = .FollowWithHeading
         mapView.frame = self.view.frame
         view.addSubview(mapView)
-    }
-    
-    /* Adds a button to save locations with. */
-    func addSaveButton() {
-        let sendLocationButton = UIButton(frame: CGRectMake(0, 0, 75, 75))
-        sendLocationButton.center = CGPointMake(self.view.frame.width / 2, CGRectGetMaxY(self.view.frame) - 100)
-        sendLocationButton.backgroundColor = UIColor.whiteColor()
-        sendLocationButton.layer.borderColor = UIColor(netHex:0x00aced).CGColor
-        sendLocationButton.layer.borderWidth = 5
-        sendLocationButton.layer.cornerRadius = 37.5
-        sendLocationButton.setTitle("Save", forState: UIControlState.Normal)
-        sendLocationButton.setTitleColor(UIColor(netHex:0x00aced), forState: UIControlState.Normal)
-        sendLocationButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
-        sendLocationButton.addTarget(self, action: "pinThisLocation:", forControlEvents: .TouchUpInside)
-        mapView.addSubview(sendLocationButton)
     }
     
     func addFollowButton() {
@@ -121,30 +105,31 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     
     
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("\(__FUNCTION__)")
+    }
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        print("\(__FUNCTION__)")
+    }
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        print("\(__FUNCTION__)")
+    }
+    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+        print("\(__FUNCTION__)")
+    }
     
-    func viewForAnnotation(annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        print("\(__FUNCTION__)")
+    }
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        print("\(__FUNCTION__)")
+//        let henk = MKAnnotationView()
+//        henk.leftCalloutAccessoryView?.backgroundColor = UIColor.blackColor()
+//        return henk
         return nil
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     func retrieveAndCacheStands() {
@@ -178,7 +163,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             annotation.title = "Henk"
             annotation.subtitle = "Holtrop"
             self.mapView.addAnnotation(annotation)
-            print("Pin placed on \(value.id)")
+//            print("Pin placed on \(value.id)")
         }
     }
     
