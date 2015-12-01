@@ -46,11 +46,11 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     
     func addFollowButton() {
-        followButton.frame = CGRectMake(0, 0, 75, 75)
+        followButton.frame = CGRectMake(0, 0, 108, 94)
         followButton.center = CGPointMake(self.view.frame.width / 2, CGRectGetMaxY(self.view.frame) - 500)
-        
+        followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
         followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
-        //mapView.addSubview(followButton)
+        mapView.addSubview(followButton)
     }
     
     /* Updates the users real-time location on the MapView. */
@@ -85,12 +85,12 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func followUser(sender: UIButton!) {
         if (following) {
             mapView.userTrackingMode = .FollowWithHeading
-            followButton.backgroundColor = UIColor.blackColor()
+            followButton.setImage(UIImage(named: "LocationTrackerFollowDirection"), forState: UIControlState.Normal)
         } else {
             mapView.userTrackingMode = .Follow
             following = true
             print("following again")
-            followButton.backgroundColor = UIColor.brownColor()
+            followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
         }
     }
     
@@ -98,7 +98,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         print("\(__FUNCTION__)")
         print("stopped following")
         following = false
-        followButton.backgroundColor = UIColor.blueColor()
+        followButton.setImage(UIImage(named: "LocationTrackerStopFollow"), forState: UIControlState.Normal)
     }
     
     
