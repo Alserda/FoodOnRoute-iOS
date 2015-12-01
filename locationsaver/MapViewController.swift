@@ -48,12 +48,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     func addFollowButton() {
         followButton.frame = CGRectMake(0, 0, 75, 75)
         followButton.center = CGPointMake(self.view.frame.width / 2, CGRectGetMaxY(self.view.frame) - 500)
-        followButton.backgroundColor = UIColor.brownColor()
-        followButton.setTitle("Follow", forState: UIControlState.Normal)
-        followButton.setTitleColor(UIColor(netHex:0x00aced), forState: UIControlState.Normal)
-        followButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
+        
         followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
-        mapView.addSubview(followButton)
+        //mapView.addSubview(followButton)
     }
     
     /* Updates the users real-time location on the MapView. */

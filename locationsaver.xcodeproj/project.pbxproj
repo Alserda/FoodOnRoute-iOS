@@ -17,7 +17,6 @@
 		A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11CD1BC1D0370031558C /* RAMItemAnimationProtocol.swift */; };
 		A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87CBFB91C0468D500C4E9AD /* Realm.swift */; };
 		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
-		A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A889B2FE1BA186DB0030AFB9 /* Images.xcassets */; };
 		A889B30E1BA186DB0030AFB9 /* locationsaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */; };
 		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; };
 		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; };
@@ -54,7 +53,6 @@
 		A889B2F21BA186DB0030AFB9 /* locationsaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locationsaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B2F61BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A889B2FE1BA186DB0030AFB9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A889B3071BA186DB0030AFB9 /* locationsaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationsaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsaverTests.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
 				F84731611BEA38EE000B617C /* Backend.swift */,
-				A889B2FE1BA186DB0030AFB9 /* Images.xcassets */,
 				A889B2F51BA186DB0030AFB9 /* Supporting Files */,
 				A82E11BD1BC1CF680031558C /* Modules */,
 			);
@@ -322,7 +319,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
