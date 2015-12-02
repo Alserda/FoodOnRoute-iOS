@@ -21,6 +21,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        
+        let image = UIImage(named: "FoodOnRouteLogo")
+        imageView.image = image
+        
+
+//        self.navigationItem.title = "some title"
+        self.navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.translucent = false
+        
         mapView.delegate = self
         
         /* Prints the Realm file location */
@@ -29,13 +40,11 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         retrieveAndCacheStands()
         addMapView()
+//        addLogo()
         addFollowButton()
         placeAnnotations(false)
-
-//        postStands()
-
     }
-    
+        
     /* Adds the MapView to the view. */
     func addMapView() {
         mapView.mapType = .Standard
@@ -43,6 +52,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         mapView.userTrackingMode = .FollowWithHeading
         mapView.frame = self.view.frame
         view.addSubview(mapView)
+    }
+    
+    func addLogo() {
+        let foodOnRouteLogo = UIImageView(image: UIImage(named: "FoodOnRouteLogo"))
+        foodOnRouteLogo.frame = CGRectMake(0, 0, 200, 200);
+        foodOnRouteLogo.center = CGPointMake(self.view.frame.width / 2, self.view.frame.height / 2)
+        mapView.addSubview(foodOnRouteLogo)
     }
     
     func addFollowButton() {
@@ -120,9 +136,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         print("\(__FUNCTION__)")
-//        let henk = MKAnnotationView()
-//        henk.leftCalloutAccessoryView?.backgroundColor = UIColor.blackColor()
-//        return henk
         return nil
     }
     
@@ -161,21 +174,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             annotation.subtitle = "Holtrop"
             self.mapView.addAnnotation(annotation)
 //            print("Pin placed on \(value.id)")
-        }
-    }
-    
-    
-    func postStands() {
-        let parameters = [
-            "stand": [
-                "name": "Anne",
-                "street": "Zegge4",
-                "housenumber": 4,
-                "postalcode": "9285LS"
-            ]
-        ]
-        backend.postRequest(endpoint.foodOnRouteStandsIndex, params: parameters) { (response) -> () in
-            print(response)
         }
     }
 }

@@ -21,18 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
-        let tabBarController = UITabBarController()
-//        let animatedTabBar = tabBarController as! RAMAnimatedTabBarController
-        
+        let navController = UINavigationController()
         let mapViewController = MapViewController()
-        let debugViewController = DebugViewController()
-        mapViewController.tabBarItem.title = "Map"
-        debugViewController.tabBarItem.title = "Debugger"
+
+        navController.navigationBar.topItem?.title = "Map"
         
-        tabBarController.viewControllers = [mapViewController, debugViewController]
-        tabBarController.selectedIndex = 0
         locationManager.start()
-        window?.rootViewController = tabBarController
+        
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.tintColor = UIColor.greenColor()
+        navigationBarAppearance.barTintColor = UIColor.brownColor()
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        
+        
+        navController.viewControllers = [mapViewController]
+        window?.rootViewController = navController
         
         window?.makeKeyAndVisible()
         return true
