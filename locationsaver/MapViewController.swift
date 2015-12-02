@@ -8,26 +8,26 @@
 // Push test
 
 import UIKit
-import MapKit
 import RealmSwift
+import Mapbox
 
-class MapViewController : UIViewController, MKMapViewDelegate {
+class MapViewController : UIViewController, MGLMapViewDelegate {
     let locationManager = LocationController()
     let backend = Backend()
-    let mapView = MKMapView()
+    let mapView = MGLMapView()
     var followButton = UIButton()
     var following : Bool = false
     let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
+        self.mapView.delegate = self
         
         /* Prints the Realm file location */
         print(Realm.Configuration.defaultConfiguration.path!)
         
         
-        retrieveAndCacheStands()
+//        retrieveAndCacheStands()
         addMapView()
         addFollowButton()
         placeAnnotations(false)
@@ -38,11 +38,12 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     /* Adds the MapView to the view. */
     func addMapView() {
-        mapView.mapType = .Standard
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .FollowWithHeading
-        mapView.frame = self.view.frame
-        view.addSubview(mapView)
+        self.mapView.frame = view.bounds
+        self.mapView.styleURL = NSURL(string: "foodonroutemap.json")
+//        self.mapView.styleURL = MGLStyle.darkStyleURL()
+        self.mapView.showsUserLocation = true
+        self.mapView.userTrackingMode = .FollowWithHeading
+        view.addSubview(self.mapView)
     }
     
     func addFollowButton() {
@@ -53,14 +54,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         followButton.setTitleColor(UIColor(netHex:0x00aced), forState: UIControlState.Normal)
         followButton.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Highlighted)
         followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
-        mapView.addSubview(followButton)
-    }
-    
-    /* Updates the users real-time location on the MapView. */
-    func updateMapWithCurrentLocation() {
-
-        let newRegion = MKCoordinateRegionMake(Locations.lastLocation, MKCoordinateSpanMake(0.007, 0.007))
-        mapView.setRegion(newRegion, animated: true)
+        self.mapView.addSubview(followButton)
     }
     
     /* Stores this location and adds an annotation to the MapView. */
@@ -70,7 +64,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                 print(true)
                 
                 /* Add an annotation to the map if the registration was successful. */
-                let annotation = MKPointAnnotation()
+                let annotation = MGLPointAnnotation()
                 annotation.coordinate = recievedParameters.coordinates
                 self.mapView.addAnnotation(annotation)
                 
@@ -87,50 +81,36 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func followUser(sender: UIButton!) {
         if (following) {
-            mapView.userTrackingMode = .FollowWithHeading
+            self.mapView.userTrackingMode = .FollowWithHeading
             followButton.backgroundColor = UIColor.blackColor()
         } else {
-            mapView.userTrackingMode = .Follow
+            self.mapView.userTrackingMode = .Follow
             following = true
             print("following again")
             followButton.backgroundColor = UIColor.brownColor()
         }
     }
     
-    func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
+    func mapView(mapView: MGLMapView, didChangeUserTrackingMode mode: MGLUserTrackingMode, animated: Bool) {
         print("\(__FUNCTION__)")
         print("stopped following")
         following = false
         followButton.backgroundColor = UIColor.blueColor()
     }
     
-    
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("\(__FUNCTION__)")
-    }
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-        print("\(__FUNCTION__)")
-    }
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-        print("\(__FUNCTION__)")
-    }
-    func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-        print("\(__FUNCTION__)")
+    func mapView(mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        print("\(__FUNCTION__)")
+    func mapView(mapView: MGLMapView, imageForAnnotation annotation: MGLAnnotation) -> MGLAnnotationImage? {
+        var annotationImage = mapView.dequeueReusableAnnotationImageWithIdentifier("pisa")
+        
+        if annotationImage == nil {
+            let image = UIImage(named: "pisa")
+            annotationImage = MGLAnnotationImage(image: image!, reuseIdentifier: "pisa")
+        }
+        return annotationImage
     }
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("\(__FUNCTION__)")
-//        let henk = MKAnnotationView()
-//        henk.leftCalloutAccessoryView?.backgroundColor = UIColor.blackColor()
-//        return henk
-        return nil
-    }
-    
-
-    
     
     func retrieveAndCacheStands() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
@@ -144,26 +124,28 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                     stand.longitude = value["longitude"].double!
                     self.realm.create(Stand.self, value: stand, update: true)
                 }
-                self.placeAnnotations(true)
+
             })
+//            self.placeAnnotations(true)
+            
             }) { (error) -> () in
                 print(error)
                 // Show the user that new stands could not be loaded
         }
+
     }
 
     func placeAnnotations(refresh: Bool) {
-        if (refresh) {
-            mapView.removeAnnotations(mapView.annotations)
+        if (refresh && self.mapView.annotations?.count >= 1) {
+            self.mapView.removeAnnotations(self.mapView.annotations!)
         }
         for value in self.realm.objects(Stand) {
-            let annotation = MKPointAnnotation()
+            let annotation = MGLPointAnnotation()
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-            annotation.title = "Henk"
-            annotation.subtitle = "Holtrop"
+            annotation.title = value.name
             self.mapView.addAnnotation(annotation)
-//            print("Pin placed on \(value.id)")
+            print("Pin placed on \(value.id)")
         }
     }
     

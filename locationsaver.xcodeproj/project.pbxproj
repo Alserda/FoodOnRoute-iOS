@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A81394E91C0EFB7B008D33B6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A81394E81C0EFB7B008D33B6 /* Settings.bundle */; };
+		A81394EB1C0F06F3008D33B6 /* foodonroutemap.json in Resources */ = {isa = PBXBuildFile; fileRef = A81394EA1C0F06F3008D33B6 /* foodonroutemap.json */; };
 		A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* DebugViewController.swift */; };
 		A82E11CE1BC1D0370031558C /* RAMBounceAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C31BC1D0370031558C /* RAMBounceAnimation.swift */; };
 		A82E11CF1BC1D0370031558C /* RAMFrameItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11C51BC1D0370031558C /* RAMFrameItemAnimation.swift */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		094176F64C5182F89F67257F /* Pods_locationsaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locationsaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE031A0DB1F546DA03FE653 /* Pods-locationsaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.release.xcconfig"; sourceTree = "<group>"; };
+		A81394E81C0EFB7B008D33B6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A81394EA1C0F06F3008D33B6 /* foodonroutemap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = foodonroutemap.json; path = Settings.bundle/foodonroutemap.json; sourceTree = "<group>"; };
 		A82E11BB1BC1B1C30031558C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		A82E11C31BC1D0370031558C /* RAMBounceAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMBounceAnimation.swift; sourceTree = "<group>"; };
 		A82E11C51BC1D0370031558C /* RAMFrameItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMFrameItemAnimation.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 		A889B2F41BA186DB0030AFB9 /* locationsaver */ = {
 			isa = PBXGroup;
 			children = (
+				A81394E81C0EFB7B008D33B6 /* Settings.bundle */,
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
 				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
 				A87CBFB91C0468D500C4E9AD /* Realm.swift */,
@@ -188,6 +193,7 @@
 				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
 				F84731611BEA38EE000B617C /* Backend.swift */,
+				A81394EA1C0F06F3008D33B6 /* foodonroutemap.json */,
 				A889B2FE1BA186DB0030AFB9 /* Images.xcassets */,
 				A889B2F51BA186DB0030AFB9 /* Supporting Files */,
 				A82E11BD1BC1CF680031558C /* Modules */,
@@ -323,6 +329,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A889B2FF1BA186DB0030AFB9 /* Images.xcassets in Resources */,
+				A81394EB1C0F06F3008D33B6 /* foodonroutemap.json in Resources */,
+				A81394E91C0EFB7B008D33B6 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
