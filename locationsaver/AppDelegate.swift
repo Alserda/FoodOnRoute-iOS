@@ -28,11 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         locationManager.start()
         
-        let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = UIColor.greenColor()
-        navigationBarAppearance.barTintColor = UIColor.brownColor()
-        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+//        let navigationBarAppearance = UINavigationBar.appearance()
+//        navigationBarAppearance.tintColor = UIColor.greenColor()
+////        navigationBarAppearance.barTintColor = UIColor.clearColor()
+//        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.contentMode = .ScaleAspectFit
+        let image = UIImage(named: "FoodOnRouteLogo")
+        imageView.image = image
+        
+        mapViewController.navigationItem.titleView = imageView
         
         navController.viewControllers = [mapViewController]
         window?.rootViewController = navController

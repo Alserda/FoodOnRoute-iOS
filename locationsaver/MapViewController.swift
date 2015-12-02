@@ -21,16 +21,15 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        imageView.contentMode = .ScaleAspectFit
-        
-        let image = UIImage(named: "FoodOnRouteLogo")
-        imageView.image = image
-        
 
-//        self.navigationItem.title = "some title"
-        self.navigationItem.titleView = imageView
-        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+
+
+        
         
         mapView.delegate = self
         
@@ -40,7 +39,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         retrieveAndCacheStands()
         addMapView()
-//        addLogo()
         addFollowButton()
         placeAnnotations(false)
     }
@@ -54,16 +52,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         view.addSubview(mapView)
     }
     
-    func addLogo() {
-        let foodOnRouteLogo = UIImageView(image: UIImage(named: "FoodOnRouteLogo"))
-        foodOnRouteLogo.frame = CGRectMake(0, 0, 200, 200);
-        foodOnRouteLogo.center = CGPointMake(self.view.frame.width / 2, self.view.frame.height / 2)
-        mapView.addSubview(foodOnRouteLogo)
-    }
-    
     func addFollowButton() {
-        followButton.frame = CGRectMake(0, 0, 108, 94)
-        followButton.center = CGPointMake(self.view.frame.width / 2, CGRectGetMaxY(self.view.frame) - 500)
+        followButton.frame = CGRectMake(0, 50, 108, 94)
+        followButton.center = CGPointMake(self.view.frame.width / 2, (self.view.frame.height / 2) + 200)
         followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
         followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
         mapView.addSubview(followButton)
