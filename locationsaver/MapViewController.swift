@@ -27,10 +27,10 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         self.navigationController?.view.backgroundColor = UIColor.clearColor()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        
+        self.view.backgroundColor = UIColor.yellowColor()
 
 
-        
-        
         mapView.delegate = self
         
         /* Prints the Realm file location */
@@ -42,12 +42,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addFollowButton()
         placeAnnotations(false)
     }
+    
+    func makeLayout() {
+        
+    }
         
     /* Adds the MapView to the view. */
     func addMapView() {
         mapView.mapType = .Standard
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .FollowWithHeading
+        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
         view.addSubview(mapView)
     }
@@ -130,9 +135,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         return nil
     }
     
-
-    
-    
     func retrieveAndCacheStands() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
             print(response)
@@ -161,10 +163,14 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-            annotation.title = "Henk"
+            annotation.title = value.name
             annotation.subtitle = "Holtrop"
             self.mapView.addAnnotation(annotation)
 //            print("Pin placed on \(value.id)")
         }
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.All
     }
 }
