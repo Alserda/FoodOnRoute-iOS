@@ -45,6 +45,16 @@ class LocationController : NSObject, CLLocationManagerDelegate {
             sentParameters(success: true, coordinates: lastCoordinates)
         }
     }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("\(__FUNCTION__)")
+        print(status.hashValue)
+    }
+    
+    func locationManager(manager: CLLocationManager, didDetermineState state: CLRegionState, forRegion region: CLRegion) {
+        print("\(__FUNCTION__)")
+        print(state.hashValue)
+    }
 
 }
 
