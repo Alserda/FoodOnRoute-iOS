@@ -24,6 +24,23 @@ extension UIColor {
     }
 }
 
+/* Allows centering views */
+extension UIView {
+    func centerInView (view : UIView) {
+        let horizontalConstraint = self.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor)
+        let vertivalConstraint = self.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
+        NSLayoutConstraint.activateConstraints([horizontalConstraint, vertivalConstraint, ])
+        
+    }
+    
+    func constrainToSize (size : CGSize) {
+        let widthConstraint = self.widthAnchor.constraintEqualToAnchor(nil, constant: size.width)
+        let heightConstraint = self.heightAnchor.constraintEqualToAnchor(nil, constant: size.height)
+        NSLayoutConstraint.activateConstraints([widthConstraint, heightConstraint])
+        
+    }
+}
+
 /* Makes it possible to compare coordinates. */
 extension CLLocationCoordinate2D {
     func equals (c: CLLocationCoordinate2D) -> Bool {

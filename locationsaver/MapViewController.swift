@@ -18,6 +18,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var followButton = UIButton()
     var following : Bool = false
     let realm = try! Realm()
+    let label1:UILabel! = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         self.navigationController?.view.backgroundColor = UIColor.clearColor()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        
-        self.view.backgroundColor = UIColor.yellowColor()
-
 
         mapView.delegate = self
         
@@ -41,12 +39,23 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addMapView()
         addFollowButton()
         placeAnnotations(false)
+        makeLayout()
     }
     
     func makeLayout() {
-        
+        label1.text = "Wat gaan we vandaag eten?"
+        label1.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(label1)
+
+
+        label1.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
+        label1.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        let heightConstraint = label1.heightAnchor.constraintEqualToAnchor(nil, constant: 400)
+        NSLayoutConstraint.activateConstraints([heightConstraint])
+
+
     }
-        
+    
     /* Adds the MapView to the view. */
     func addMapView() {
         mapView.mapType = .Standard
