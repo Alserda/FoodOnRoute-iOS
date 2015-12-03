@@ -50,7 +50,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
 
         label1.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
         label1.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        let heightConstraint = label1.heightAnchor.constraintEqualToAnchor(nil, constant: 400)
+        let heightConstraint = label1.heightAnchor.constraintEqualToAnchor(nil, constant: 50)
         NSLayoutConstraint.activateConstraints([heightConstraint])
 
 
@@ -67,11 +67,18 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     
     func addFollowButton() {
-        followButton.frame = CGRectMake(0, 50, 108, 94)
-        followButton.center = CGPointMake(self.view.frame.width / 2, (self.view.frame.height / 2) + 200)
+        followButton.frame = CGRectMake(0, 0, 108, 94)
         followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
         followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
+        followButton.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(followButton)
+        
+        followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
+        followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
+        
+        let widthConstaint = followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
+        let heightConstaint = followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 67)
+        NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
     }
     
     /* Updates the users real-time location on the MapView. */
