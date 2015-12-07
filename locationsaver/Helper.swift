@@ -28,8 +28,8 @@ extension UIColor {
 extension UIView {
     func centerInView (view : UIView) {
         let horizontalConstraint = self.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor)
-        let vertivalConstraint = self.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
-        NSLayoutConstraint.activateConstraints([horizontalConstraint, vertivalConstraint, ])
+        let verticalConstraint = self.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor)
+        NSLayoutConstraint.activateConstraints([horizontalConstraint, verticalConstraint, ])
         
     }
     

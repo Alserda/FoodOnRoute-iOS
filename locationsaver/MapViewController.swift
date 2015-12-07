@@ -19,6 +19,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     var following : Bool = false
     let realm = try! Realm()
     let label1:UILabel! = UILabel()
+    let searchField : UISearchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,8 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         addMapView()
         addFollowButton()
         placeAnnotations(false)
-        makeLayout()
+//        makeLayout()
+        addSearchField()
     }
     
     func makeLayout() {
@@ -52,8 +54,15 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         label1.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         let heightConstraint = label1.heightAnchor.constraintEqualToAnchor(nil, constant: 50)
         NSLayoutConstraint.activateConstraints([heightConstraint])
-
-
+    }
+    
+    func addSearchField() {
+        searchField.frame = CGRectMake(0, 0, 300, 50)
+        searchField.placeholder = "Wat wil je eten?"
+        searchField.barStyle = .Default
+        searchField.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(searchField)
+        
     }
     
     /* Adds the MapView to the view. */
