@@ -24,6 +24,7 @@
 		A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* Helper.swift */; };
 		DE7AD940F41DB718B68493C8 /* Pods_locationsaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094176F64C5182F89F67257F /* Pods_locationsaver.framework */; };
 		F84731621BEA38EE000B617C /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84731611BEA38EE000B617C /* Backend.swift */; };
+		F86500F61C15B28700B0DC22 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F51C15B28700B0DC22 /* Colors.swift */; };
 		F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		A899B48D1BBDD0AB0070C07F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.debug.xcconfig"; sourceTree = "<group>"; };
 		F84731611BEA38EE000B617C /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
+		F86500F51C15B28700B0DC22 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				A899B4881BBD8B380070C07F /* LocationController.swift */,
 				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
+				F86500F51C15B28700B0DC22 /* Colors.swift */,
 				F84731611BEA38EE000B617C /* Backend.swift */,
 				F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */,
 				A889B2F51BA186DB0030AFB9 /* Supporting Files */,
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A899B4891BBD8B380070C07F /* LocationController.swift in Sources */,
+				F86500F61C15B28700B0DC22 /* Colors.swift in Sources */,
 				A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */,
 				A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */,
 				A82E11D41BC1D0370031558C /* RAMItemAnimationProtocol.swift in Sources */,

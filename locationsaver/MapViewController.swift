@@ -72,6 +72,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         mapView.userTrackingMode = .FollowWithHeading
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
+        mapView.tintColor = Colors.getDarkBlueColor()
         view.addSubview(mapView)
     }
     
@@ -141,6 +142,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("\(__FUNCTION__)")
+        
     }
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         print("\(__FUNCTION__)")
