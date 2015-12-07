@@ -41,7 +41,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addSearchField()
         addFollowButton()
         placeAnnotations(false)
-        print("Available fonts: \(UIFont.familyNames())")
     }
     
     func addSearchField() {
@@ -123,7 +122,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         print("\(__FUNCTION__)")
     }
     func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-        print("\(__FUNCTION__)")
+//        print("\(__FUNCTION__)")
     }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
@@ -155,7 +154,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("\(__FUNCTION__)")
+//        print("\(__FUNCTION__)")
         
         // Check if an annotation is member of MKUserLocation
         if annotation is MKUserLocation {
@@ -186,26 +185,29 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     
     
-    
-    
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("\(__FUNCTION__)")
-    }
-    
-//    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-//        print("\(__FUNCTION__)")
-//    }
-    
+
+    var activeFilter = false
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print("\(__FUNCTION__)")
-    }
-    
-    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
-        print("\(__FUNCTION__)")
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        print("\(__FUNCTION__)")
+        
+        if activeFilter && searchText.characters.count == 0 {
+            print("refreshed!")
+            placeAnnotations(true)
+        }
+        
+        let query = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
+
+        if query.count >= 1 && searchText.characters.count >= 1 {
+            mapView.removeAnnotations(mapView.annotations)
+            activeFilter = true
+            for stand in query {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate.latitude = stand.latitude as CLLocationDegrees
+                annotation.coordinate.longitude = stand.longitude as CLLocationDegrees
+                annotation.title = stand.name
+                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
+                self.mapView.addAnnotation(annotation)
+            }
+        }
     }
     
     func searchBarResultsListButtonClicked(searchBar: UISearchBar) {
@@ -214,32 +216,22 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
+        // Wanneer je op 'Zoek' drukt
     }
-    
-//    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-//        print("\(__FUNCTION__)")
-//    }
-    
-//    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
-//        print("\(__FUNCTION__)")
-//    }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
+        // Wanneer je op de form tapt
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
+        // Wanneer je buiten het veld tapt
     }
-//    
-//    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
-//        print("\(__FUNCTION__)")
-//    }
     
-//    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-//        print("\(__FUNCTION__)")
-//    }
-    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print("hoi")
+    }
     
     
     
@@ -281,5 +273,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     
-    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }
