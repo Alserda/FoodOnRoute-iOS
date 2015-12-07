@@ -6,7 +6,6 @@ target 'locationsaver' do
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire'
   pod 'RealmSwift'
-  pod 'Mapbox-iOS-SDK'
 end
 
 target 'locationsaverTests' do
