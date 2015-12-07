@@ -19,6 +19,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var following : Bool = false
     let realm = try! Realm()
     let searchBar : UISearchBar = UISearchBar()
+    var activeFilter = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addMapView()
         addSearchField()
         addFollowButton()
-        placeAnnotations(false)
+        placeAnnotations(false, query: nil)
     }
+    
+    // MARK: Views
     
     func addSearchField() {
         searchBar.backgroundImage = UIImage()
@@ -94,23 +97,20 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
     }
     
-    func followUser(sender: UIButton!) {
-        if (following) {
-            mapView.userTrackingMode = .FollowWithHeading
-            followButton.setImage(UIImage(named: "LocationTrackerFollowDirection"), forState: UIControlState.Normal)
-        } else {
-            mapView.userTrackingMode = .Follow
-            following = true
-            print("following again")
-            followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
-        }
-    }
+    // MARK: mapView Delegates
     
     func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
-        print("\(__FUNCTION__)")
-        print("stopped following")
-        following = false
-        followButton.setImage(UIImage(named: "LocationTrackerStopFollow"), forState: UIControlState.Normal)
+        /* Tells the app that the user is being followed. */
+        if mode.hashValue == 1 {
+            following = true
+            followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
+        }
+        
+        /* Stop following whenever the user moves their screen. */
+        else {
+            following = false
+            followButton.setImage(UIImage(named: "LocationTrackerStopFollow"), forState: UIControlState.Normal)
+        }
     }
     
     
@@ -139,18 +139,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             updatePinPosition(mapPin)
             
         }
-    }
-    
-    func updatePinPosition(pin:MapPin) {
-        let defaultShift:CGFloat = 50
-        let pinPosition = CGPointMake(pin.frame.midX, pin.frame.maxY)
-        
-        let y = pinPosition.y - defaultShift
-        
-        let controlPoint = CGPointMake(pinPosition.x, y)
-        let controlPointCoordinate = mapView.convertPoint(controlPoint, toCoordinateFromView: mapView)
-        
-        mapView.setCenterCoordinate(controlPointCoordinate, animated: true)
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -182,31 +170,20 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     
+    // MARK: searchBar Delegates
     
-    
-    
-
-    var activeFilter = false
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         if activeFilter && searchText.characters.count == 0 {
             print("refreshed!")
-            placeAnnotations(true)
+            placeAnnotations(true, query: nil)
         }
         
         let query = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
 
         if query.count >= 1 && searchText.characters.count >= 1 {
-            mapView.removeAnnotations(mapView.annotations)
             activeFilter = true
-            for stand in query {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate.latitude = stand.latitude as CLLocationDegrees
-                annotation.coordinate.longitude = stand.longitude as CLLocationDegrees
-                annotation.title = stand.name
-                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
-                self.mapView.addAnnotation(annotation)
-            }
+            placeAnnotations(true, query: query)
         }
     }
     
@@ -234,6 +211,60 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     
+    // MARK: Other Methods
+    
+    
+    func followUser(sender: UIButton!) {
+        if (following) {
+            mapView.userTrackingMode = .FollowWithHeading
+            followButton.setImage(UIImage(named: "LocationTrackerFollowDirection"), forState: UIControlState.Normal)
+        } else {
+            mapView.userTrackingMode = .Follow
+            following = true
+            print("following again")
+            followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
+        }
+    }
+    
+    func placeAnnotations(removeOldPins: Bool, query: Results<(Stand)>?) {
+        
+        if (removeOldPins) {
+            mapView.removeAnnotations(mapView.annotations)
+        }
+        
+        if let stands : Results<(Stand)> = query  {
+            for value in stands {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+                annotation.title = value.name
+                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
+                self.mapView.addAnnotation(annotation)
+            }
+        }
+        else {
+            for value in self.realm.objects(Stand) {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+                annotation.title = value.name
+                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
+                self.mapView.addAnnotation(annotation)
+            }
+        }
+    }
+    
+    func updatePinPosition(pin:MapPin) {
+        let defaultShift:CGFloat = 50
+        let pinPosition = CGPointMake(pin.frame.midX, pin.frame.maxY)
+        
+        let y = pinPosition.y - defaultShift
+        
+        let controlPoint = CGPointMake(pinPosition.x, y)
+        let controlPointCoordinate = mapView.convertPoint(controlPoint, toCoordinateFromView: mapView)
+        
+        mapView.setCenterCoordinate(controlPointCoordinate, animated: true)
+    }
     
     
     
@@ -249,7 +280,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     stand.longitude = value["longitude"].double!
                     self.realm.create(Stand.self, value: stand, update: true)
                 }
-                self.placeAnnotations(true)
+                self.placeAnnotations(true, query: nil)
             })
             }) { (error) -> () in
                 print(error)
@@ -257,22 +288,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
 
-    func placeAnnotations(refresh: Bool) {
-        if (refresh) {
-            mapView.removeAnnotations(mapView.annotations)
-        }
-        for value in self.realm.objects(Stand) {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-            annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-            annotation.title = value.name
-            annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
-            self.mapView.addAnnotation(annotation)
-//            print("Pin placed on \(value.id)")
-        }
-    }
-    
-    
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
