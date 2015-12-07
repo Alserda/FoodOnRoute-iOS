@@ -41,7 +41,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addSearchField()
         addFollowButton()
         placeAnnotations(false)
-
+        print("Available fonts: \(UIFont.familyNames())")
     }
     
     func addSearchField() {
@@ -51,17 +51,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         searchBar.setImage(UIImage(named: "searchMagnifier"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal);
-        
+
         
         let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
         searchTextField!.textColor = UIColor.orangeColor() //TODO Get right color (Hex: #979797)
+        searchTextField?.font = UIFont(name: "PT Sans", size: 16)
         searchTextField!.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: UIColor.purpleColor()])  //TODO Get right color (Hex: #979797)
         
-        
-        
-        
-        
-        
+    
         mapView.addSubview(searchBar)
         
         searchBar.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 0).active = true
