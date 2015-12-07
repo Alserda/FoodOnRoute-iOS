@@ -11,15 +11,14 @@ import UIKit
 import MapKit
 import RealmSwift
 
-class MapViewController : UIViewController, MKMapViewDelegate {
+class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelegate {
     let locationManager = LocationController()
     let backend = Backend()
     let mapView = MKMapView()
     var followButton = UIButton()
     var following : Bool = false
     let realm = try! Realm()
-    let label1:UILabel! = UILabel()
-    let searchField : UISearchBar = UISearchBar()
+    let searchBar : UISearchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +30,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
 
         mapView.delegate = self
+        searchBar.delegate = self
         
         /* Prints the Realm file location */
         print(Realm.Configuration.defaultConfiguration.path!)
@@ -38,31 +38,38 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         
         retrieveAndCacheStands()
         addMapView()
+        addSearchField()
         addFollowButton()
         placeAnnotations(false)
-//        makeLayout()
-        addSearchField()
-    }
-    
-    func makeLayout() {
-        label1.text = "Wat gaan we vandaag eten?"
-        label1.translatesAutoresizingMaskIntoConstraints = false
-        mapView.addSubview(label1)
 
-
-        label1.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor).active = true
-        label1.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        let heightConstraint = label1.heightAnchor.constraintEqualToAnchor(nil, constant: 50)
-        NSLayoutConstraint.activateConstraints([heightConstraint])
     }
     
     func addSearchField() {
-        searchField.frame = CGRectMake(0, 0, 300, 50)
-        searchField.placeholder = "Wat wil je eten?"
-        searchField.barStyle = .Default
-        searchField.translatesAutoresizingMaskIntoConstraints = false
-        mapView.addSubview(searchField)
+        searchBar.backgroundImage = UIImage()
+        searchBar.searchBarStyle = .Default
+        searchBar.tintColor = UIColor.greenColor() //TODO Get right color (Hex: #979797)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         
+        searchBar.setImage(UIImage(named: "searchMagnifier"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal);
+        
+        
+        let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
+        searchTextField!.textColor = UIColor.orangeColor() //TODO Get right color (Hex: #979797)
+        searchTextField!.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: UIColor.purpleColor()])  //TODO Get right color (Hex: #979797)
+        
+        
+        
+        
+        
+        
+        mapView.addSubview(searchBar)
+        
+        searchBar.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 0).active = true
+        searchBar.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        
+        let widthConstraint = searchBar.widthAnchor.constraintEqualToAnchor(nil, constant: 250)
+        let heightConstraint = searchBar.heightAnchor.constraintEqualToAnchor(nil, constant: 44)
+        NSLayoutConstraint.activateConstraints([heightConstraint, widthConstraint])
     }
     
     /* Adds the MapView to the view. */
@@ -156,13 +163,13 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         print("\(__FUNCTION__)")
     }
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("\(__FUNCTION__)")
+//        print("\(__FUNCTION__)")
         return nil
     }
     
     func retrieveAndCacheStands() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            print(response)
+//            print(response)
             try! self.realm.write({ () -> Void in
                 for (_, value) in response {
                     let stand = Stand()
@@ -193,9 +200,5 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             self.mapView.addAnnotation(annotation)
 //            print("Pin placed on \(value.id)")
         }
-    }
-    
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
     }
 }
