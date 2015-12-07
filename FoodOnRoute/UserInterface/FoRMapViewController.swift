@@ -276,4 +276,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
 }
