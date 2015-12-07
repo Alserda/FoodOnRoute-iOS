@@ -25,6 +25,8 @@
 		DE7AD940F41DB718B68493C8 /* Pods_locationsaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094176F64C5182F89F67257F /* Pods_locationsaver.framework */; };
 		F84731621BEA38EE000B617C /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84731611BEA38EE000B617C /* Backend.swift */; };
 		F86500F61C15B28700B0DC22 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F51C15B28700B0DC22 /* Colors.swift */; };
+		F86500F81C15C77F00B0DC22 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F71C15C77F00B0DC22 /* MapPin.swift */; };
+		F86500FA1C15C81100B0DC22 /* MapPinCallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F91C15C81100B0DC22 /* MapPinCallout.swift */; };
 		F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.debug.xcconfig"; sourceTree = "<group>"; };
 		F84731611BEA38EE000B617C /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
 		F86500F51C15B28700B0DC22 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		F86500F71C15C77F00B0DC22 /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
+		F86500F91C15C81100B0DC22 /* MapPinCallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinCallout.swift; sourceTree = "<group>"; };
 		F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +190,8 @@
 				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
 				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
 				A87CBFB91C0468D500C4E9AD /* Realm.swift */,
+				F86500F71C15C77F00B0DC22 /* MapPin.swift */,
+				F86500F91C15C81100B0DC22 /* MapPinCallout.swift */,
 				A899B4881BBD8B380070C07F /* LocationController.swift */,
 				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
 				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
@@ -403,7 +409,9 @@
 				A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */,
 				A82E11D01BC1D0370031558C /* RAMFumeAnimation.swift in Sources */,
 				A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */,
+				F86500F81C15C77F00B0DC22 /* MapPin.swift in Sources */,
 				A82E11D21BC1D0370031558C /* RAMTransitionItemAnimation.swift in Sources */,
+				F86500FA1C15C81100B0DC22 /* MapPinCallout.swift in Sources */,
 				F84731621BEA38EE000B617C /* Backend.swift in Sources */,
 				A82E11D11BC1D0370031558C /* RAMRotationAnimation.swift in Sources */,
 			);

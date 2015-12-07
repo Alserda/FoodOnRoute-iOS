@@ -152,11 +152,33 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
+        if let mapPin = view as? MapPin {
+            if mapPin.preventDeselection {
+                mapView.selectAnnotation(view.annotation!, animated: false)
+            }
+        }
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
+        if let mapPin = view as? MapPin {
+            updatePinPosition(mapPin)
+            
+        }
     }
+    
+    func updatePinPosition(pin:MapPin) {
+        let defaultShift:CGFloat = 50
+        let pinPosition = CGPointMake(pin.frame.midX, pin.frame.maxY)
+        
+        let y = pinPosition.y - defaultShift
+        
+        let controlPoint = CGPointMake(pinPosition.x, y)
+        let controlPointCoordinate = mapView.convertPoint(controlPoint, toCoordinateFromView: mapView)
+        
+        mapView.setCenterCoordinate(controlPointCoordinate, animated: true)
+    }
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         print("\(__FUNCTION__)")
         
@@ -174,8 +196,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             annotationView!.canShowCallout = true
             annotationView!.image = UIImage(named:"AnnotationsView")
             
-            let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
-            annotationView!.rightCalloutAccessoryView = calloutButton
+            //let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
+            //annotationView!.rightCalloutAccessoryView = calloutButton
+            
         } else {
             annotationView!.annotation = annotation
         }
@@ -213,7 +236,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
             annotation.title = value.name
-            annotation.subtitle = "Holtrop"
+            annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(annotation)
 //            print("Pin placed on \(value.id)")
         }
