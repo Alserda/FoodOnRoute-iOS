@@ -157,7 +157,29 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     }
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         print("\(__FUNCTION__)")
-        return nil
+        
+        // Check if an annotation is member of MKUserLocation
+        if annotation is MKUserLocation {
+            // Return nil to reset User location icon to default
+            return nil
+        }
+        
+        // Change current annotationView to a custom annotation image
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            annotationView!.canShowCallout = true
+            annotationView!.image = UIImage(named:"AnnotationsView")
+            
+            let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
+            annotationView!.rightCalloutAccessoryView = calloutButton
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        // Return annotations with new annotation image
+        return annotationView
     }
     
     func retrieveAndCacheStands() {
