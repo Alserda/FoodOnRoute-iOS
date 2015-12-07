@@ -76,6 +76,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         mapView.userTrackingMode = .FollowWithHeading
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
+        mapView.tintColor = Colors.getDarkBlueColor()
         view.addSubview(mapView)
     }
     
@@ -145,6 +146,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         print("\(__FUNCTION__)")
+        
     }
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         print("\(__FUNCTION__)")
@@ -154,14 +156,59 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
+        if let mapPin = view as? MapPin {
+            if mapPin.preventDeselection {
+                mapView.selectAnnotation(view.annotation!, animated: false)
+            }
+        }
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
+        if let mapPin = view as? MapPin {
+            updatePinPosition(mapPin)
+            
+        }
     }
+    
+    func updatePinPosition(pin:MapPin) {
+        let defaultShift:CGFloat = 50
+        let pinPosition = CGPointMake(pin.frame.midX, pin.frame.maxY)
+        
+        let y = pinPosition.y - defaultShift
+        
+        let controlPoint = CGPointMake(pinPosition.x, y)
+        let controlPointCoordinate = mapView.convertPoint(controlPoint, toCoordinateFromView: mapView)
+        
+        mapView.setCenterCoordinate(controlPointCoordinate, animated: true)
+    }
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        print("\(__FUNCTION__)")
-        return nil
+        print("\(__FUNCTION__)")
+        
+        // Check if an annotation is member of MKUserLocation
+        if annotation is MKUserLocation {
+            // Return nil to reset User location icon to default
+            return nil
+        }
+        
+        // Change current annotationView to a custom annotation image
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            annotationView!.canShowCallout = true
+            annotationView!.image = UIImage(named:"AnnotationsView")
+            
+            //let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
+            //annotationView!.rightCalloutAccessoryView = calloutButton
+            
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        // Return annotations with new annotation image
+        return annotationView
     }
     
     func retrieveAndCacheStands() {
@@ -193,7 +240,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
             annotation.title = value.name
-            annotation.subtitle = "Holtrop"
+            annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(annotation)
 //            print("Pin placed on \(value.id)")
         }
