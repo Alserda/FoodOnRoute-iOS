@@ -41,7 +41,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addMapView()
         addSearchField()
         addFollowButton()
-        placeAnnotations(false, query: nil)
+        placeAnnotations(false, forStands: nil)
     }
     
     // MARK: Views
@@ -176,14 +176,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         
         if activeFilter && searchText.characters.count == 0 {
             print("refreshed!")
-            placeAnnotations(true, query: nil)
+            placeAnnotations(true, forStands: nil)
         }
         
         let query = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
 
         if query.count >= 1 && searchText.characters.count >= 1 {
             activeFilter = true
-            placeAnnotations(true, query: query)
+            placeAnnotations(true, forStands: query)
         }
     }
     
@@ -226,31 +226,30 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
     
-    func placeAnnotations(removeOldPins: Bool, query: Results<(Stand)>?) {
+    func placeAnnotations(removeOldPins: Bool, forStands: Results<(Stand)>?) {
+        var stands : Results<(Stand)>
         
+        /* Remove the old pins before updating. */
         if (removeOldPins) {
             mapView.removeAnnotations(mapView.annotations)
         }
         
-        if let stands : Results<(Stand)> = query  {
-            for value in stands {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-                annotation.title = value.name
-                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
-                self.mapView.addAnnotation(annotation)
-            }
+        /* If this method recieved specific stands to be annotated, use them. 
+           Else use all available stands. */
+        if forStands?.count >= 1 {
+            stands = forStands!
+        } else {
+            stands = self.realm.objects(Stand)
         }
-        else {
-            for value in self.realm.objects(Stand) {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-                annotation.title = value.name
-                annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
-                self.mapView.addAnnotation(annotation)
-            }
+        
+        /* Place all annotations */
+        for value in stands {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+            annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+            annotation.title = value.name
+            annotation.subtitle = "Appels, Peren, Bananen, Duiven" //TODO: get ingredients from JSON
+            self.mapView.addAnnotation(annotation)
         }
     }
     
@@ -280,7 +279,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     stand.longitude = value["longitude"].double!
                     self.realm.create(Stand.self, value: stand, update: true)
                 }
-                self.placeAnnotations(true, query: nil)
+                self.placeAnnotations(true, forStands: nil)
             })
             }) { (error) -> () in
                 print(error)
