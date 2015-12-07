@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* DebugViewController.swift */; };
+		A82E11BC1BC1B1C30031558C /* FoRDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82E11BB1BC1B1C30031558C /* FoRDebugViewController.swift */; };
 		A8345F9D1C15C70800A97D9B /* PT_Sans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8345F991C15C70800A97D9B /* PT_Sans-Bold.ttf */; };
 		A8345F9E1C15C70800A97D9B /* PT_Sans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8345F9A1C15C70800A97D9B /* PT_Sans-BoldItalic.ttf */; };
 		A8345F9F1C15C70800A97D9B /* PT_Sans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8345F9B1C15C70800A97D9B /* PT_Sans-Italic.ttf */; };
 		A8345FA01C15C70800A97D9B /* PT_Sans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8345F9C1C15C70800A97D9B /* PT_Sans-Regular.ttf */; };
-		A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87CBFB91C0468D500C4E9AD /* Realm.swift */; };
-		A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */; };
+		A87CBFBA1C0468D500C4E9AD /* FoRDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87CBFB91C0468D500C4E9AD /* FoRDatabase.swift */; };
+		A889B2F81BA186DB0030AFB9 /* FoRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B2F71BA186DB0030AFB9 /* FoRAppDelegate.swift */; };
 		A889B30E1BA186DB0030AFB9 /* locationsaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */; };
-		A899B4891BBD8B380070C07F /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* LocationController.swift */; };
-		A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* MapViewController.swift */; };
+		A899B4891BBD8B380070C07F /* FoRLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B4881BBD8B380070C07F /* FoRLocationController.swift */; };
+		A899B48B1BBD8C770070C07F /* FoRMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48A1BBD8C770070C07F /* FoRMapViewController.swift */; };
 		A899B48C1BBD8D680070C07F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
-		A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* Helper.swift */; };
+		A899B48E1BBDD0AB0070C07F /* FoRHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A899B48D1BBDD0AB0070C07F /* FoRHelper.swift */; };
 		DE7AD940F41DB718B68493C8 /* Pods_locationsaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094176F64C5182F89F67257F /* Pods_locationsaver.framework */; };
-		F84731621BEA38EE000B617C /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84731611BEA38EE000B617C /* Backend.swift */; };
-		F86500F61C15B28700B0DC22 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F51C15B28700B0DC22 /* Colors.swift */; };
-		F86500F81C15C77F00B0DC22 /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F71C15C77F00B0DC22 /* MapPin.swift */; };
-		F86500FA1C15C81100B0DC22 /* MapPinCallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F91C15C81100B0DC22 /* MapPinCallout.swift */; };
+		F84731621BEA38EE000B617C /* FoRBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84731611BEA38EE000B617C /* FoRBackend.swift */; };
+		F86500F61C15B28700B0DC22 /* FoRColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F51C15B28700B0DC22 /* FoRColors.swift */; };
+		F86500F81C15C77F00B0DC22 /* FoRMapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F71C15C77F00B0DC22 /* FoRMapPin.swift */; };
+		F86500FA1C15C81100B0DC22 /* FoRMapPinCallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86500F91C15C81100B0DC22 /* FoRMapPinCallout.swift */; };
 		F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -40,28 +40,28 @@
 /* Begin PBXFileReference section */
 		094176F64C5182F89F67257F /* Pods_locationsaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_locationsaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE031A0DB1F546DA03FE653 /* Pods-locationsaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.release.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.release.xcconfig"; sourceTree = "<group>"; };
-		A82E11BB1BC1B1C30031558C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
-		A8345F991C15C70800A97D9B /* PT_Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Bold.ttf"; sourceTree = "<group>"; };
-		A8345F9A1C15C70800A97D9B /* PT_Sans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		A8345F9B1C15C70800A97D9B /* PT_Sans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Italic.ttf"; sourceTree = "<group>"; };
-		A8345F9C1C15C70800A97D9B /* PT_Sans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Regular.ttf"; sourceTree = "<group>"; };
+		A82E11BB1BC1B1C30031558C /* FoRDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRDebugViewController.swift; path = UserInterface/FoRDebugViewController.swift; sourceTree = "<group>"; };
+		A8345F991C15C70800A97D9B /* PT_Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Bold.ttf"; path = "Resources/Fonts/PT_Sans-Bold.ttf"; sourceTree = "<group>"; };
+		A8345F9A1C15C70800A97D9B /* PT_Sans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-BoldItalic.ttf"; path = "Resources/Fonts/PT_Sans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		A8345F9B1C15C70800A97D9B /* PT_Sans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Italic.ttf"; path = "Resources/Fonts/PT_Sans-Italic.ttf"; sourceTree = "<group>"; };
+		A8345F9C1C15C70800A97D9B /* PT_Sans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Regular.ttf"; path = "Resources/Fonts/PT_Sans-Regular.ttf"; sourceTree = "<group>"; };
 		A837CCB81BA6B4C8007B811F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A837CCBA1BA6B4CE007B811F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		A87CBFB91C0468D500C4E9AD /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		A87CBFB91C0468D500C4E9AD /* FoRDatabase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRDatabase.swift; path = Models/FoRDatabase.swift; sourceTree = "<group>"; };
 		A889B2F21BA186DB0030AFB9 /* locationsaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = locationsaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B2F61BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A889B2F71BA186DB0030AFB9 /* FoRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoRAppDelegate.swift; sourceTree = "<group>"; };
 		A889B3071BA186DB0030AFB9 /* locationsaverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = locationsaverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* locationsaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationsaverTests.swift; sourceTree = "<group>"; };
-		A899B4881BBD8B380070C07F /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
-		A899B48A1BBD8C770070C07F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		A899B48D1BBDD0AB0070C07F /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		A899B4881BBD8B380070C07F /* FoRLocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRLocationController.swift; path = Models/FoRLocationController.swift; sourceTree = "<group>"; };
+		A899B48A1BBD8C770070C07F /* FoRMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRMapViewController.swift; path = UserInterface/FoRMapViewController.swift; sourceTree = "<group>"; };
+		A899B48D1BBDD0AB0070C07F /* FoRHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRHelper.swift; path = Models/FoRHelper.swift; sourceTree = "<group>"; };
 		D36289EAEF10F97A0D9ED599 /* Pods-locationsaver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-locationsaver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-locationsaver/Pods-locationsaver.debug.xcconfig"; sourceTree = "<group>"; };
-		F84731611BEA38EE000B617C /* Backend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Backend.swift; sourceTree = "<group>"; };
-		F86500F51C15B28700B0DC22 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		F86500F71C15C77F00B0DC22 /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
-		F86500F91C15C81100B0DC22 /* MapPinCallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPinCallout.swift; sourceTree = "<group>"; };
+		F84731611BEA38EE000B617C /* FoRBackend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRBackend.swift; path = API/FoRBackend.swift; sourceTree = "<group>"; };
+		F86500F51C15B28700B0DC22 /* FoRColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRColors.swift; path = Models/FoRColors.swift; sourceTree = "<group>"; };
+		F86500F71C15C77F00B0DC22 /* FoRMapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRMapPin.swift; path = UserInterface/Annotations/FoRMapPin.swift; sourceTree = "<group>"; };
+		F86500F91C15C81100B0DC22 /* FoRMapPinCallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRMapPinCallout.swift; path = UserInterface/Annotations/FoRMapPinCallout.swift; sourceTree = "<group>"; };
 		F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,11 +104,54 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		A889B2E91BA186DB0030AFB9 = {
+		A88248511C16101D00AD1F4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				A837CCBA1BA6B4CE007B811F /* MapKit.framework */,
 				A837CCB81BA6B4C8007B811F /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A88248521C1611F400AD1F4A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F84731611BEA38EE000B617C /* FoRBackend.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		A88248531C16121000AD1F4A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A87CBFB91C0468D500C4E9AD /* FoRDatabase.swift */,
+				A899B4881BBD8B380070C07F /* FoRLocationController.swift */,
+				A899B48D1BBDD0AB0070C07F /* FoRHelper.swift */,
+				F86500F51C15B28700B0DC22 /* FoRColors.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A88248541C16123300AD1F4A /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A88248551C16124800AD1F4A /* Annotations */,
+			);
+			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		A88248551C16124800AD1F4A /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				F86500F71C15C77F00B0DC22 /* FoRMapPin.swift */,
+				F86500F91C15C81100B0DC22 /* FoRMapPinCallout.swift */,
+			);
+			name = Annotations;
+			sourceTree = "<group>";
+		};
+		A889B2E91BA186DB0030AFB9 = {
+			isa = PBXGroup;
+			children = (
 				A889B2F41BA186DB0030AFB9 /* locationsaver */,
 				A889B30A1BA186DB0030AFB9 /* locationsaverTests */,
 				A889B2F31BA186DB0030AFB9 /* Products */,
@@ -129,18 +172,15 @@
 		A889B2F41BA186DB0030AFB9 /* locationsaver */ = {
 			isa = PBXGroup;
 			children = (
-				A889B2F71BA186DB0030AFB9 /* AppDelegate.swift */,
-				A899B48A1BBD8C770070C07F /* MapViewController.swift */,
-				A87CBFB91C0468D500C4E9AD /* Realm.swift */,
-				F86500F71C15C77F00B0DC22 /* MapPin.swift */,
-				F86500F91C15C81100B0DC22 /* MapPinCallout.swift */,
-				A899B4881BBD8B380070C07F /* LocationController.swift */,
-				A82E11BB1BC1B1C30031558C /* DebugViewController.swift */,
-				A899B48D1BBDD0AB0070C07F /* Helper.swift */,
-				F86500F51C15B28700B0DC22 /* Colors.swift */,
-				F84731611BEA38EE000B617C /* Backend.swift */,
+				A889B2F71BA186DB0030AFB9 /* FoRAppDelegate.swift */,
+				A88248521C1611F400AD1F4A /* API */,
+				A88248531C16121000AD1F4A /* Models */,
+				A88248541C16123300AD1F4A /* UserInterface */,
+				A899B48A1BBD8C770070C07F /* FoRMapViewController.swift */,
+				A82E11BB1BC1B1C30031558C /* FoRDebugViewController.swift */,
 				F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */,
 				A8345F971C15C6DC00A97D9B /* Resources */,
+				A88248511C16101D00AD1F4A /* Frameworks */,
 				A889B2F51BA186DB0030AFB9 /* Supporting Files */,
 			);
 			path = locationsaver;
@@ -343,16 +383,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A899B4891BBD8B380070C07F /* LocationController.swift in Sources */,
-				F86500F61C15B28700B0DC22 /* Colors.swift in Sources */,
-				A87CBFBA1C0468D500C4E9AD /* Realm.swift in Sources */,
-				A899B48E1BBDD0AB0070C07F /* Helper.swift in Sources */,
-				A889B2F81BA186DB0030AFB9 /* AppDelegate.swift in Sources */,
-				A899B48B1BBD8C770070C07F /* MapViewController.swift in Sources */,
-				A82E11BC1BC1B1C30031558C /* DebugViewController.swift in Sources */,
-				F86500F81C15C77F00B0DC22 /* MapPin.swift in Sources */,
-				F86500FA1C15C81100B0DC22 /* MapPinCallout.swift in Sources */,
-				F84731621BEA38EE000B617C /* Backend.swift in Sources */,
+				A899B4891BBD8B380070C07F /* FoRLocationController.swift in Sources */,
+				F86500F61C15B28700B0DC22 /* FoRColors.swift in Sources */,
+				A87CBFBA1C0468D500C4E9AD /* FoRDatabase.swift in Sources */,
+				A899B48E1BBDD0AB0070C07F /* FoRHelper.swift in Sources */,
+				A889B2F81BA186DB0030AFB9 /* FoRAppDelegate.swift in Sources */,
+				A899B48B1BBD8C770070C07F /* FoRMapViewController.swift in Sources */,
+				A82E11BC1BC1B1C30031558C /* FoRDebugViewController.swift in Sources */,
+				F86500F81C15C77F00B0DC22 /* FoRMapPin.swift in Sources */,
+				F86500FA1C15C81100B0DC22 /* FoRMapPinCallout.swift in Sources */,
+				F84731621BEA38EE000B617C /* FoRBackend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
