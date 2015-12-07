@@ -84,14 +84,14 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-locationsaver/Alamofire.framework"
-  install_framework "Pods-locationsaver/Realm.framework"
-  install_framework "Pods-locationsaver/RealmSwift.framework"
-  install_framework "Pods-locationsaver/SwiftyJSON.framework"
+  install_framework "Pods-FoodOnRoute/Alamofire.framework"
+  install_framework "Pods-FoodOnRoute/Realm.framework"
+  install_framework "Pods-FoodOnRoute/RealmSwift.framework"
+  install_framework "Pods-FoodOnRoute/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-locationsaver/Alamofire.framework"
-  install_framework "Pods-locationsaver/Realm.framework"
-  install_framework "Pods-locationsaver/RealmSwift.framework"
-  install_framework "Pods-locationsaver/SwiftyJSON.framework"
+  install_framework "Pods-FoodOnRoute/Alamofire.framework"
+  install_framework "Pods-FoodOnRoute/Realm.framework"
+  install_framework "Pods-FoodOnRoute/RealmSwift.framework"
+  install_framework "Pods-FoodOnRoute/SwiftyJSON.framework"
 fi

@@ -1,0 +1,6 @@
+framework module Pods_FoodOnRoute {
+  umbrella header "Pods-FoodOnRoute-umbrella.h"
+
+  export *
+  module * { export * }
+}
