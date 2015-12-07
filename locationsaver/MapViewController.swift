@@ -47,16 +47,16 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func addSearchField() {
         searchBar.backgroundImage = UIImage()
         searchBar.searchBarStyle = .Default
-        searchBar.tintColor = UIColor.greenColor() //TODO Get right color (Hex: #979797)
+        searchBar.tintColor = foodOnRouteColor.lightGrey
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         searchBar.setImage(UIImage(named: "searchMagnifier"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal);
 
         
         let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
-        searchTextField!.textColor = UIColor.orangeColor() //TODO Get right color (Hex: #979797)
+        searchTextField!.textColor = foodOnRouteColor.lightGrey
         searchTextField?.font = UIFont(name: "PT Sans", size: 16)
-        searchTextField!.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: UIColor.purpleColor()])  //TODO Get right color (Hex: #979797)
+        searchTextField!.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: foodOnRouteColor.lightGrey])  //TODO Get right color (Hex: #979797)
         
     
         mapView.addSubview(searchBar)
@@ -76,7 +76,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         mapView.userTrackingMode = .FollowWithHeading
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
-        mapView.tintColor = Colors.getDarkBlueColor()
+        mapView.tintColor = foodOnRouteColor.darkBlue
         view.addSubview(mapView)
     }
     
@@ -93,35 +93,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         let widthConstaint = followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
         let heightConstaint = followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 67)
         NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
-    }
-    
-    /* Updates the users real-time location on the MapView. */
-    func updateMapWithCurrentLocation() {
-
-        let newRegion = MKCoordinateRegionMake(Locations.lastLocation, MKCoordinateSpanMake(0.007, 0.007))
-        mapView.setRegion(newRegion, animated: true)
-    }
-    
-    /* Stores this location and adds an annotation to the MapView. */
-    func pinThisLocation(sender: UIButton!) {
-        locationManager.registerCurrentLocation { (recievedParameters) -> Void in
-            if (recievedParameters.success) {
-                print(true)
-                
-                /* Add an annotation to the map if the registration was successful. */
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = recievedParameters.coordinates
-                self.mapView.addAnnotation(annotation)
-                
-                /* Debug purposes */
-                let coordinateLatitude = recievedParameters.coordinates.latitude, coordinateLongitude = recievedParameters.coordinates.longitude
-                Debugger.messages.append("Pinned || lat \(coordinateLatitude.format()), long \(coordinateLongitude.format())")
-            }
-            else {
-                /* Do nothing if the registration failed. */
-                print(false)
-            }
-        }
     }
     
     func followUser(sender: UIButton!) {
@@ -211,6 +182,69 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         return annotationView
     }
     
+    
+    
+    
+    
+    
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        print("\(__FUNCTION__)")
+    }
+    
+//    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+//        print("\(__FUNCTION__)")
+//    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func searchBarResultsListButtonClicked(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+    
+//    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+//        print("\(__FUNCTION__)")
+//    }
+    
+//    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+//        print("\(__FUNCTION__)")
+//    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        print("\(__FUNCTION__)")
+    }
+//    
+//    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+//        print("\(__FUNCTION__)")
+//    }
+    
+//    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+//        print("\(__FUNCTION__)")
+//    }
+    
+    
+    
+    
+    
+    
     func retrieveAndCacheStands() {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
 //            print(response)
@@ -245,4 +279,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 //            print("Pin placed on \(value.id)")
         }
     }
+    
+    
+    
 }
