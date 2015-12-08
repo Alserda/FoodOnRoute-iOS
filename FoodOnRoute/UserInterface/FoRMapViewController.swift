@@ -272,7 +272,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if searchText.characters.count >= 1 {
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
             if searchResults?.count == 0 {
-                print("Geen resultaten", self.searchResults)
                 searchTextField!.textColor = UIColor.redColor()
             } else {
                 activeFilter = true
@@ -373,6 +372,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     stand.name = value["name"].string!
                     stand.latitude = value["latitude"].double!
                     stand.longitude = value["longitude"].double!
+                    for products in value["products"] {
+                        let product = Product()
+                        product.name = String(products.1)
+                        print(product)
+                        stand.products.append(product)
+                    }
                     self.realm.create(Stand.self, value: stand, update: true)
                 }
                 self.placeAnnotations(true, forStands: nil)
@@ -381,6 +386,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 print(error)
                 // Show the user that new stands could not be loaded
         }
+        print(self.realm.objects(Stand))
     }
 
 
