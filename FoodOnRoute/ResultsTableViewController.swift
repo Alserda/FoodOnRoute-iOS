@@ -1,14 +1,14 @@
 //
-//  DebugViewController.swift
-//  locationsaver
+//  ResultsTableViewController.swift
+//  FoodOnRoute
 //
-//  Created by Peter Alserda on 04/10/15.
+//  Created by Peter Alserda on 08/12/15.
 //  Copyright © 2015 Peter Alserda. All rights reserved.
 //
 
 import UIKit
 
-class DebugViewController : UITableViewController {
+class ResultsTableViewController : UITableViewController {
     var timer : NSTimer? = nil
     
     override func viewDidLoad() {

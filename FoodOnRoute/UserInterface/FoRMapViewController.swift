@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 import RealmSwift
 
-class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelegate {
+class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     let locationManager = LocationController()
     let backend = Backend()
     let mapView = MKMapView()
@@ -20,6 +20,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     let realm = try! Realm()
     let searchBar : UISearchBar = UISearchBar()
     var activeFilter = false
+    var searchResults : Results<(Stand)>?
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
         mapView.delegate = self
         searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        
         
         /* Prints the Realm file location */
         print(Realm.Configuration.defaultConfiguration.path!)
@@ -42,7 +48,58 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addSearchField()
         addFollowButton()
         placeAnnotations(false, forStands: nil)
+        
     }
+    
+    func addTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(tableView)
+        
+        tableView.topAnchor.constraintEqualToAnchor(searchBar.bottomAnchor, constant: 0).active = true
+        tableView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        
+        let widthConstraint = tableView.widthAnchor.constraintEqualToAnchor(nil, constant: 250)
+        let heightConstraint = tableView.heightAnchor.constraintEqualToAnchor(nil, constant: 200)
+        NSLayoutConstraint.activateConstraints([heightConstraint, widthConstraint])
+        
+        
+        
+        
+        
+        
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var cellCount = 0
+        
+        if searchResults?.count >= 1 {
+            cellCount = (searchResults?.count)!
+        }
+
+        return cellCount
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell : UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        
+        if searchResults?.count >= 1 {
+            cell.textLabel?.text = searchResults?[indexPath.row].name
+        }
+
+        return cell
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     // MARK: Views
     
@@ -180,6 +237,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
         
         let query = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
+        print(query)
+        searchResults = query
+        tableView.reloadData()
 
         if query.count >= 1 && searchText.characters.count >= 1 {
             activeFilter = true
@@ -199,11 +259,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je op de form tapt
+        addTableView()
+        
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je buiten het veld tapt
+        tableView.removeFromSuperview()
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
