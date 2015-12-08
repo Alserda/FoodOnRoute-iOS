@@ -37,8 +37,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.delegate = self
         tableView.dataSource = self
 
-        
-        
         /* Prints the Realm file location */
         print(Realm.Configuration.defaultConfiguration.path!)
         
@@ -48,8 +46,61 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addSearchField()
         addFollowButton()
         placeAnnotations(false, forStands: nil)
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
     }
+    
+    func keyboardWillShow(aNotification: NSNotification) {
+        let duration = aNotification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let keyboardSize = (aNotification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().height
+        print(aNotification)
+        print(keyboardSize)
+
+        animateShowingKeyboardWithDuration(duration, keyboardHeight: keyboardSize!)
+    }
+    
+    func keyboardWillHide(aNotification: NSNotification) {
+        let duration = aNotification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
+        animateHidingKeyboardWithDuration(duration)
+    }
+    
+    func animateShowingKeyboardWithDuration(duration: NSTimeInterval, keyboardHeight: CGFloat) {
+//        let animationOptions : UIViewAnimationOptions = UIViewAnimationOptions
+        
+        UIView .animateWithDuration(duration, delay: 0, options: [.CurveEaseInOut], animations: { () -> Void in
+            self.followButton.removeConstraints(self.followButton.constraints)
+            self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
+            self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
+            
+            let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
+            let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: (keyboardHeight * 2) + 67)
+            NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
+            }) { (finished) -> Void in
+                print(true)
+        }
+    }
+    
+    func animateHidingKeyboardWithDuration(duration: NSTimeInterval) {
+        UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseOut], animations: { () -> Void in
+            self.followButton.removeConstraints(self.followButton.constraints)
+            self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
+            self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
+            
+            let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
+            let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 67)
+            NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
+
+            }) { (finished) -> Void in
+                print(true)
+        }
+    }
+    
+    
+
+    
+    
     
     func addTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +110,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         
         let widthConstraint = tableView.widthAnchor.constraintEqualToAnchor(nil, constant: 250)
-        let heightConstraint = tableView.heightAnchor.constraintEqualToAnchor(nil, constant: 200)
+        let heightConstraint = tableView.heightAnchor.constraintEqualToAnchor(nil, constant: 100)
         NSLayoutConstraint.activateConstraints([heightConstraint, widthConstraint])
         
         
@@ -247,13 +298,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
     
-    func searchBarResultsListButtonClicked(searchBar: UISearchBar) {
-        print("\(__FUNCTION__)")
-    }
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je op 'Zoek' drukt
+        self.view.endEditing(true)
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -358,4 +406,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     override func prefersStatusBarHidden() -> Bool {
         return false
     }
+//    
+//    NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+//    notification
+//    
+//    
+//    func keyboardWillShow(aNotification: NSNotification)    {
+//        
+//        let duration = aNotification.userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as NSNumber
+//        let curve = aNotification.userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as NSNumber
+//    }
 }
