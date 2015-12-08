@@ -45,6 +45,16 @@ extension UIColor {
     }
 }
 
+/* Gives more clear errors when breaking constraints */
+extension NSLayoutConstraint {
+    
+    override public var description: String {
+        let id = identifier ?? ""
+        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+    }
+}
+
+
 /* Allows centering views */
 extension UIView {
     func centerInView (view : UIView) {

@@ -85,15 +85,34 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if ((extraHeightToHeightConstraint) != nil) {
             extraHeight = extraHeightToHeightConstraint!
         }
-
-        self.followButton.removeConstraints(self.followButton.constraints)
-        self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
-        self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
         
-        let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
-        let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: (extraHeight * 2) + 67)
+        self.followButton.removeConstraints(self.followButton.constraints)
+        self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor, constant: -20).active = true // TODO: Make it so that constraints don't conflict. Currently it's possible to press under the button and it'll still be triggered...
+        self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor, constant: -20).active = true
+        let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 54)
+        let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: extraHeight + 47)
+        self.followButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: extraHeight, right: 0)
+//
+        NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
+
+        
+    }
+    
+    
+    func addFollowButton() {
+        followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
+        followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
+        followButton.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(followButton)
+        
+        followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor, constant: -20).active = true
+        followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor, constant: -20).active = true
+        
+        let widthConstaint = followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 54)
+        let heightConstaint = followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 47)
         NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
     }
+    
     
     func addTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,22 +186,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
         mapView.tintColor = foodOnRouteColor.darkBlue
+//        mapView.layoutMargins = UIEdgeInsets(top: 5, left: 10, bottom: 50, right: 20) // TODO: Position compass
         view.addSubview(mapView)
-    }
-    
-    func addFollowButton() {
-        followButton.frame = CGRectMake(0, 0, 108, 94)
-        followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
-        followButton.addTarget(self, action: "followUser:", forControlEvents: .TouchUpInside)
-        followButton.translatesAutoresizingMaskIntoConstraints = false
-        mapView.addSubview(followButton)
-        
-        followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
-        followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
-        
-        let widthConstaint = followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
-        let heightConstaint = followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 67)
-        NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
     }
     
     // MARK: mapView Delegates
@@ -375,7 +380,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     for products in value["products"] {
                         let product = Product()
                         product.name = String(products.1)
-                        print(product)
+//                        print(product)
                         stand.products.append(product)
                     }
                     self.realm.create(Stand.self, value: stand, update: true)
@@ -386,7 +391,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 print(error)
                 // Show the user that new stands could not be loaded
         }
-        print(self.realm.objects(Stand))
+//        print(self.realm.objects(Stand))
     }
 
 
