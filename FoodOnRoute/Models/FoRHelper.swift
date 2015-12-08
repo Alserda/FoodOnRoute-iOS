@@ -89,7 +89,7 @@ struct Locations {
 
 /* Stores frequently used colors */
 struct foodOnRouteColor {
-    static var darkBlue   : UIColor = UIColor(hexString: "#1D717D")
-    static var lightGreen : UIColor = UIColor(hexString: "#38A97A")
-    static var lightGrey  : UIColor = UIColor(hexString: "#979797")
+    static let darkBlue   : UIColor = UIColor(hexString: "#1D717D")
+    static let lightGreen : UIColor = UIColor(hexString: "#38A97A")
+    static let lightGrey  : UIColor = UIColor(hexString: "#979797")
 }
