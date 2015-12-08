@@ -66,13 +66,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     func animateShowingKeyboardWithDuration(duration: NSTimeInterval, keyboardHeight: CGFloat) {
         UIView .animateWithDuration(duration, delay: 0, options: [.CurveEaseIn], animations: { () -> Void in
-            self.followButton.removeConstraints(self.followButton.constraints)
-            self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
-            self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
-            
-            let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
-            let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: (keyboardHeight * 2) + 67)
-            NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
+            self.refreshFollowButtonConstraints(keyboardHeight)
             }) { (finished) -> Void in
                 // Wanneer de animaties etc zijn afgerond..
         }
@@ -80,23 +74,26 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     func animateHidingKeyboardWithDuration(duration: NSTimeInterval) {
         UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseOut], animations: { () -> Void in
-            self.followButton.removeConstraints(self.followButton.constraints)
-            self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
-            self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
-            
-            let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
-            let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: 67)
-            NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
-
+            self.refreshFollowButtonConstraints(nil)
             }) { (finished) -> Void in
                 // Wanneer de animaties etc zijn afgerond..
         }
     }
     
-    
+    func refreshFollowButtonConstraints(extraHeightToHeightConstraint: CGFloat?) {
+        var extraHeight : CGFloat = 0
+        if ((extraHeightToHeightConstraint) != nil) {
+            extraHeight = extraHeightToHeightConstraint!
+        }
 
-    
-    
+        self.followButton.removeConstraints(self.followButton.constraints)
+        self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
+        self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
+        
+        let widthConstaint = self.followButton.widthAnchor.constraintEqualToAnchor(nil, constant: 79)
+        let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: (extraHeight * 2) + 67)
+        NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
+    }
     
     func addTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -130,16 +127,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if searchResults?.count >= 1 {
             cell.textLabel?.text = searchResults?[indexPath.row].name
         }
-
         return cell
     }
-    
-    
-    
-    
-    
-    
-    
+
     
     
     // MARK: Views
@@ -273,18 +263,23 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         if activeFilter && searchText.characters.count == 0 {
-            print("refreshed!")
             placeAnnotations(true, forStands: nil)
         }
         
-        let query = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
-        print(query)
-        searchResults = query
+        searchResults = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
         tableView.reloadData()
 
-        if query.count >= 1 && searchText.characters.count >= 1 {
-            activeFilter = true
-            placeAnnotations(true, forStands: query)
+        if searchText.characters.count >= 1 {
+            let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
+            if searchResults?.count == 0 {
+                print("Geen resultaten", self.searchResults)
+                searchTextField!.textColor = UIColor.redColor()
+            } else {
+                activeFilter = true
+                placeAnnotations(true, forStands: searchResults)
+                searchTextField!.textColor = foodOnRouteColor.lightGrey
+            }
+
         }
     }
     
@@ -396,14 +391,4 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     override func prefersStatusBarHidden() -> Bool {
         return false
     }
-//    
-//    NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-//    notification
-//    
-//    
-//    func keyboardWillShow(aNotification: NSNotification)    {
-//        
-//        let duration = aNotification.userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as NSNumber
-//        let curve = aNotification.userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as NSNumber
-//    }
 }

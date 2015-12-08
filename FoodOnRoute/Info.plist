@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>PT_Sans-Bold.ttf</string>
-		<string>PT_Sans-Bolditalic.ttf</string>
-		<string>PT_Sans-Italic.ttf</string>
-		<string>PT_Sans-Regular.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -38,8 +31,13 @@
 	<string>De mogelijkheid om je eigen locatie te weergeven.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>De mogelijkheid om je eigen locatie te weergeven.</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>PT_Sans-Bold.ttf</string>
+		<string>PT_Sans-Bolditalic.ttf</string>
+		<string>PT_Sans-Italic.ttf</string>
+		<string>PT_Sans-Regular.ttf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
