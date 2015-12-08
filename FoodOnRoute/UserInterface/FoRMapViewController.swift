@@ -55,8 +55,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func keyboardWillShow(aNotification: NSNotification) {
         let duration = aNotification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
         let keyboardSize = (aNotification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().height
-        print(aNotification)
-        print(keyboardSize)
 
         animateShowingKeyboardWithDuration(duration, keyboardHeight: keyboardSize!)
     }
@@ -67,9 +65,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     func animateShowingKeyboardWithDuration(duration: NSTimeInterval, keyboardHeight: CGFloat) {
-//        let animationOptions : UIViewAnimationOptions = UIViewAnimationOptions
-        
-        UIView .animateWithDuration(duration, delay: 0, options: [.CurveEaseInOut], animations: { () -> Void in
+        UIView .animateWithDuration(duration, delay: 0, options: [.CurveEaseIn], animations: { () -> Void in
             self.followButton.removeConstraints(self.followButton.constraints)
             self.followButton.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.bottomAnchor).active = true
             self.followButton.rightAnchor.constraintEqualToAnchor(self.view.rightAnchor).active = true
@@ -78,7 +74,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             let heightConstaint = self.followButton.heightAnchor.constraintEqualToAnchor(nil, constant: (keyboardHeight * 2) + 67)
             NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
             }) { (finished) -> Void in
-                print(true)
+                // Wanneer de animaties etc zijn afgerond..
         }
     }
     
@@ -93,7 +89,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             NSLayoutConstraint.activateConstraints([heightConstaint, widthConstaint])
 
             }) { (finished) -> Void in
-                print(true)
+                // Wanneer de animaties etc zijn afgerond..
         }
     }
     
@@ -112,12 +108,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         let widthConstraint = tableView.widthAnchor.constraintEqualToAnchor(nil, constant: 250)
         let heightConstraint = tableView.heightAnchor.constraintEqualToAnchor(nil, constant: 100)
         NSLayoutConstraint.activateConstraints([heightConstraint, widthConstraint])
-        
-        
-        
-        
-        
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
