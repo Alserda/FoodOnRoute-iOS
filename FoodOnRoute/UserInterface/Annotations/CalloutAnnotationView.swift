@@ -38,7 +38,6 @@ class CalloutAnnotationView : MKAnnotationView {
         var size = CGSizeZero
         if let string = annotation?.title where string != nil {
             let attributes = [NSFontAttributeName : font]
-            print(string)
             size = string!.sizeWithAttributes(attributes)
             label.text = (annotation?.title)!
         }

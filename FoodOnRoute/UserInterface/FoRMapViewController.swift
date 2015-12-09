@@ -125,7 +125,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 //        print("\(__FUNCTION__)")
     }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-//        print("\(__FUNCTION__)")
+        print("\(__FUNCTION__)")
         if let annotation = view.annotation as? CalloutAnnotation {
             mapView.removeAnnotation(annotation)
             print("Removed: ", annotation)
@@ -133,7 +133,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-//        print("\(__FUNCTION__)")
+        print("\(__FUNCTION__)")
         if let annotation = view.annotation as? CustomAnnotation {
             let calloutAnnotation = CalloutAnnotation(annotation: annotation)
             mapView.addAnnotation(calloutAnnotation)
@@ -145,13 +145,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         print("\(__FUNCTION__)")
 //
-//        // Check if an annotation is member of MKUserLocation
-//        if annotation is MKUserLocation {
-//            // Return nil to reset User location icon to default
-//            return nil
-//        }
+        var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+        if annotation is MKUserLocation {
+            // Return nil to reset User location icon to default
+            return nil
+        }
         if annotation is CustomAnnotation {
-            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+            
             if pin == nil {
                 pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
                 pin?.canShowCallout = false
@@ -269,6 +269,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         /* Place all annotations */
         for value in stands {
             let annotation = CustomAnnotation()
+            print("Hoi")
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
             annotation.title = value.name
