@@ -153,11 +153,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if annotation is CustomAnnotation {
             
             if pin == nil {
-                pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-                pin?.canShowCallout = false
+                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                pin!.canShowCallout = false
+                pin!.image = UIImage(named:"AnnotationsView")
                 print("Normal")
             } else {
-                pin?.annotation = annotation
+                pin!.annotation = annotation
             }
             return pin
         }
@@ -165,10 +166,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
             if pin == nil {
                 pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-                pin?.canShowCallout = false
+                pin!.canShowCallout = false
                 print("Callout")
             } else {
-                pin?.annotation = annotation
+                pin!.annotation = annotation
             }
             return pin
         }
@@ -179,7 +180,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 //        
 //        if annotationView == nil {
 ////            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-//            annotationView = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "pin")
 //            annotationView!.canShowCallout = true
 //            annotationView!.image = UIImage(named:"AnnotationsView")
 //            //let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
