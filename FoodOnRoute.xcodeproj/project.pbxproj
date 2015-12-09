@@ -25,6 +25,8 @@
 		A8FE8B7E1C161D5000E0160C /* PT_Sans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */; };
 		F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */; };
 		F8587ABE1C17184300C53630 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABD1C17184300C53630 /* BubbleView.swift */; };
+		F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */; };
+		F8587AC21C183FC600C53630 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587AC11C183FC600C53630 /* CustomAnnotation.swift */; };
 		F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		D36289EAEF10F97A0D9ED599 /* Pods-FoodOnRoute.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodOnRoute.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodOnRoute/Pods-FoodOnRoute.debug.xcconfig"; sourceTree = "<group>"; };
 		F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotationView.swift; path = UserInterface/Annotations/CalloutAnnotationView.swift; sourceTree = "<group>"; };
 		F8587ABD1C17184300C53630 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BubbleView.swift; path = UserInterface/Annotations/BubbleView.swift; sourceTree = "<group>"; };
+		F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotation.swift; path = UserInterface/Annotations/CalloutAnnotation.swift; sourceTree = "<group>"; };
+		F8587AC11C183FC600C53630 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomAnnotation.swift; path = UserInterface/Annotations/CustomAnnotation.swift; sourceTree = "<group>"; };
 		F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,6 +150,8 @@
 		A88248551C16124800AD1F4A /* Annotations */ = {
 			isa = PBXGroup;
 			children = (
+				F8587AC11C183FC600C53630 /* CustomAnnotation.swift */,
+				F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */,
 				F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */,
 				F8587ABD1C17184300C53630 /* BubbleView.swift */,
 			);
@@ -361,10 +367,12 @@
 				A8FE8B6B1C161D2300E0160C /* FoRColors.swift in Sources */,
 				A8FE8B661C161D1700E0160C /* FoRBackend.swift in Sources */,
 				F8587ABE1C17184300C53630 /* BubbleView.swift in Sources */,
+				F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */,
 				A8FE8B6D1C161D2300E0160C /* FoRHelper.swift in Sources */,
 				A8FE8B751C161D3400E0160C /* FoRDebugViewController.swift in Sources */,
 				A8FE8B641C161D0700E0160C /* FoRAppDelegate.swift in Sources */,
 				F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */,
+				F8587AC21C183FC600C53630 /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

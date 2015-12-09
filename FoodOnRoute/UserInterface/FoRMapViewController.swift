@@ -125,43 +125,72 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 //        print("\(__FUNCTION__)")
     }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-        
+//        print("\(__FUNCTION__)")
+        if let annotation = view.annotation as? CalloutAnnotation {
+            mapView.removeAnnotation(annotation)
+            print("Removed: ", annotation)
+        }
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        print("\(__FUNCTION__)")
+//        print("\(__FUNCTION__)")
+        if let annotation = view.annotation as? CustomAnnotation {
+            let calloutAnnotation = CalloutAnnotation(annotation: annotation)
+            mapView.addAnnotation(calloutAnnotation)
+            mapView.selectAnnotation(calloutAnnotation, animated: false)
+
+        }
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        print("\(__FUNCTION__)")
-        
-        // Check if an annotation is member of MKUserLocation
-        if annotation is MKUserLocation {
-            // Return nil to reset User location icon to default
-            return nil
+        print("\(__FUNCTION__)")
+//
+//        // Check if an annotation is member of MKUserLocation
+//        if annotation is MKUserLocation {
+//            // Return nil to reset User location icon to default
+//            return nil
+//        }
+        if annotation is CustomAnnotation {
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+            if pin == nil {
+                pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                pin?.canShowCallout = false
+                print("Normal")
+            } else {
+                pin?.annotation = annotation
+            }
+            return pin
+        }
+        else if annotation is CalloutAnnotation {
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+            if pin == nil {
+                pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                pin?.canShowCallout = false
+                print("Callout")
+            } else {
+                pin?.annotation = annotation
+            }
+            return pin
         }
         
-        // Change current annotationView to a custom annotation image
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
-        
-        if annotationView == nil {
-            //annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            annotationView = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            annotationView!.canShowCallout = false
-            annotationView!.image = UIImage(named:"AnnotationsView")
-            
-            
-            
-            
-            //let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
-            //annotationView!.rightCalloutAccessoryView = calloutButton
-            
-        } else {
-            annotationView!.annotation = annotation
-        }
-        
-        // Return annotations with new annotation image
-        return annotationView
+        return nil
+//        // Change current annotationView to a custom annotation image
+//        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
+//        
+//        if annotationView == nil {
+////            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+//            annotationView = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+//            annotationView!.canShowCallout = true
+//            annotationView!.image = UIImage(named:"AnnotationsView")
+//            //let calloutButton: UIButton = UIButton(type: UIButtonType.DetailDisclosure)
+//            //annotationView!.rightCalloutAccessoryView = calloutButton
+//            
+//        } else {
+//            annotationView!.annotation = annotation
+//        }
+//        
+//        // Return annotations with new annotation image
+//        return annotationView
     }
     
     
@@ -239,7 +268,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         
         /* Place all annotations */
         for value in stands {
-            let annotation = MKPointAnnotation()
+            let annotation = CustomAnnotation()
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
             annotation.title = value.name
@@ -260,7 +289,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     stand.longitude = value["longitude"].double!
                     self.realm.create(Stand.self, value: stand, update: true)
                 }
-                self.placeAnnotations(true, forStands: nil)
+//                self.placeAnnotations(true, forStands: nil)
             })
             }) { (error) -> () in
                 print(error)
