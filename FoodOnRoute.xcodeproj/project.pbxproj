@@ -20,13 +20,13 @@
 		A8FE8B751C161D3400E0160C /* FoRDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B731C161D3400E0160C /* FoRDebugViewController.swift */; };
 		A8FE8B761C161D3400E0160C /* FoRMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B741C161D3400E0160C /* FoRMapViewController.swift */; };
 		A8FE8B7B1C161D5000E0160C /* PT_Sans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */; };
-		A8FE8B7C1C161D5000E0160C /* PT_Sans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B781C161D5000E0160C /* PT_Sans-BoldItalic.ttf */; };
-		A8FE8B7D1C161D5000E0160C /* PT_Sans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B791C161D5000E0160C /* PT_Sans-Italic.ttf */; };
 		A8FE8B7E1C161D5000E0160C /* PT_Sans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */; };
 		F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */; };
 		F8587ABE1C17184300C53630 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABD1C17184300C53630 /* BubbleView.swift */; };
 		F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */; };
 		F8587AC21C183FC600C53630 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587AC11C183FC600C53630 /* CustomAnnotation.swift */; };
+		F8587AC61C199CF000C53630 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8587AC51C199CF000C53630 /* Montserrat-Regular.ttf */; };
+		F8587AC81C199D1200C53630 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8587AC71C199D1200C53630 /* Montserrat-Bold.ttf */; };
 		F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -60,14 +60,14 @@
 		A8FE8B731C161D3400E0160C /* FoRDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRDebugViewController.swift; path = UserInterface/FoRDebugViewController.swift; sourceTree = "<group>"; };
 		A8FE8B741C161D3400E0160C /* FoRMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRMapViewController.swift; path = UserInterface/FoRMapViewController.swift; sourceTree = "<group>"; };
 		A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Bold.ttf"; path = "Resources/Fonts/PT_Sans-Bold.ttf"; sourceTree = "<group>"; };
-		A8FE8B781C161D5000E0160C /* PT_Sans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-BoldItalic.ttf"; path = "Resources/Fonts/PT_Sans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		A8FE8B791C161D5000E0160C /* PT_Sans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Italic.ttf"; path = "Resources/Fonts/PT_Sans-Italic.ttf"; sourceTree = "<group>"; };
 		A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Regular.ttf"; path = "Resources/Fonts/PT_Sans-Regular.ttf"; sourceTree = "<group>"; };
 		D36289EAEF10F97A0D9ED599 /* Pods-FoodOnRoute.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodOnRoute.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodOnRoute/Pods-FoodOnRoute.debug.xcconfig"; sourceTree = "<group>"; };
 		F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotationView.swift; path = UserInterface/Annotations/CalloutAnnotationView.swift; sourceTree = "<group>"; };
 		F8587ABD1C17184300C53630 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BubbleView.swift; path = UserInterface/Annotations/BubbleView.swift; sourceTree = "<group>"; };
 		F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotation.swift; path = UserInterface/Annotations/CalloutAnnotation.swift; sourceTree = "<group>"; };
 		F8587AC11C183FC600C53630 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomAnnotation.swift; path = UserInterface/Annotations/CustomAnnotation.swift; sourceTree = "<group>"; };
+		F8587AC51C199CF000C53630 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Resources/Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		F8587AC71C199D1200C53630 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Resources/Fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,9 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */,
-				A8FE8B781C161D5000E0160C /* PT_Sans-BoldItalic.ttf */,
-				A8FE8B791C161D5000E0160C /* PT_Sans-Italic.ttf */,
 				A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */,
+				F8587AC51C199CF000C53630 /* Montserrat-Regular.ttf */,
+				F8587AC71C199D1200C53630 /* Montserrat-Bold.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -321,10 +321,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8587AC81C199D1200C53630 /* Montserrat-Bold.ttf in Resources */,
+				F8587AC61C199CF000C53630 /* Montserrat-Regular.ttf in Resources */,
 				F8C0F6A21C0DEBCE007EBF2F /* Images.xcassets in Resources */,
-				A8FE8B7D1C161D5000E0160C /* PT_Sans-Italic.ttf in Resources */,
 				A8FE8B7E1C161D5000E0160C /* PT_Sans-Regular.ttf in Resources */,
-				A8FE8B7C1C161D5000E0160C /* PT_Sans-BoldItalic.ttf in Resources */,
 				A8FE8B7B1C161D5000E0160C /* PT_Sans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

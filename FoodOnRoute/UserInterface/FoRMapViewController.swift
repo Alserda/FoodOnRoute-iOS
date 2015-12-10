@@ -143,7 +143,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        print("\(__FUNCTION__)")
+//        print("\(__FUNCTION__)")
 //
         var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("pin")
         if annotation is MKUserLocation {
@@ -156,7 +156,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 pin = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
                 pin!.canShowCallout = false
                 pin!.image = UIImage(named:"AnnotationsView")
-                print("Normal")
+//                print("Normal")
             } else {
                 pin!.annotation = annotation
             }
@@ -269,7 +269,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         /* Place all annotations */
         for value in stands {
             let annotation = CustomAnnotation()
-            print("Hoi")
             annotation.coordinate.latitude = value.latitude as CLLocationDegrees
             annotation.coordinate.longitude = value.longitude as CLLocationDegrees
             annotation.title = value.name

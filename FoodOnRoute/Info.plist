@@ -5,9 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>PT_Sans-Bold.ttf</string>
-		<string>PT_Sans-Bolditalic.ttf</string>
-		<string>PT_Sans-Italic.ttf</string>
 		<string>PT_Sans-Regular.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

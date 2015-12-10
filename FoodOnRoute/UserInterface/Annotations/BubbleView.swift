@@ -61,7 +61,7 @@ import UIKit
     
     public func setContentViewSize(size: CGSize) {
         var bubbleFrame = self.frame
-        bubbleFrame.size = CGSize(width: size.width + cornerRadius * 2.0, height: size.height + cornerRadius * 2.0 + arrowHeight)
+        bubbleFrame.size = CGSize(width: size.width + cornerRadius * 2.0, height: size.height + cornerRadius * 2.0 + arrowHeight + 100)
         frame = bubbleFrame
         print("\(frame.height) ContentViewSize")
         setNeedsDisplay()

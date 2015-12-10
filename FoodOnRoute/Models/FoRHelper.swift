@@ -91,6 +91,12 @@ struct Locations {
 struct foodOnRouteColor {
     static let darkBlue   : UIColor = UIColor(hexString: "#1D717D")
     static let lightGreen : UIColor = UIColor(hexString: "#38A97A")
+    static let darkGreen : UIColor = UIColor(hexString: "#2F9168")
     static let darkGrey : UIColor = UIColor(hexString: "#666666")
     static let lightGrey  : UIColor = UIColor(hexString: "#979797")
+}
+
+/* Change the systemfonts to the appfont */
+extension UIFont {
+    @nonobjc static let titleFont = UIFont(name: "Montserrat-Bold", size: 15) ?? UIFont.systemFontOfSize(15)
 }
