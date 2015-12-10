@@ -14,14 +14,14 @@ import RealmSwift
 class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     let locationManager = LocationController()
     let backend = Backend()
-    let mapView = MKMapView()
+    let mapView = MapView()
     var followButton = UIButton()
     var following : Bool = false
     let realm = try! Realm()
-    let searchBar : UISearchBar = UISearchBar()
+    let searchBar : ResultsSearchBar = ResultsSearchBar()
     var activeFilter = false
     var searchResults : Results<(Stand)>?
-    let tableView = UITableView()
+    let tableView = ResultsTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,39 +154,17 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     // MARK: Views
     
     func addSearchField() {
-        searchBar.backgroundImage = UIImage()
-        searchBar.searchBarStyle = .Default
-        searchBar.tintColor = foodOnRouteColor.lightGrey
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        searchBar.setImage(UIImage(named: "searchMagnifier"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal);
-
-        
-        let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
-        searchTextField!.textColor = foodOnRouteColor.lightGrey
-        searchTextField?.font = UIFont(name: "PT Sans", size: 16)
-        searchTextField!.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: foodOnRouteColor.lightGrey])  //TODO Get right color (Hex: #979797)
-        
-    
         mapView.addSubview(searchBar)
-        
-        searchBar.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 0).active = true
-        searchBar.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        
-        let widthConstraint = searchBar.widthAnchor.constraintEqualToAnchor(nil, constant: 250)
-        let heightConstraint = searchBar.heightAnchor.constraintEqualToAnchor(nil, constant: 44)
-        NSLayoutConstraint.activateConstraints([heightConstraint, widthConstraint])
+        print(self)
+    
+        searchBar.centerWithTopMargin(self, topMargin: 0)
+        searchBar.constrainToSize(CGSize(width: 250, height: 44))
+    
     }
     
     /* Adds the MapView to the view. */
     func addMapView() {
-        mapView.mapType = .Standard
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .FollowWithHeading
-        mapView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         mapView.frame = self.view.frame
-        mapView.tintColor = foodOnRouteColor.darkBlue
-//        mapView.layoutMargins = UIEdgeInsets(top: 5, left: 10, bottom: 50, right: 20) // TODO: Position compass
         view.addSubview(mapView)
     }
     
@@ -207,16 +185,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
     
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("\(__FUNCTION__)")
-        
-    }
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
-        print("\(__FUNCTION__)")
-    }
-    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-//        print("\(__FUNCTION__)")
-    }
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
         if let mapPin = view as? MapPin {

@@ -11,7 +11,9 @@
 		A85C09B31C16194E00B05A96 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
 		A85C09B41C16195800B05A96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCBA1BA6B4CE007B811F /* MapKit.framework */; };
 		A889B30E1BA186DB0030AFB9 /* FoodOnRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* FoodOnRouteTests.swift */; };
-		A895FFE11C16E11C00F6FB46 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A895FFE01C16E11C00F6FB46 /* ResultsTableViewController.swift */; };
+		A895FFE11C16E11C00F6FB46 /* ResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A895FFE01C16E11C00F6FB46 /* ResultsTableView.swift */; };
+		A8AAFF811C1874AC00A87A8D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AAFF801C1874AC00A87A8D /* MapView.swift */; };
+		A8AAFF831C18797000A87A8D /* ResultsSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */; };
 		A8FE8B641C161D0700E0160C /* FoRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B631C161D0700E0160C /* FoRAppDelegate.swift */; };
 		A8FE8B661C161D1700E0160C /* FoRBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B651C161D1700E0160C /* FoRBackend.swift */; };
 		A8FE8B6B1C161D2300E0160C /* FoRColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B671C161D2300E0160C /* FoRColors.swift */; };
@@ -50,7 +52,9 @@
 		A889B3071BA186DB0030AFB9 /* FoodOnRoute.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodOnRoute.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* FoodOnRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOnRouteTests.swift; sourceTree = "<group>"; };
-		A895FFE01C16E11C00F6FB46 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
+		A895FFE01C16E11C00F6FB46 /* ResultsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableView.swift; sourceTree = "<group>"; };
+		A8AAFF801C1874AC00A87A8D /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapView.swift; path = UserInterface/MapView.swift; sourceTree = "<group>"; };
+		A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsSearchBar.swift; path = UserInterface/ResultsSearchBar.swift; sourceTree = "<group>"; };
 		A8FE8B631C161D0700E0160C /* FoRAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoRAppDelegate.swift; sourceTree = "<group>"; };
 		A8FE8B651C161D1700E0160C /* FoRBackend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRBackend.swift; path = API/FoRBackend.swift; sourceTree = "<group>"; };
 		A8FE8B671C161D2300E0160C /* FoRColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FoRColors.swift; path = Models/FoRColors.swift; sourceTree = "<group>"; };
@@ -140,7 +144,9 @@
 		A88248541C16123300AD1F4A /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A895FFE01C16E11C00F6FB46 /* ResultsTableViewController.swift */,
+				A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */,
+				A895FFE01C16E11C00F6FB46 /* ResultsTableView.swift */,
+				A8AAFF801C1874AC00A87A8D /* MapView.swift */,
 				A88248551C16124800AD1F4A /* Annotations */,
 			);
 			name = UserInterface;
@@ -358,11 +364,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AAFF831C18797000A87A8D /* ResultsSearchBar.swift in Sources */,
 				A8FE8B6C1C161D2300E0160C /* FoRDatabase.swift in Sources */,
+				A8AAFF811C1874AC00A87A8D /* MapView.swift in Sources */,
 				A8FE8B761C161D3400E0160C /* FoRMapViewController.swift in Sources */,
 				A8FE8B6E1C161D2300E0160C /* FoRLocationController.swift in Sources */,
 				A8FE8B6B1C161D2300E0160C /* FoRColors.swift in Sources */,
-				A895FFE11C16E11C00F6FB46 /* ResultsTableViewController.swift in Sources */,
+				A895FFE11C16E11C00F6FB46 /* ResultsTableView.swift in Sources */,
 				A8FE8B661C161D1700E0160C /* FoRBackend.swift in Sources */,
 				A8FE8B721C161D2F00E0160C /* FoRMapPinCallout.swift in Sources */,
 				A8FE8B6D1C161D2300E0160C /* FoRHelper.swift in Sources */,
