@@ -57,18 +57,24 @@ extension NSLayoutConstraint {
 
 /* Allows centering views */
 extension UIView {
-    func centerWithTopMargin(viewController: UIViewController, topMargin: CGFloat) {
-        let horizontalConstraint = self.topAnchor.constraintEqualToAnchor(viewController.topLayoutGuide.bottomAnchor, constant: topMargin)
+    func centerWithTopMargin(viewController: UIViewController, placeUnderViews: [UIView]?, topMargin: CGFloat) {
+        var addedViewHeight : CGFloat = 0
+        
+        if let extraViews = placeUnderViews {
+            for view in extraViews {
+                addedViewHeight += view.bounds.size.height
+            }
+        }
+
+        let horizontalConstraint = self.topAnchor.constraintEqualToAnchor(viewController.topLayoutGuide.bottomAnchor, constant: addedViewHeight + topMargin)
         let verticalConstraint = self.centerXAnchor.constraintEqualToAnchor(viewController.view.centerXAnchor)
         NSLayoutConstraint.activateConstraints([horizontalConstraint, verticalConstraint])
-        
     }
     
     func constrainToSize (size : CGSize) {
         let widthConstraint = self.widthAnchor.constraintEqualToAnchor(nil, constant: size.width)
         let heightConstraint = self.heightAnchor.constraintEqualToAnchor(nil, constant: size.height)
         NSLayoutConstraint.activateConstraints([widthConstraint, heightConstraint])
-        
     }
 }
 

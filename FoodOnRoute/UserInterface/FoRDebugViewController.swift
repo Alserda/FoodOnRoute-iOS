@@ -10,6 +10,7 @@ import UIKit
 
 class DebugViewController : UITableViewController {
     var timer : NSTimer? = nil
+    let mapview = MapViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
