@@ -86,11 +86,11 @@ class CalloutAnnotationView : MKAnnotationView {
         showStandButton.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
         showStandButton.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
-        showStandButton.layer.shadowColor = foodOnRouteColor.darkGreen.CGColor
-        showStandButton.layer.shadowOffset = CGSize(width: 0, height: 3)
-        showStandButton.layer.shadowRadius = 5
-        showStandButton.layer.shadowOpacity = 1
+        
+        showStandButton.layer.borderWidth = 3
+        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
         showStandButton.layer.cornerRadius = 5
+        showStandButton.addBottomBorderWithColor(UIColor.redColor(), width: showStandButton.frame.size.width)
         showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
         showStandButton.titleLabel?.font = buttonFont
         showStandButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -107,6 +107,9 @@ class CalloutAnnotationView : MKAnnotationView {
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 0).active = true
         showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 13).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
+
+        
+        
         
         updateCallout()
     }

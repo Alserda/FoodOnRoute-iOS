@@ -60,6 +60,35 @@ extension UIView {
         NSLayoutConstraint.activateConstraints([widthConstraint, heightConstraint])
         
     }
+    
+    func addTopBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, 0, self.frame.size.width, width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addRightBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(self.frame.size.width - width, 0, width, self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+    
+    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, self.frame.size.height - width, self.frame.size.width, width)
+        self.layer.addSublayer(border)
+    }
+    
+    func addLeftBorderWithColor(color: UIColor, width: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.CGColor
+        border.frame = CGRectMake(0, 0, width, self.frame.size.height)
+        self.layer.addSublayer(border)
+    }
+
 }
 
 /* Makes it possible to compare coordinates. */
@@ -94,9 +123,4 @@ struct foodOnRouteColor {
     static let darkGreen : UIColor = UIColor(hexString: "#2F9168")
     static let darkGrey : UIColor = UIColor(hexString: "#666666")
     static let lightGrey  : UIColor = UIColor(hexString: "#979797")
-}
-
-/* Change the systemfonts to the appfont */
-extension UIFont {
-    @nonobjc static let titleFont = UIFont(name: "Montserrat-Bold", size: 15) ?? UIFont.systemFontOfSize(15)
 }
