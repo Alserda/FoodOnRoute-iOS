@@ -63,6 +63,7 @@ class CalloutAnnotationView : MKAnnotationView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         showStandButton.translatesAutoresizingMaskIntoConstraints = false
+        bubbleView.contentView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(bubbleView)
         
@@ -80,8 +81,6 @@ class CalloutAnnotationView : MKAnnotationView {
         subtitleLabel.font = subtitleFont
         subtitleLabel.textColor = foodOnRouteColor.darkGrey
         
-        
-
         
         // Create show stand button stats
         showStandButton.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
@@ -101,9 +100,12 @@ class CalloutAnnotationView : MKAnnotationView {
         bubbleView.contentView.addSubview(subtitleLabel)
         bubbleView.contentView.addSubview(showStandButton)
         
-        titleLabel.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 0).active = true
+        titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 10).active = true
+        titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 5).active = true
+        subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 10).active = true
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 0).active = true
         showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 0).active = true
+        showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
         
         updateCallout()
     }
