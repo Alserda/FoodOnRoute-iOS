@@ -28,8 +28,8 @@ import UIKit
     @IBInspectable public var cornerRadius      : CGFloat = 5
     @IBInspectable public var arrowHeight       : CGFloat = 5
     @IBInspectable public var arrowAngle        : CGFloat = CGFloat(M_PI_4)
-    @IBInspectable public var bubbleFillColor   : UIColor = UIColor.redColor()
-    @IBInspectable public var bubbleStrokeColor : UIColor = UIColor.whiteColor()
+    @IBInspectable public var bubbleFillColor   : UIColor = UIColor.whiteColor()
+    @IBInspectable public var bubbleStrokeColor : UIColor = UIColor.clearColor()
     @IBInspectable public var bubbleLineWidth   : CGFloat = 1
     
     public let contentView = UIView()
@@ -56,12 +56,14 @@ import UIKit
         let contentViewFrame = CGRect(x: cornerRadius, y: cornerRadius, width: frame.size.width - cornerRadius * 2.0, height: frame.size.height - cornerRadius * 2.0 - arrowHeight)
         
         contentView.frame = contentViewFrame
+        print("\(contentView.frame.height) contentViewFrame")
     }
     
     public func setContentViewSize(size: CGSize) {
         var bubbleFrame = self.frame
         bubbleFrame.size = CGSize(width: size.width + cornerRadius * 2.0, height: size.height + cornerRadius * 2.0 + arrowHeight)
         frame = bubbleFrame
+        print("\(frame.height) ContentViewSize")
         setNeedsDisplay()
     }
     

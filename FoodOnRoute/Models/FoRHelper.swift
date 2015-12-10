@@ -91,5 +91,6 @@ struct Locations {
 struct foodOnRouteColor {
     static let darkBlue   : UIColor = UIColor(hexString: "#1D717D")
     static let lightGreen : UIColor = UIColor(hexString: "#38A97A")
+    static let darkGrey : UIColor = UIColor(hexString: "#666666")
     static let lightGrey  : UIColor = UIColor(hexString: "#979797")
 }
