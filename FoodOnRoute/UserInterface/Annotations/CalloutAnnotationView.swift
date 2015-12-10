@@ -27,8 +27,10 @@ class CalloutAnnotationView : MKAnnotationView {
     let bubbleView = BubbleView()           // the view that actually represents the callout bubble
     let titleLabel = UILabel()                   // the label we'll add as subview to the bubble's contentView
     let titleFont = UIFont(name: "Montserrat-Bold", size: 18)!  // the font we'll use for the title
-    let buttonFont = UIFont(name: "Montserrat", size: 14)!  // the font we'll use for the buttons
+    let subtitleLabel = UILabel()                   // the label we'll add as subview to the bubble's contentView
+    let subtitleFont = UIFont(name: "PT Sans", size: 14)!  // the font we'll use for the title
     let showStandButton   = UIButton(type: UIButtonType.System) as UIButton
+    let buttonFont = UIFont(name: "Montserrat", size: 14)!  // the font we'll use for the buttons
 
     /// Update size and layout of callout view
     
@@ -42,6 +44,7 @@ class CalloutAnnotationView : MKAnnotationView {
             let attributes = [NSFontAttributeName : titleFont]
             size = string!.sizeWithAttributes(attributes)
             titleLabel.text = (annotation?.title)!
+            subtitleLabel.text = (annotation?.subtitle)!
         }
         if size.width < 30 {
             size.width = 30
@@ -58,39 +61,49 @@ class CalloutAnnotationView : MKAnnotationView {
         backgroundColor = UIColor.clearColor()
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        showStandButton.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        showStandButton.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(bubbleView)
         
         // Create title label stats
         titleLabel.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
         titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .Left
         titleLabel.font = titleFont
         titleLabel.textColor = foodOnRouteColor.darkBlue
+        
+        // Create subtitle label stats
+        subtitleLabel.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
+        subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        subtitleLabel.textAlignment = .Left
+        subtitleLabel.font = subtitleFont
+        subtitleLabel.textColor = foodOnRouteColor.darkGrey
         
         
 
         
-//        // Create show stand button stats
-//        showStandButton.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
-//            //showStandButton.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-//        showStandButton.backgroundColor = foodOnRouteColor.lightGreen
-//        showStandButton.layer.shadowColor = foodOnRouteColor.darkGreen.CGColor
-//        showStandButton.layer.shadowOffset = CGSizeMake(0, 3)
-//        showStandButton.layer.shadowRadius = 5
-//        showStandButton.layer.cornerRadius = 5
-//        showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
-//        showStandButton.titleLabel?.font = buttonFont
-//        showStandButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-//        showStandButton.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        // Create show stand button stats
+        showStandButton.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
+        showStandButton.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        showStandButton.backgroundColor = foodOnRouteColor.lightGreen
+        showStandButton.layer.shadowColor = foodOnRouteColor.darkGreen.CGColor
+        showStandButton.layer.shadowOffset = CGSizeMake(0, 3)
+        showStandButton.layer.shadowRadius = 5
+        showStandButton.layer.cornerRadius = 5
+        showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
+        showStandButton.titleLabel?.font = buttonFont
+        showStandButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        showStandButton.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
         // Add the subviews
         bubbleView.contentView.addSubview(titleLabel)
-//        bubbleView.contentView.addSubview(showStandButton)
+        bubbleView.contentView.addSubview(subtitleLabel)
+        bubbleView.contentView.addSubview(showStandButton)
         
         titleLabel.topAnchor.constraintEqualToAnchor(self.topAnchor, constant: 0).active = true
-//        showStandButton.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 5).active = true
+        subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 0).active = true
+        showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 0).active = true
         
         updateCallout()
     }

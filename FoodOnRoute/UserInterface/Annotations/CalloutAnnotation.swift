@@ -31,6 +31,12 @@ class CalloutAnnotation : MKPointAnnotation {
             return underlyingAnnotation.title }
         set { underlyingAnnotation.title = newValue }
     }
+    
+    override var subtitle: String? {
+        get { print(underlyingAnnotation.subtitle)
+            return underlyingAnnotation.subtitle }
+        set { underlyingAnnotation.subtitle = newValue }
+    }
 }
 
 
