@@ -87,8 +87,9 @@ class CalloutAnnotationView : MKAnnotationView {
         showStandButton.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
         showStandButton.layer.shadowColor = foodOnRouteColor.darkGreen.CGColor
-        showStandButton.layer.shadowOffset = CGSizeMake(0, 3)
+        showStandButton.layer.shadowOffset = CGSize(width: 0, height: 3)
         showStandButton.layer.shadowRadius = 5
+        showStandButton.layer.shadowOpacity = 1
         showStandButton.layer.cornerRadius = 5
         showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
         showStandButton.titleLabel?.font = buttonFont
@@ -100,11 +101,11 @@ class CalloutAnnotationView : MKAnnotationView {
         bubbleView.contentView.addSubview(subtitleLabel)
         bubbleView.contentView.addSubview(showStandButton)
         
-        titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 10).active = true
-        titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 5).active = true
-        subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 10).active = true
+        titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 15).active = true
+        titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 10).active = true
+        subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 15).active = true
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 0).active = true
-        showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 0).active = true
+        showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 13).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
         
         updateCallout()
