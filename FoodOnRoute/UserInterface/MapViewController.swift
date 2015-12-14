@@ -296,35 +296,18 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
             let listOfProducts : List<(Product)> = List<(Product)>()
             
-            func addStand(stand: Stand, products: List<(Product)>?) {
-//                if (products != nil) {
-//                    for product in products! {
-//
-//                        stand.products.append(product)
-//                    }
-//                }
-//                try! self.realm.write({ () -> Void in
-//                    self.realm.create(Stand.self, value: stand, update: true)
-//                })
-//
-//                for product in products! {
-//                    print(stand, product)
-//                }
-//                print(stand)
-//                print(products)
-                
-                if (products != nil) {
-                    for product in products! {
-                        stand.products.append(product)
-                    }
+            func addProducts(stand: Stand, products: List<(Product)>?) {
+                for product in products! {
+                    print(product.name)
+                    let newProduct = Product()
+                    newProduct.id = product.id
+                    newProduct.name = product.name
+                    newProduct.stands.append(stand)
+                    
+                    try! self.realm.write({ () -> Void in
+                        self.realm.create(Product.self, value: newProduct, update: true)
+                    })
                 }
-                
-                try! self.realm.write({ () -> Void in
-                    self.realm.create(Stand.self, value: stand, update: true)
-                })
-
-                print(stand)
-
 
                 listOfProducts.removeAll()
             }
@@ -339,16 +322,17 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     let product = Product()
                     product.id = products["id"].intValue
                     product.name = products["name"].string!
+                    stand.products.append(product)
                     listOfProducts.append(product)
                 }
-
-                addStand(stand, products: listOfProducts)
+                
+                try! self.realm.write({ () -> Void in
+                    self.realm.create(Stand.self, value: stand, update: true)
+                })
+                
+                addProducts(stand, products: listOfProducts)
             }
             
-
-
-
-
             print(Realm.Configuration.defaultConfiguration.path!)
 
             }) { (error) -> () in
