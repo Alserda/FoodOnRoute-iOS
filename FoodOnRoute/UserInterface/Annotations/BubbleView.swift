@@ -56,14 +56,14 @@ import UIKit
         let contentViewFrame = CGRect(x: cornerRadius, y: cornerRadius, width: frame.size.width - cornerRadius * 2.0, height: frame.size.height - cornerRadius * 2.0 - arrowHeight)
         
         contentView.frame = contentViewFrame
-        print("\(contentView.frame.height) contentViewFrame")
+//        print("\(contentView.frame.height) contentViewFrame")
     }
     
     public func setContentViewSize(size: CGSize) {
         var bubbleFrame = self.frame
         bubbleFrame.size = CGSize(width: 250 + cornerRadius * 2.0, height: 100 + cornerRadius * 2.0 + arrowHeight)
         frame = bubbleFrame
-        print("\(frame.height) ContentViewSize")
+//        print("\(frame.height) ContentViewSize")
         setNeedsDisplay()
     }
     

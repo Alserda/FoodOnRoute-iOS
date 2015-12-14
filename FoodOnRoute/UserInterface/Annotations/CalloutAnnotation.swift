@@ -1,5 +1,5 @@
 //
-//  CustomAnnotation.swift
+//  CalloutAnnotation.swift
 //  FoodOnRoute
 //
 //  Created by Stefan Brouwer on 09-12-15.
@@ -17,25 +17,25 @@ class CalloutAnnotation : MKPointAnnotation {
         super.init()
     }
     
-    /// Override `coordinate` so that it returns the same coordinate of the annotation for which this serves as callout
+    // Override `coordinate` so that it returns the same coordinate of the annotation for which this serves as callout
     
     override var coordinate: CLLocationCoordinate2D {
         get { return underlyingAnnotation.coordinate }
         set { underlyingAnnotation.coordinate = newValue }
     }
     
-    /// Override `title` so that it simply the title of the annotation for which this serves as callout
+    // Override `title` so that it simply the title of the annotation for which this serves as callout
     
     override var title: String? {
-        get { print(underlyingAnnotation.title)
-            return underlyingAnnotation.title }
-        set { underlyingAnnotation.title = newValue }
+        get {
+            return underlyingAnnotation.title! }
+        set { underlyingAnnotation.title = newValue! }
     }
     
     override var subtitle: String? {
-        get { print(underlyingAnnotation.subtitle)
-            return underlyingAnnotation.subtitle }
-        set { underlyingAnnotation.subtitle = newValue }
+        get { 
+            return underlyingAnnotation.subtitle! }
+        set { underlyingAnnotation.subtitle = newValue! }
     }
 }
 

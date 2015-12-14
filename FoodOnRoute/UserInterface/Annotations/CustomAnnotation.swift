@@ -1,12 +1,10 @@
 //
 //  CustomAnnotation.swift
-//  SwiftMapViewCustomCallout
+//  FoodOnRoute
 //
-//  Created by Robert Ryan on 6/15/15.
-//  Copyright (c) 2015 Robert Ryan. All rights reserved.
+//  Created by Stefan Brouwer on 09-12-15.
+//  Copyright © 2015 Peter Alserda. All rights reserved.
 //
-//  This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-//  http://creativecommons.org/licenses/by-sa/4.0/
 
 import UIKit
 import MapKit

@@ -36,6 +36,7 @@ class CalloutAnnotationView : MKAnnotationView {
     
     func updateCallout() {
         if annotation == nil {
+            print(annotation, "is nil")
             return
         }
         
