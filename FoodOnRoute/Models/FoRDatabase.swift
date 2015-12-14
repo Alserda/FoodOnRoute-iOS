@@ -23,6 +23,11 @@ class Stand: Object {
 }
 
 class Product: Object {
+    dynamic var id : Int = 0
     dynamic var name : String = ""
     let stands = List<Stand>()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
