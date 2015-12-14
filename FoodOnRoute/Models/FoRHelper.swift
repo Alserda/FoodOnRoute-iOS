@@ -61,6 +61,7 @@ extension UIView {
         
     }
     
+    /* Add borders to objects */
     func addTopBorderWithColor(color: UIColor, width: CGFloat) {
         let border = CALayer()
         border.backgroundColor = color.CGColor

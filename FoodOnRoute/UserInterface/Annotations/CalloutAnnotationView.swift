@@ -52,7 +52,7 @@ class CalloutAnnotationView : MKAnnotationView {
         bubbleView.setContentViewSize(size)
         print("SIZEEEEEE", size)
         frame = (bubbleView.bounds)
-        centerOffset = CGPoint(x: 0, y: -40)
+        centerOffset = CGPoint(x: 0, y: -80)
     }
     
     /// Perform the initial configuration of the subviews
