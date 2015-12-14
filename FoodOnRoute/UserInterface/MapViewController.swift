@@ -33,8 +33,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.delegate = self
         tableView.dataSource = self
 
-//        retrieveAndCacheStands(clearDatabase: false)
-        retrieveAndCacheStands()
+        retrieveAndCacheStands(clearDatabase: true)
+//        retrieveAndCacheStands()
         addMapView()
         addSearchField()
         addFollowButton()
@@ -287,15 +287,47 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             self.mapView.addAnnotation(annotation)
         }
     }
+    
+    func retrieveAndCacheProducts(clearDatabase clearDatabase: Bool?) {
+        
+    }
 
-
-/*
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
-
-
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            let listOfStands : List<(Stand)> = List<(Stand)>()
-//            let listOfProducts : List<(Product)> = List<(Product)>()
+            let listOfProducts : List<(Product)> = List<(Product)>()
+            
+            func addStand(stand: Stand, products: List<(Product)>?) {
+//                if (products != nil) {
+//                    for product in products! {
+//
+//                        stand.products.append(product)
+//                    }
+//                }
+//                try! self.realm.write({ () -> Void in
+//                    self.realm.create(Stand.self, value: stand, update: true)
+//                })
+//
+//                for product in products! {
+//                    print(stand, product)
+//                }
+//                print(stand)
+//                print(products)
+                
+                if (products != nil) {
+                    for product in products! {
+                        stand.products.append(product)
+                    }
+                }
+                
+                try! self.realm.write({ () -> Void in
+                    self.realm.create(Stand.self, value: stand, update: true)
+                })
+
+                print(stand)
+
+
+                listOfProducts.removeAll()
+            }
 
             for (_, value) in response {
                 let stand = Stand()
@@ -307,51 +339,43 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     let product = Product()
                     product.id = products["id"].intValue
                     product.name = products["name"].string!
-//                    product.stands.append(stand)
-                    stand.products.append(product)
+                    listOfProducts.append(product)
                 }
-                listOfStands.append(stand)
-//                listOfProducts.appendContentsOf(stand.products)
+
+                addStand(stand, products: listOfProducts)
             }
+            
 
-//            print(listOfStands, "tjerk my man")
 
 
-//            print(listOfProducts)
 
-            try! self.realm.write({ () -> Void in
-                for stand in listOfStands {
-                    print(stand)
-                    self.realm.create(Stand.self, value: stand, update: true)
-                }
-            })
+            print(Realm.Configuration.defaultConfiguration.path!)
 
-  print(Realm.Configuration.defaultConfiguration.path!)
             }) { (error) -> () in
                 print(error)
         }
     }
-*/
 
-    func retrieveAndCacheStands() {
-        backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            //            print(response)
-            try! self.realm.write({ () -> Void in
-                for (_, value) in response {
-                    let stand = Stand()
-                    stand.id = value["id"].intValue
-                    stand.name = value["name"].string!
-                    stand.latitude = value["latitude"].double!
-                    stand.longitude = value["longitude"].double!
-                    self.realm.create(Stand.self, value: stand, update: true)
-                }
-//                self.placeAnnotations(true, forStands: nil)
-            })
-            }) { (error) -> () in
-                print(error)
-                // Show the user that new stands could not be loaded
-        }
-    }
+//
+//    func retrieveAndCacheStands() {
+//        backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
+//            //            print(response)
+//            try! self.realm.write({ () -> Void in
+//                for (_, value) in response {
+//                    let stand = Stand()
+//                    stand.id = value["id"].intValue
+//                    stand.name = value["name"].string!
+//                    stand.latitude = value["latitude"].double!
+//                    stand.longitude = value["longitude"].double!
+//                    self.realm.create(Stand.self, value: stand, update: true)
+//                }
+////                self.placeAnnotations(true, forStands: nil)
+//            })
+//            }) { (error) -> () in
+//                print(error)
+//                // Show the user that new stands could not be loaded
+//        }
+//    }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
