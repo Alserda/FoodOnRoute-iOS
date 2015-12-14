@@ -20,7 +20,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     let realm = try! Realm()
     let searchBar : ResultsSearchBar = ResultsSearchBar()
     var activeFilter = false
-    var searchResults : Results<(Stand)>?
+    var searchResults : Results<(Product)>?
     let tableView = ResultsTableView()
 
     override func viewDidLoad() {
@@ -32,6 +32,21 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        let query = self.realm.objects(Product).filter("name CONTAINS[c] %@", "teunisbloem")
+//        var standsWithProducts: List<(Stand)> = List<(Stand)>()
+//        print(query)
+//        for elements in query {
+//            print(elements.name)
+//            for stands in elements.stands {
+//                print(stands.name)
+//                standsWithProducts.append(stands)
+//            }
+//        }
+//        print(standsWithProducts)
+//        for elements in standsWithProducts {
+//            print(elements.latitude, elements.longitude)
+//        }
 
         retrieveAndCacheStands(clearDatabase: true)
 //        retrieveAndCacheStands()
@@ -206,7 +221,22 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             placeAnnotations(true, forStands: nil)
         }
 
-        searchResults = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
+        searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
+        
+        let standsWithProducts: List<(Stand)> = List<(Stand)>()
+        if let products = searchResults {
+            for elements in products {
+                print(elements.name)
+                for stands in elements.stands {
+                    print(stands.name)
+                    standsWithProducts.append(stands)
+                }
+            }
+        }
+        for elements in standsWithProducts {
+            print(elements.latitude, elements.longitude)
+        }
+
         tableView.reloadData()
 
         if searchText.characters.count >= 1 {
@@ -215,7 +245,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 searchTextField!.textColor = UIColor.redColor()
             } else {
                 activeFilter = true
-                placeAnnotations(true, forStands: searchResults)
+                placeAnnotations(true, forStands: standsWithProducts)
                 searchTextField!.textColor = foodOnRouteColor.lightGrey
             }
 
@@ -261,8 +291,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
 
-    func placeAnnotations(removeOldPins: Bool, forStands: Results<(Stand)>?) {
-        var stands : Results<(Stand)>
+    func placeAnnotations(removeOldPins: Bool, forStands: List<(Stand)>?) {
 
         /* Remove the old pins before updating. */
         if (removeOldPins) {
@@ -272,20 +301,29 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         /* If this method recieved specific stands to be annotated, use them.
            Else use all available stands. */
         if forStands?.count >= 1 {
-            stands = forStands!
+            /* Place all annotations */
+            for value in forStands! {
+                let annotation = CustomAnnotation()
+                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+                annotation.title = value.name
+                annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+                self.mapView.addAnnotation(annotation)
+            }
+            
         } else {
-            stands = self.realm.objects(Stand)
+            /* Place all annotations */
+            for value in self.realm.objects(Stand) {
+                let annotation = CustomAnnotation()
+                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
+                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
+                annotation.title = value.name
+                annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+                self.mapView.addAnnotation(annotation)
+            }
         }
 
-        /* Place all annotations */
-        for value in stands {
-            let annotation = CustomAnnotation()
-            annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-            annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-            annotation.title = value.name
-            annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
-            self.mapView.addAnnotation(annotation)
-        }
+
     }
     
     func retrieveAndCacheProducts(clearDatabase clearDatabase: Bool?) {
