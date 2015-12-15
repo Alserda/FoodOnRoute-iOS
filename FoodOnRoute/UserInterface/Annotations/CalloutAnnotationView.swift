@@ -88,9 +88,14 @@ class CalloutAnnotationView : MKAnnotationView {
         showStandButton.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
         
-        showStandButton.layer.borderWidth = 3
-        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
-        showStandButton.layer.cornerRadius = 5
+//        showStandButton.titleEdgeInsets.left = 20
+//        showStandButton.titleEdgeInsets.top = 10
+//        showStandButton.titleEdgeInsets.right = 20
+//        showStandButton.titleEdgeInsets.top = 10
+        
+//        showStandButton.layer.borderWidth = 3
+//        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
+//        showStandButton.layer.cornerRadius = 5
         showStandButton.addBottomBorderWithColor(UIColor.redColor(), width: showStandButton.frame.size.width)
         showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
         showStandButton.titleLabel?.font = buttonFont
