@@ -281,33 +281,29 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if (removeOldPins) {
             mapView.removeAnnotations(mapView.annotations)
         }
+        
+        func placeAnnotation(data: Stand) {
+            let newAnnotation = CustomAnnotation()
+            newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
+            newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
+            newAnnotation.title = data.name
+            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+            self.mapView.addAnnotation(newAnnotation)
+        }
 
         /* If this method recieved specific stands to be annotated, use them.
            Else use all available stands. */
         if forStands?.count >= 1 {
             /* Place all annotations */
             for value in forStands! {
-                let annotation = CustomAnnotation()
-                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-                annotation.title = value.name
-                annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
-                self.mapView.addAnnotation(annotation)
+                placeAnnotation(value)
             }
-            
         } else {
             /* Place all annotations */
             for value in self.realm.objects(Stand) {
-                let annotation = CustomAnnotation()
-                annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-                annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-                annotation.title = value.name
-                annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
-                self.mapView.addAnnotation(annotation)
+                placeAnnotation(value)
             }
         }
-
-
     }
 
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
