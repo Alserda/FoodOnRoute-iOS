@@ -33,13 +33,41 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.delegate = self
         tableView.dataSource = self
         
-        retrieveAndCacheStands(clearDatabase: false)
-        addMapView()
-        addSearchField()
-        addFollowButton()
-        placeAnnotations(false, forStands: nil)
+        searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", "a")
+        
+        
+//        let arrayWithStands = [["id": Int, "name": String, "latitude": Double, "longitude": Double]]()
 
-        self.registerShowAndHideKeyboard()
+        
+        let standsWithProducts: List<(Stand)> = List<(Stand)>()
+        if let products = searchResults {
+            for elements in products {
+                for stands in elements.stands {
+                    print(stands.id)
+                    standsWithProducts.append(stands)
+                }
+            }
+        }
+        
+        var arrayWithStands: [Stand] = [Stand]()
+        for elements in standsWithProducts {
+            if !arrayWithStands.containsObject(elements) {
+                print(false)
+                arrayWithStands.append(elements)
+            } else {
+                print(true)
+            }
+        }
+        
+        print(arrayWithStands)
+        
+//        retrieveAndCacheStands(clearDatabase: false)
+//        addMapView()
+//        addSearchField()
+//        addFollowButton()
+//        placeAnnotations(false, forStands: nil)
+//
+//        self.registerShowAndHideKeyboard()
 
     }
 
@@ -198,11 +226,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     // MARK: searchBar Delegates
+    
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
         if activeFilter && searchText.characters.count == 0 {
             placeAnnotations(true, forStands: nil)
+            activeFilter = false
         }
 
         searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
@@ -210,25 +240,30 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         let standsWithProducts: List<(Stand)> = List<(Stand)>()
         if let products = searchResults {
             for elements in products {
-                print(elements.name)
                 for stands in elements.stands {
-                    print(stands.name)
                     standsWithProducts.append(stands)
                 }
             }
         }
+        
         for elements in standsWithProducts {
-            print(elements.latitude, elements.longitude)
+            print(elements.name)
         }
+        
+
+        
+
+            
+       
 
         tableView.reloadData()
 
         if searchText.characters.count >= 1 {
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
+            activeFilter = true
             if searchResults?.count == 0 {
                 searchTextField!.textColor = UIColor.redColor()
             } else {
-                activeFilter = true
                 placeAnnotations(true, forStands: standsWithProducts)
                 searchTextField!.textColor = foodOnRouteColor.lightGrey
             }
@@ -246,7 +281,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         print("\(__FUNCTION__)")
         // Wanneer je op de form tapt
         addTableView()
-
     }
 
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -333,27 +367,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 print(error)
         }
     }
-
-//
-//    func retrieveAndCacheStands() {
-//        backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-//            //            print(response)
-//            try! self.realm.write({ () -> Void in
-//                for (_, value) in response {
-//                    let stand = Stand()
-//                    stand.id = value["id"].intValue
-//                    stand.name = value["name"].string!
-//                    stand.latitude = value["latitude"].double!
-//                    stand.longitude = value["longitude"].double!
-//                    self.realm.create(Stand.self, value: stand, update: true)
-//                }
-////                self.placeAnnotations(true, forStands: nil)
-//            })
-//            }) { (error) -> () in
-//                print(error)
-//                // Show the user that new stands could not be loaded
-//        }
-//    }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
