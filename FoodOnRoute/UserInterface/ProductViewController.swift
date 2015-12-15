@@ -17,6 +17,7 @@ class ProductViewController : UIViewController {
         
         self.view.backgroundColor = foodOnRouteColor.lightBlue
         setNavigationbarAppearance()
+        addShadowToNavigationbar()
         addUpperBackground()
 
     }
@@ -41,18 +42,20 @@ class ProductViewController : UIViewController {
         let image = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
         let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack")
         self.navigationItem.leftBarButtonItem = button
-        
+    }
+    
+    func addShadowToNavigationbar() {
         let navBorder: UIView = UIView()
         navBorder.backgroundColor = foodOnRouteColor.shadowGreen
         navBorder.opaque = true
         navBorder.translatesAutoresizingMaskIntoConstraints = false
         self.navigationController?.navigationBar.addSubview(navBorder)
-
+        
         navBorder.topAnchor.constraintEqualToAnchor(self.navigationController?.navigationBar.bottomAnchor, constant: 0).active = true
-            
+        
         navBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
     }
-    
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -64,16 +67,7 @@ class ProductViewController : UIViewController {
     }
     
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        if let navigationBar = self.navigationController?.navigationBar {
-            var frame: CGRect = navigationBar.frame
-            print(toInterfaceOrientation.isLandscape)
-            if UIInterfaceOrientationIsPortrait(toInterfaceOrientation) {
-                frame.size.height = 44
-            } else {
-                frame.size.height = 32
-            }
-            print(frame)
-            self.navigationController?.navigationBar.frame = frame
-        }
+            /* Resets the border under the navigationBar, otherwise the width of the border will stay the same as it was in portrait mode */
+            addShadowToNavigationbar()
     }
 }
