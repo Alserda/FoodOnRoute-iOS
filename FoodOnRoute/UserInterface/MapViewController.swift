@@ -33,41 +33,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.delegate = self
         tableView.dataSource = self
         
-        searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", "a")
-        
-        
-//        let arrayWithStands = [["id": Int, "name": String, "latitude": Double, "longitude": Double]]()
+        retrieveAndCacheStands(clearDatabase: false)
+        addMapView()
+        addSearchField()
+        addFollowButton()
+        placeAnnotations(false, forStands: nil)
 
-        
-        let standsWithProducts: List<(Stand)> = List<(Stand)>()
-        if let products = searchResults {
-            for elements in products {
-                for stands in elements.stands {
-                    print(stands.id)
-                    standsWithProducts.append(stands)
-                }
-            }
-        }
-        
-        var arrayWithStands: [Stand] = [Stand]()
-        for elements in standsWithProducts {
-            if !arrayWithStands.containsObject(elements) {
-                print(false)
-                arrayWithStands.append(elements)
-            } else {
-                print(true)
-            }
-        }
-        
-        print(arrayWithStands)
-        
-//        retrieveAndCacheStands(clearDatabase: false)
-//        addMapView()
-//        addSearchField()
-//        addFollowButton()
-//        placeAnnotations(false, forStands: nil)
-//
-//        self.registerShowAndHideKeyboard()
+        self.registerShowAndHideKeyboard()
 
     }
 
@@ -230,35 +202,23 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
-        if activeFilter && searchText.characters.count == 0 {
-            placeAnnotations(true, forStands: nil)
-            activeFilter = false
-        }
-
-        searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
-        
-        let standsWithProducts: List<(Stand)> = List<(Stand)>()
-        if let products = searchResults {
-            for elements in products {
-                for stands in elements.stands {
-                    standsWithProducts.append(stands)
+        if searchText.characters.count >= 2 {
+            addTableView()
+            
+            searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
+            
+            var standsWithProducts: [Stand] = [Stand]()
+            if let products = searchResults {
+                for elements in products {
+                    for stands in elements.stands {
+                        if !standsWithProducts.containsObject(stands) {
+                            standsWithProducts.append(stands)
+                        }
+                    }
                 }
             }
-        }
-        
-        for elements in standsWithProducts {
-            print(elements.name)
-        }
-        
-
-        
-
             
-       
-
-        tableView.reloadData()
-
-        if searchText.characters.count >= 1 {
+            tableView.reloadData()
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
             activeFilter = true
             if searchResults?.count == 0 {
@@ -268,6 +228,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 searchTextField!.textColor = foodOnRouteColor.lightGrey
             }
 
+        }
+        else {
+            tableView.removeFromSuperview()
+            placeAnnotations(true, forStands: nil)
         }
     }
 
@@ -280,7 +244,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je op de form tapt
-        addTableView()
     }
 
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -309,13 +272,20 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
 
-    func placeAnnotations(removeOldPins: Bool, forStands: List<(Stand)>?) {
-
-        /* Remove the old pins before updating. */
-        if (removeOldPins) {
-            mapView.removeAnnotations(mapView.annotations)
-        }
+    func placeAnnotations(removeOldPins: Bool, forStands: [Stand]?) {
+        var allowedToPlaceAnnotations : Bool = true
         
+        func removeUserLocationAnnotationCount(count: [MKAnnotation]) -> Int {
+            var counter = mapView.annotations.count
+            
+            for elements in mapView.annotations {
+                if elements is MKUserLocation {
+                    counter -= 1
+                }
+            }
+            return counter
+        }
+
         func placeAnnotation(data: Stand) {
             let newAnnotation = CustomAnnotation()
             newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
@@ -323,21 +293,50 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.title = data.name
             newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(newAnnotation)
+            print(newAnnotation.title, "added")
         }
+        
+        
+        /* Remove the old pins before updating. */
+        if (removeOldPins) {
+            if !(self.realm.objects(Stand).count == (mapView.annotations.count)) {
+                if let stands = forStands {
+                    let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
+                    
+                    print(stands.count, placedAnnotations)
+                    if !(stands.count == placedAnnotations) {
+                        mapView.removeAnnotations(mapView.annotations)
+                        print("pins removed")
+                    } else {
+                        print("mag niet")
+                        allowedToPlaceAnnotations = false
+                    }
+                } else {
+                    /* Remove pins */
+                    mapView.removeAnnotations(mapView.annotations)
+                    print("pins removed!")
+                }
+            }
+        }
+        
+
 
         /* If this method recieved specific stands to be annotated, use them.
            Else use all available stands. */
-        if forStands?.count >= 1 {
-            /* Place all annotations */
-            for value in forStands! {
-                placeAnnotation(value)
-            }
-        } else {
-            /* Place all annotations */
-            for value in self.realm.objects(Stand) {
-                placeAnnotation(value)
+        if allowedToPlaceAnnotations {
+            if forStands?.count >= 1 {
+                /* Place all annotations */
+                for value in forStands! {
+                    placeAnnotation(value)
+                }
+            } else {
+                /* Place all annotations */
+                for value in self.realm.objects(Stand) {
+                    placeAnnotation(value)
+                }
             }
         }
+        print(removeUserLocationAnnotationCount(mapView.annotations))
     }
 
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
