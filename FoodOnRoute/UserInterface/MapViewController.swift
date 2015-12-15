@@ -110,10 +110,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func addSearchField() {
         mapView.addSubview(searchBar)
-        print(self)
 
-        searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
+        searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBar.constrainToSize(CGSize(width: 250, height: 44))
+        print(searchBar.frame.width)
+        
+//        let searchTextField : UITextField = searchBar.valueForKey("searchField") as! UITextField
+//        searchTextField.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
+//        searchTextField.constrainToSize(CGSize(width: 250, height: 44))
 
     }
 
@@ -199,6 +203,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
 
         if searchText.characters.count >= 2 {
             addTableView()
@@ -295,8 +300,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         
         /* Remove the old pins before updating. */
         if (removeOldPins) {
-            print(self.realm.objects(Stand).count)
-            print(mapView.annotations.count)
             if !(self.realm.objects(Stand).count == (mapView.annotations.count)) {
                 if let stands = forStands {
                     let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
@@ -304,23 +307,18 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     print(stands.count, placedAnnotations)
                     if !(stands.count == placedAnnotations) {
                         mapView.removeAnnotations(mapView.annotations)
-                        print("pins removed")
                     } else {
-                        print("mag niet")
                         allowedToPlaceAnnotations = false
                     }
                 } else {
                     /* Remove pins */
                     mapView.removeAnnotations(mapView.annotations)
-                    print("pins removed!")
                 }
             }
             else {
                 allowedToPlaceAnnotations = false
             }
         }
-        
-
 
         /* If this method recieved specific stands to be annotated, use them.
            Else use all available stands. */
@@ -337,7 +335,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 }
             }
         }
-        print(removeUserLocationAnnotationCount(mapView.annotations))
     }
 
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
