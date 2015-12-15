@@ -80,7 +80,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         mapView.addSubview(tableView)
 
         tableView.centerWithTopMargin(self, placeUnderViews: [self.searchBar], topMargin: 17)
-        tableView.constrainToSize(CGSize(width: 250, height: 189))
+        tableView.constrainToSize(CGSize(width: 250, height: 126))
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -332,6 +332,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             } else {
                 print("show all stands")
                 mapView.removeAnnotations(mapView.annotations)
+                tableView.removeFromSuperview()
             }
         }
 

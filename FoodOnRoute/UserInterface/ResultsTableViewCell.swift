@@ -20,7 +20,6 @@ class ResultsTableViewCell: UITableViewCell {
         productTitle.frame = CGRectMake(20, 22, self.contentView.bounds.width, 20)
         productTitle.font = UIFont(name: "PT Sans", size: 16)
         productTitle.textColor = foodOnRouteColor.darkBlack
-        productTitle.text = "Peters standje 69"
         self.addSubview(productTitle)
     }
 
