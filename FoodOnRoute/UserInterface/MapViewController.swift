@@ -33,23 +33,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.delegate = self
         tableView.dataSource = self
         
-//        let query = self.realm.objects(Product).filter("name CONTAINS[c] %@", "teunisbloem")
-//        var standsWithProducts: List<(Stand)> = List<(Stand)>()
-//        print(query)
-//        for elements in query {
-//            print(elements.name)
-//            for stands in elements.stands {
-//                print(stands.name)
-//                standsWithProducts.append(stands)
-//            }
-//        }
-//        print(standsWithProducts)
-//        for elements in standsWithProducts {
-//            print(elements.latitude, elements.longitude)
-//        }
-
-        retrieveAndCacheStands(clearDatabase: true)
-//        retrieveAndCacheStands()
+        retrieveAndCacheStands(clearDatabase: false)
         addMapView()
         addSearchField()
         addFollowButton()
@@ -325,31 +309,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     }
-    
-    func retrieveAndCacheProducts(clearDatabase clearDatabase: Bool?) {
-        
-    }
 
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            let listOfProducts : List<(Product)> = List<(Product)>()
-            
-            func addProducts(stand: Stand, products: List<(Product)>?) {
-                for product in products! {
-                    print(product.name)
-                    let newProduct = Product()
-                    newProduct.id = product.id
-                    newProduct.name = product.name
-                    newProduct.stands.append(stand)
-                    
-                    try! self.realm.write({ () -> Void in
-                        self.realm.create(Product.self, value: newProduct, update: true)
-                    })
-                }
-
-                listOfProducts.removeAll()
-            }
-
             for (_, value) in response {
                 let stand = Stand()
                 stand.id = value["id"].intValue
@@ -361,17 +323,15 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     product.id = products["id"].intValue
                     product.name = products["name"].string!
                     stand.products.append(product)
-                    listOfProducts.append(product)
                 }
                 
                 try! self.realm.write({ () -> Void in
                     self.realm.create(Stand.self, value: stand, update: true)
                 })
-                
-                addProducts(stand, products: listOfProducts)
             }
             
             print(Realm.Configuration.defaultConfiguration.path!)
+            self.placeAnnotations(true, forStands: nil)
 
             }) { (error) -> () in
                 print(error)
