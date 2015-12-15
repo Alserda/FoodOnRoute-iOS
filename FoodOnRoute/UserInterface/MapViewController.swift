@@ -19,6 +19,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var following : Bool = false
     let realm = try! Realm()
     let searchBar : ResultsSearchBar = ResultsSearchBar()
+    var searchBarTextfield : UITextField = UITextField()
     var activeFilter = false
     var searchResults : Results<(Product)>?
     let tableView = ResultsTableView()
@@ -32,6 +33,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerClass(ResultsTableViewCell.self, forCellReuseIdentifier: "ResultCell")
         
         retrieveAndCacheStands(clearDatabase: false)
         addMapView()
@@ -74,16 +76,36 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     func addTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+
         mapView.addSubview(tableView)
 
-        tableView.centerWithTopMargin(self, placeUnderViews: [self.searchBar], topMargin: 0)
-        tableView.constrainToSize(CGSize(width: 250, height: 100))
+        tableView.centerWithTopMargin(self, placeUnderViews: [self.searchBar], topMargin: 17)
+        tableView.constrainToSize(CGSize(width: 250, height: 189))
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        var numOfSections = 0
+        if searchResults?.count >= 1 {
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
+            numOfSections = 1
+            tableView.backgroundView = nil
+        } else {
+            let noDataLabel : UILabel = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text = "Niks gevonden!"
+            noDataLabel.textColor = foodOnRouteColor.darkBlack
+            noDataLabel.textAlignment = NSTextAlignment.Center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+
+        }
+        return numOfSections
     }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return 63
+    }
+    
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var cellCount = 0
@@ -96,10 +118,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell : UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
+        let cell : ResultsTableViewCell = tableView.dequeueReusableCellWithIdentifier("ResultCell", forIndexPath: indexPath) as! ResultsTableViewCell
 
         if searchResults?.count >= 1 {
-            cell.textLabel?.text = searchResults?[indexPath.row].name
+            cell.productTitle.text = searchResults?[indexPath.row].name
         }
         return cell
     }
@@ -110,15 +132,13 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func addSearchField() {
         mapView.addSubview(searchBar)
-
+        
+        searchBarTextfield = searchBar.valueForKey("searchField") as! UITextField
+        
+        searchBarTextfield.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
+        searchBarTextfield.constrainToSize(CGSize(width: 250, height: 44))
         searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBar.constrainToSize(CGSize(width: 250, height: 44))
-        print(searchBar.frame.width)
-        
-//        let searchTextField : UITextField = searchBar.valueForKey("searchField") as! UITextField
-//        searchTextField.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
-//        searchTextField.constrainToSize(CGSize(width: 250, height: 44))
-
     }
 
     /* Adds the MapView to the view. */
@@ -222,8 +242,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             }
             
             tableView.reloadData()
+
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
-            activeFilter = true
             if searchResults?.count == 0 {
                 searchTextField!.textColor = UIColor.redColor()
             } else {
@@ -232,8 +252,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             }
 
         }
-        else {
-            tableView.removeFromSuperview()
+        else  {
             placeAnnotations(true, forStands: nil)
         }
     }
@@ -300,23 +319,19 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         
         /* Remove the old pins before updating. */
         if (removeOldPins) {
-            if !(self.realm.objects(Stand).count == (mapView.annotations.count)) {
-                if let stands = forStands {
-                    let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
-                    
-                    print(stands.count, placedAnnotations)
-                    if !(stands.count == placedAnnotations) {
-                        mapView.removeAnnotations(mapView.annotations)
-                    } else {
-                        allowedToPlaceAnnotations = false
-                    }
+            if let stands = forStands {
+                let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
+                if stands.count == placedAnnotations {
+                    // doe niks wanneer het aantal gevonden stands gelijk is aan het aantal geplaatste annotations
+                    allowedToPlaceAnnotations = false
+                    print("stands.count \(stands.count) IS equal to the placed annotations: \(placedAnnotations)!!")
                 } else {
-                    /* Remove pins */
+                    print("stands.count \(stands.count) is NOT equal to the placed annotations: \(placedAnnotations)")
                     mapView.removeAnnotations(mapView.annotations)
                 }
-            }
-            else {
-                allowedToPlaceAnnotations = false
+            } else {
+                print("show all stands")
+                mapView.removeAnnotations(mapView.annotations)
             }
         }
 

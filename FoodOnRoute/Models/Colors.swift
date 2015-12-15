@@ -7,32 +7,13 @@
 //
 
 import UIKit
-//
-//class Colors {
-//    /*
-//    // MARK: - Primairy Colors
-//    */
-//    
-//    /**
-//    Get dark blue color
-//    
-//    :returns: hex #1D717D
-//    */
-//    class func getDarkBlueColor() -> UIColor{
-//        return UIColor(hexString: "#1D717D")
-//    }
-//    
-//    /*
-//    // MARK: - Secondairy Colors
-//    */
-//    
-//    /**
-//    Get light green color
-//    
-//    :returns: hex #38A97A
-//    */
-//    class func getLightGreenColor() -> UIColor{
-//        return UIColor(hexString: "#38A97A")
-//    }
-//
-//}
+
+/* Stores frequently used colors */
+struct foodOnRouteColor {
+    static let darkBlue   : UIColor = UIColor(hexString: "#1D717D")
+    static let lightGreen : UIColor = UIColor(hexString: "#38A97A")
+    static let darkGreen : UIColor = UIColor(hexString: "#2F9168")
+    static let darkGrey : UIColor = UIColor(hexString: "#666666")
+    static let lightGrey  : UIColor = UIColor(hexString: "#979797")
+    static let darkBlack : UIColor = UIColor(hexString: "#444444")
+}

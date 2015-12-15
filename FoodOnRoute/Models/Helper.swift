@@ -138,12 +138,3 @@ struct Locations {
     static var lastLocation : CLLocationCoordinate2D = CLLocationCoordinate2D()
     static var pinnedLocations : [CLLocationCoordinate2D] = []
 }
-
-/* Stores frequently used colors */
-struct foodOnRouteColor {
-    static let darkBlue   : UIColor = UIColor(hexString: "#1D717D")
-    static let lightGreen : UIColor = UIColor(hexString: "#38A97A")
-    static let darkGreen : UIColor = UIColor(hexString: "#2F9168")
-    static let darkGrey : UIColor = UIColor(hexString: "#666666")
-    static let lightGrey  : UIColor = UIColor(hexString: "#979797")
-}

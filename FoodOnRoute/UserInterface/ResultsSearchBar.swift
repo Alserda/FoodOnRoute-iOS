@@ -16,11 +16,11 @@ class ResultsSearchBar : UISearchBar {
         self.tintColor = foodOnRouteColor.lightGrey
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setImage(UIImage(named: "searchMagnifier"), forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal);
-        print(self.frame.width)
         
         let searchTextField : UITextField = self.valueForKey("searchField") as! UITextField
-//        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.textColor = foodOnRouteColor.lightGrey
+        searchTextField.layer.cornerRadius = 5
         searchTextField.font = UIFont(name: "PT Sans", size: 16)
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Wat wil je eten?", attributes: [NSForegroundColorAttributeName: foodOnRouteColor.lightGrey])
     }
