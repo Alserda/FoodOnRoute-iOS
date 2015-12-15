@@ -165,27 +165,25 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
 //        print("\(__FUNCTION__)")
-
         if annotation is MKUserLocation {
             // Return nil to reset User location icon to default
             return nil
         }
         if annotation is CustomAnnotation {
-            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("customAnnotationViewIdentifier")
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
             if pin == nil {
-                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: "customAnnotationViewIdentifier")
+                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
                 pin!.canShowCallout = false
                 pin!.image = UIImage(named:"AnnotationsView")
-                //print("Normal")
+//                print("Normal")
             } else {
                 pin!.annotation = annotation
             }
             return pin
-        }
-        else if annotation is CalloutAnnotation {
-            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("calloutAnnotationViewIdentifier")
+        } else if annotation is CalloutAnnotation {
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(calloutAnnotationViewIdentifier)
             if pin == nil {
-                pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: "calloutAnnotationViewIdentifier")
+                pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: calloutAnnotationViewIdentifier)
                 pin!.canShowCallout = false
                 print("Callout")
             } else {

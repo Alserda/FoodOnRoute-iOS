@@ -108,9 +108,6 @@ class CalloutAnnotationView : MKAnnotationView {
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 0).active = true
         showStandButton.topAnchor.constraintEqualToAnchor(subtitleLabel.bottomAnchor, constant: 13).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
-
-        
-        
         
         updateCallout()
     }
