@@ -293,12 +293,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.title = data.name
             newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(newAnnotation)
-            print(newAnnotation.title, "added")
         }
-        
         
         /* Remove the old pins before updating. */
         if (removeOldPins) {
+            print(self.realm.objects(Stand).count)
+            print(mapView.annotations.count)
             if !(self.realm.objects(Stand).count == (mapView.annotations.count)) {
                 if let stands = forStands {
                     let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
@@ -316,6 +316,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     mapView.removeAnnotations(mapView.annotations)
                     print("pins removed!")
                 }
+            }
+            else {
+                allowedToPlaceAnnotations = false
             }
         }
         
