@@ -22,11 +22,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var searchBarTextfield : UITextField = UITextField()
     var activeFilter = false
     var searchResults : Results<(Product)>?
-    let tableView = ResultsTableView()
+    let tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.setNavigationBarAppearance()
 
         mapView.delegate = self
@@ -76,7 +76,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     func addTableView() {
-
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorInset = UIEdgeInsetsZero
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.layer.cornerRadius = 5
         mapView.addSubview(tableView)
 
         tableView.centerWithTopMargin(self, placeUnderViews: [self.searchBar], topMargin: 17)

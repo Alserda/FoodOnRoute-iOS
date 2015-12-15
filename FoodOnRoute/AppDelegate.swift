@@ -22,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let navController = UINavigationController()
         let mapViewController = MapViewController()
+        let productViewController = ProductViewController()
 
-        navController.navigationBar.topItem?.title = "Map"
+//        navController.navigationBar.topItem?.title = "Map"
         
         locationManager.start()
         
@@ -38,8 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         imageView.image = image
         
         mapViewController.navigationItem.titleView = imageView
+        productViewController.navigationItem.titleView = imageView
         
-        navController.viewControllers = [mapViewController]
+        navController.viewControllers = [mapViewController, productViewController]
         window?.rootViewController = navController
         
         window?.makeKeyAndVisible()

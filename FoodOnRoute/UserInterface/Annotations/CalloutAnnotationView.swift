@@ -100,7 +100,7 @@ class CalloutAnnotationView : MKAnnotationView {
         showStandButton.setTitle("Winkel bekijken", forState: UIControlState.Normal)
         showStandButton.titleLabel?.font = buttonFont
         showStandButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        showStandButton.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
+        showStandButton.addTarget(self, action: "showStandView:", forControlEvents: UIControlEvents.TouchUpInside)
         
         // Add the subviews
         bubbleView.contentView.addSubview(titleLabel)
@@ -115,6 +115,10 @@ class CalloutAnnotationView : MKAnnotationView {
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
         
         updateCallout()
+    }
+    
+    func showStandView(sender: UIButton!) {
+        print("button pressed")
     }
 }
 
