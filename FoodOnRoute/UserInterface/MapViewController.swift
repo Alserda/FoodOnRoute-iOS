@@ -20,7 +20,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     let realm = try! Realm()
     let searchBar : ResultsSearchBar = ResultsSearchBar()
     var activeFilter = false
-    var searchResults : Results<(Stand)>?
+    var searchResults : Results<(Product)>?
     let tableView = ResultsTableView()
 
     override func viewDidLoad() {
@@ -32,9 +32,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-
-//        retrieveAndCacheStands(clearDatabase: false)
-        retrieveAndCacheStands()
+        
+        retrieveAndCacheStands(clearDatabase: false)
         addMapView()
         addSearchField()
         addFollowButton()
@@ -197,26 +196,40 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     // MARK: searchBar Delegates
+    
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
-        if activeFilter && searchText.characters.count == 0 {
-            placeAnnotations(true, forStands: nil)
-        }
-
-        searchResults = self.realm.objects(Stand).filter("name CONTAINS[c] %@", searchText)
-        tableView.reloadData()
-
-        if searchText.characters.count >= 1 {
+        if searchText.characters.count >= 2 {
+            addTableView()
+            
+            searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
+            
+            var standsWithProducts: [Stand] = [Stand]()
+            if let products = searchResults {
+                for elements in products {
+                    for stands in elements.stands {
+                        if !standsWithProducts.containsObject(stands) {
+                            standsWithProducts.append(stands)
+                        }
+                    }
+                }
+            }
+            
+            tableView.reloadData()
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
+            activeFilter = true
             if searchResults?.count == 0 {
                 searchTextField!.textColor = UIColor.redColor()
             } else {
-                activeFilter = true
-                placeAnnotations(true, forStands: searchResults)
+                placeAnnotations(true, forStands: standsWithProducts)
                 searchTextField!.textColor = foodOnRouteColor.lightGrey
             }
 
+        }
+        else {
+            tableView.removeFromSuperview()
+            placeAnnotations(true, forStands: nil)
         }
     }
 
@@ -229,8 +242,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je op de form tapt
-        addTableView()
-
     }
 
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -259,42 +270,78 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
     }
 
-    func placeAnnotations(removeOldPins: Bool, forStands: Results<(Stand)>?) {
-        var stands : Results<(Stand)>
+    func placeAnnotations(removeOldPins: Bool, forStands: [Stand]?) {
+        var allowedToPlaceAnnotations : Bool = true
+        
+        func removeUserLocationAnnotationCount(count: [MKAnnotation]) -> Int {
+            var counter = mapView.annotations.count
+            
+            for elements in mapView.annotations {
+                if elements is MKUserLocation {
+                    counter -= 1
+                }
+            }
+            return counter
+        }
 
+        func placeAnnotation(data: Stand) {
+            let newAnnotation = CustomAnnotation()
+            newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
+            newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
+            newAnnotation.title = data.name
+            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+            self.mapView.addAnnotation(newAnnotation)
+        }
+        
         /* Remove the old pins before updating. */
         if (removeOldPins) {
-            mapView.removeAnnotations(mapView.annotations)
+            print(self.realm.objects(Stand).count)
+            print(mapView.annotations.count)
+            if !(self.realm.objects(Stand).count == (mapView.annotations.count)) {
+                if let stands = forStands {
+                    let placedAnnotations = removeUserLocationAnnotationCount(mapView.annotations)
+                    
+                    print(stands.count, placedAnnotations)
+                    if !(stands.count == placedAnnotations) {
+                        mapView.removeAnnotations(mapView.annotations)
+                        print("pins removed")
+                    } else {
+                        print("mag niet")
+                        allowedToPlaceAnnotations = false
+                    }
+                } else {
+                    /* Remove pins */
+                    mapView.removeAnnotations(mapView.annotations)
+                    print("pins removed!")
+                }
+            }
+            else {
+                allowedToPlaceAnnotations = false
+            }
         }
+        
+
 
         /* If this method recieved specific stands to be annotated, use them.
            Else use all available stands. */
-        if forStands?.count >= 1 {
-            stands = forStands!
-        } else {
-            stands = self.realm.objects(Stand)
+        if allowedToPlaceAnnotations {
+            if forStands?.count >= 1 {
+                /* Place all annotations */
+                for value in forStands! {
+                    placeAnnotation(value)
+                }
+            } else {
+                /* Place all annotations */
+                for value in self.realm.objects(Stand) {
+                    placeAnnotation(value)
+                }
+            }
         }
-
-        /* Place all annotations */
-        for value in stands {
-            let annotation = CustomAnnotation()
-            annotation.coordinate.latitude = value.latitude as CLLocationDegrees
-            annotation.coordinate.longitude = value.longitude as CLLocationDegrees
-            annotation.title = value.name
-            annotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
-            self.mapView.addAnnotation(annotation)
-        }
+        print(removeUserLocationAnnotationCount(mapView.annotations))
     }
 
-
-/*
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
-
-
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            let listOfStands : List<(Stand)> = List<(Stand)>()
-//            let listOfProducts : List<(Product)> = List<(Product)>()
-
             for (_, value) in response {
                 let stand = Stand()
                 stand.id = value["id"].intValue
@@ -305,49 +352,19 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     let product = Product()
                     product.id = products["id"].intValue
                     product.name = products["name"].string!
-//                    product.stands.append(stand)
                     stand.products.append(product)
                 }
-                listOfStands.append(stand)
-//                listOfProducts.appendContentsOf(stand.products)
+                
+                try! self.realm.write({ () -> Void in
+                    self.realm.create(Stand.self, value: stand, update: true)
+                })
             }
+            
+            print(Realm.Configuration.defaultConfiguration.path!)
+            self.placeAnnotations(true, forStands: nil)
 
-//            print(listOfStands, "tjerk my man")
-
-
-//            print(listOfProducts)
-
-            try! self.realm.write({ () -> Void in
-                for stand in listOfStands {
-                    print(stand)
-                    self.realm.create(Stand.self, value: stand, update: true)
-                }
-            })
-
-  print(Realm.Configuration.defaultConfiguration.path!)
             }) { (error) -> () in
                 print(error)
-        }
-    }
-*/
-
-    func retrieveAndCacheStands() {
-        backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
-            //            print(response)
-            try! self.realm.write({ () -> Void in
-                for (_, value) in response {
-                    let stand = Stand()
-                    stand.id = value["id"].intValue
-                    stand.name = value["name"].string!
-                    stand.latitude = value["latitude"].double!
-                    stand.longitude = value["longitude"].double!
-                    self.realm.create(Stand.self, value: stand, update: true)
-                }
-//                self.placeAnnotations(true, forStands: nil)
-            })
-            }) { (error) -> () in
-                print(error)
-                // Show the user that new stands could not be loaded
         }
     }
 

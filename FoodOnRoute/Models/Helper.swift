@@ -9,6 +9,12 @@
 import UIKit
 import CoreLocation
 
+extension Array {
+    func containsObject<T where T : Equatable>(obj: T) -> Bool {
+        return self.filter({$0 as? T == obj}).count > 0
+    }
+}
+
 /* Makes the use of hex colors possible. */
 extension UIColor {
     convenience init(hexString: String) {

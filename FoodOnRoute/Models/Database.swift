@@ -25,7 +25,11 @@ class Stand: Object {
 class Product: Object {
     dynamic var id : Int = 0
     dynamic var name : String = ""
-    let stands = List<Stand>()
+    var stands: [Stand] {
+        // Realm doesn't persist this property because it only has a getter defined
+        // Define "stands" as the inverse relationship to Stand.products
+        return linkingObjects(Stand.self, forProperty: "products")
+    }
     
     override static func primaryKey() -> String? {
         return "id"
