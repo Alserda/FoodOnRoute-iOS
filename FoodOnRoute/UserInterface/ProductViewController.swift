@@ -42,14 +42,15 @@ class ProductViewController : UIViewController {
         let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack")
         self.navigationItem.leftBarButtonItem = button
         
-        if let navigationController = self.navigationController {
+        let navBorder: UIView = UIView()
+        navBorder.backgroundColor = foodOnRouteColor.shadowGreen
+        navBorder.opaque = true
+        navBorder.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationController?.navigationBar.addSubview(navBorder)
+
+        navBorder.topAnchor.constraintEqualToAnchor(self.navigationController?.navigationBar.bottomAnchor, constant: 0).active = true
             
-            let navigationBar = navigationController.navigationBar
-            let navBorder: UIView = UIView(frame: CGRectMake(0, navigationBar.frame.size.height - 1, navigationBar.frame.size.width, 3))
-            navBorder.backgroundColor = foodOnRouteColor.shadowGreen
-            navBorder.opaque = true
-            self.navigationController?.navigationBar.addSubview(navBorder)
-        }
+        navBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -60,5 +61,19 @@ class ProductViewController : UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return false
+    }
+    
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        if let navigationBar = self.navigationController?.navigationBar {
+            var frame: CGRect = navigationBar.frame
+            print(toInterfaceOrientation.isLandscape)
+            if UIInterfaceOrientationIsPortrait(toInterfaceOrientation) {
+                frame.size.height = 44
+            } else {
+                frame.size.height = 32
+            }
+            print(frame)
+            self.navigationController?.navigationBar.frame = frame
+        }
     }
 }
