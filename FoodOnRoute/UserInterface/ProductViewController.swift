@@ -10,7 +10,7 @@ import UIKit
 
 class ProductViewController : UIViewController {
     let tableView = UITableView()
-    
+    let bottomBackground: UIImageView = UIImageView(image: UIImage(named: "BottomBackground"))
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +19,15 @@ class ProductViewController : UIViewController {
         setNavigationbarAppearance()
         addShadowToNavigationbar()
         addUpperBackground()
-
+        addBottomBackground()
+    }
+    
+    func addBottomBackground() {
+        bottomBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bottomBackground)
+        
+        bottomBackground.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor, constant: 0).active = true
+        bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
     }
     
     func addUpperBackground() {
@@ -40,8 +48,13 @@ class ProductViewController : UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = foodOnRouteColor.lightGreen
         let image = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
-        let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack")
+        let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack:")
         self.navigationItem.leftBarButtonItem = button
+    }
+    
+    func goBack(sender: UIBarButtonItem) {
+        print("pressed")
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func addShadowToNavigationbar() {
@@ -68,6 +81,8 @@ class ProductViewController : UIViewController {
     
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
             /* Resets the border under the navigationBar, otherwise the width of the border will stay the same as it was in portrait mode */
+            self.bottomBackground.removeConstraints(self.bottomBackground.constraints)
             addShadowToNavigationbar()
+            addBottomBackground()
     }
 }
