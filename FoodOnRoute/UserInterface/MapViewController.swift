@@ -224,6 +224,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if annotation is MKUserLocation {
             // Return nil to reset User location icon to default
             return nil
+            
+            //
         }
         if annotation is CustomAnnotation {
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
@@ -243,7 +245,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 pin!.canShowCallout = false
                 print("Callout")
             } else {
+                let p = pin as! CalloutAnnotationView
                 pin!.annotation = annotation
+
+                p.configure()
+                
             }
             return pin
         }
@@ -346,7 +352,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
             newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
             newAnnotation.title = data.name
-            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven, Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(newAnnotation)
         }
         
