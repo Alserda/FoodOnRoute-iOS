@@ -194,6 +194,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if annotation is MKUserLocation {
             // Return nil to reset User location icon to default
             return nil
+            
+            //
         }
         if annotation is CustomAnnotation {
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
@@ -213,7 +215,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 pin!.canShowCallout = false
                 print("Callout")
             } else {
+                let p = pin as! CalloutAnnotationView
                 pin!.annotation = annotation
+
+                p.configure()
+                
             }
             return pin
         }

@@ -30,10 +30,8 @@ class CalloutAnnotationView : MKAnnotationView {
     let subtitleLabel = UILabel()                   // the label we'll add as subview to the bubble's contentView
     let subtitleFont = UIFont(name: "PT Sans", size: 14)!  // the font we'll use for the title
     let showStandButton = UIButton(type: UIButtonType.System) as UIButton
-    let buttonFont = UIFont(name: "Montserrat", size: 14)!  // the font we'll use for the buttons
 
-    /// Update size and layout of callout view
-    
+    /// Update size and layout of callout view    
     func updateCallout() {
         if annotation == nil {
             print(annotation, "is nil")
@@ -46,6 +44,7 @@ class CalloutAnnotationView : MKAnnotationView {
             size = string!.sizeWithAttributes(attributes)
             titleLabel.text = (annotation?.title)!
             subtitleLabel.text = (annotation?.subtitle)!
+            subtitleLabel.numberOfLines = 2
         }
         bubbleView.setContentViewSize(size)
         print("SIZEEEEEE", size)
@@ -61,10 +60,6 @@ class CalloutAnnotationView : MKAnnotationView {
         setBubbleConstraints()
     }
     
-    func showStandView(sender: UIButton!) {
-        print("button pressed")
-    }
-    
     func addBubbleData() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,26 +69,25 @@ class CalloutAnnotationView : MKAnnotationView {
         addSubview(bubbleView)
         
         // Create title label stats
-        titleLabel.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
+        titleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
         titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         titleLabel.textAlignment = .Left
         titleLabel.font = titleFont
         titleLabel.textColor = foodOnRouteColor.darkBlue
         
         // Create subtitle label stats
-        subtitleLabel.frame = CGRectInset(bubbleView.contentView.bounds, -1, -1)
+        subtitleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
         subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         subtitleLabel.textAlignment = .Left
         subtitleLabel.font = subtitleFont
         subtitleLabel.textColor = foodOnRouteColor.darkGrey
-        
-        // Create show stand button stats
+//
+//        // Create show stand button stats
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
-        
         showStandButton.layer.borderWidth = 3
         showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
         showStandButton.layer.cornerRadius = 5
-        
+//
         showStandButton.setImage(UIImage(named: "NavToStandButton")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
         showStandButton.addTarget(self, action: "showStandView:", forControlEvents: UIControlEvents.TouchUpInside)
         
@@ -104,15 +98,19 @@ class CalloutAnnotationView : MKAnnotationView {
         bubbleView.contentView.addSubview(showStandButton)
     }
     
+    func showStandView(sender: UIButton!) {
+        print("button pressed")
+    }
+    
     func setBubbleConstraints() {
         titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 20).active = true
         subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
+        titleLabel.rightAnchor.constraintEqualToAnchor(bubbleView.rightAnchor, constant: 20).active = true
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 5).active = true
         
         showStandButton.bottomAnchor.constraintEqualToAnchor(bubbleView.bottomAnchor, constant: -28).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
-        print(bubbleView.contentView.bounds)
         print(bubbleView.bounds)
         
         let showStandWidthConstraint = showStandButton.widthAnchor.constraintEqualToAnchor(nil, constant: bubbleView.bounds.width - 40)
