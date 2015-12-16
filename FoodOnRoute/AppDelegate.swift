@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
         let mapViewController = MapViewController()
-        let productViewController = ProductViewController()
+//        let productViewController = ProductViewController()
         let navController = UINavigationController(rootViewController: mapViewController)
         
         locationManager.start()
