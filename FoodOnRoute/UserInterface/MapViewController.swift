@@ -316,7 +316,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
             newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
             newAnnotation.title = data.name
-            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven, Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
             self.mapView.addAnnotation(newAnnotation)
         }
         
