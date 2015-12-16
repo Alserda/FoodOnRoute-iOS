@@ -8,18 +8,36 @@
 
 import UIKit
 
-class ProductViewController : UIViewController {
+class ProductViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableView = UITableView()
     let bottomBackground: UIImageView = UIImageView(image: UIImage(named: "BottomBackground"))
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         
         
         self.view.backgroundColor = foodOnRouteColor.lightBlue
         setNavigationbarAppearance()
         addShadowToNavigationbar()
+        
+
+        
+        
         addUpperBackground()
         addBottomBackground()
+        addTableView()
+    }
+    
+    func addTableView() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorInset = UIEdgeInsetsZero
+        tableView.layoutMargins = UIEdgeInsetsZero
+        tableView.layer.cornerRadius = 5
+        view.addSubview(tableView)
+        
+        tableView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 20)
+        tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 400))
     }
     
     func addBottomBackground() {
@@ -69,6 +87,28 @@ class ProductViewController : UIViewController {
         navBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
     }
 
+    
+    
+    // MARK: TableView Delegates
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 47
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .Default, reuseIdentifier: "cell")
+        cell.textLabel?.text = "Hallo"
+        return cell
+    }
+    
+    
+    
+    
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
