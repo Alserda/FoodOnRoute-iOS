@@ -20,28 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.path!)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
-        let navController = UINavigationController()
         let mapViewController = MapViewController()
-        let productViewController = ProductViewController()
+        
+        let navController = UINavigationController(rootViewController: mapViewController)
 
-//        navController.navigationBar.topItem?.title = "Map"
+        let productViewController = ProductViewController()
         
         locationManager.start()
         
-//        let navigationBarAppearance = UINavigationBar.appearance()
-//        navigationBarAppearance.tintColor = UIColor.greenColor()
-////        navigationBarAppearance.barTintColor = UIColor.clearColor()
-//        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+
+//        productViewController.navigationItem.titleView = imageView
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        imageView.contentMode = .ScaleAspectFit
-        let image = UIImage(named: "FoodOnRouteLogo")
-        imageView.image = image
-        
-        mapViewController.navigationItem.titleView = imageView
-        productViewController.navigationItem.titleView = imageView
-        
-        navController.viewControllers = [mapViewController, productViewController]
         window?.rootViewController = navController
         
         window?.makeKeyAndVisible()

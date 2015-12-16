@@ -10,14 +10,6 @@ import UIKit
 
 extension MapViewController {
     
-    func setNavigationBarAppearance() {
-        self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.view.backgroundColor = UIColor.clearColor()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-    }
-    
     func registerShowAndHideKeyboard() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)

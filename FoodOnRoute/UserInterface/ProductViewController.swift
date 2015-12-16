@@ -10,23 +10,26 @@ import UIKit
 
 class ProductViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     let tableView = UITableView()
-    let bottomBackground: UIImageView = UIImageView(image: UIImage(named: "BottomBackground"))
+    let bottomBackground: UIImageView = UIImageView(image: UIImage(named:
+        "BottomBackground"))
+    let navigationbarBorder: UIView = UIView()
+    var listOfProducts: [String] = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
-        
         self.view.backgroundColor = foodOnRouteColor.lightBlue
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+
         setNavigationbarAppearance()
         addShadowToNavigationbar()
-        
-
-        
         
         addUpperBackground()
         addBottomBackground()
         addTableView()
+        print(listOfProducts)
     }
     
     func addTableView() {
@@ -62,29 +65,36 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     
     
     func setNavigationbarAppearance() {
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
+        self.navigationController?.navigationBar.translucent = false
         self.navigationController?.navigationBar.barTintColor = foodOnRouteColor.lightGreen
         let image = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
         let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack:")
         self.navigationItem.leftBarButtonItem = button
+        
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = UIImage(named: "FoodOnRouteLogo")
+        
+        self.navigationItem.titleView = imageView
     }
     
     func goBack(sender: UIBarButtonItem) {
-        print("pressed")
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     func addShadowToNavigationbar() {
-        let navBorder: UIView = UIView()
-        navBorder.backgroundColor = foodOnRouteColor.shadowGreen
-        navBorder.opaque = true
-        navBorder.translatesAutoresizingMaskIntoConstraints = false
-        self.navigationController?.navigationBar.addSubview(navBorder)
+        if !navigationbarBorder.constraints.isEmpty {
+            navigationbarBorder.removeConstraints(navigationbarBorder.constraints)
+        }
+        navigationbarBorder.backgroundColor = foodOnRouteColor.shadowGreen
+        navigationbarBorder.opaque = true
+        navigationbarBorder.tag = 10
+        navigationbarBorder.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(navigationbarBorder)
         
-        navBorder.topAnchor.constraintEqualToAnchor(self.navigationController?.navigationBar.bottomAnchor, constant: 0).active = true
-        
-        navBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
+//        navigationbarBorder.topAnchor.constraintEqualToAnchor(self.navigationController?.navigationBar.bottomAnchor, constant: 0).active = true
+        navigationbarBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
     }
 
     
@@ -109,10 +119,18 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     
     
     
+    
+    
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+
+    }
+    
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
     }
     
     override func prefersStatusBarHidden() -> Bool {

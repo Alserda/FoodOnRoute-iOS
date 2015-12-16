@@ -42,13 +42,6 @@ class Backend {
         Alamofire
             .request(.POST, endpoint, parameters: params, encoding: .JSON)
             .responseJSON { response in
-//                print("RESULT:\(response.result)")
-//                print("DATA:\(response.data)")
-//                print("DEBUGDESCRIPTION:\(response.debugDescription)")
-//                print("DESCRIPTION:\(response.description)")
-//                print("REQUEST:\(response.request)")
-//                print("RESPONSE:\(response.response)")
-                
                 switch response.result {
 
                 case .Failure(let error):

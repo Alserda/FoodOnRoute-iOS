@@ -23,26 +23,55 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var activeFilter = false
     var searchResults : Results<(Product)>?
     let tableView = UITableView()
+    
+    let peterButton: UIButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setNavigationBarAppearance()
-
         mapView.delegate = self
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.registerClass(ResultsTableViewCell.self, forCellReuseIdentifier: "ResultCell")
+
         
         retrieveAndCacheStands(clearDatabase: false)
         addMapView()
         addSearchField()
         addFollowButton()
         placeAnnotations(false, forStands: nil)
+        peterIsGeweldigSoms()
 
         self.registerShowAndHideKeyboard()
 
+    }
+    
+    func peterIsGeweldigSoms() {
+        peterButton.setImage(UIImage(named: "UpperBackground"), forState: UIControlState.Normal)
+        peterButton.addTarget(self, action: "openProductView:", forControlEvents: .TouchUpInside)
+        peterButton.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(peterButton)
+        
+        peterButton.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 20).active = true
+        peterButton.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor, constant: -20).active = true
+        
+        peterButton.constrainToSize(CGSize(width: 54, height: 47))
+    }
+    
+    func openProductView(sender: UIButton) {
+        let productVC = ProductViewController()
+        
+        var products: [String] = [String]()
+        if let stand = realm.objects(Stand).first?.products {
+            for product in stand {
+                products.append(product.name)
+            }
+        }
+        
+        productVC.listOfProducts = products
+        self.navigationController?.pushViewController(productVC, animated: true)
+        
     }
 
 
@@ -140,6 +169,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         
         searchBarTextfield.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBarTextfield.constrainToSize(CGSize(width: 250, height: 44))
+        
         searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBar.constrainToSize(CGSize(width: 250, height: 44))
     }
@@ -382,6 +412,21 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             }) { (error) -> () in
                 print(error)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        imageView.contentMode = .ScaleAspectFit
+        imageView.image = UIImage(named: "FoodOnRouteLogo")
+        
+        self.navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
