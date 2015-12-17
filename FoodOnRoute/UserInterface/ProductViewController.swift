@@ -24,7 +24,8 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.view.backgroundColor = foodOnRouteColor.darkBlack
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-//        listOfProducts = ["Afrikaanse baobab", "boomkalebas", "brave hendrik", "kudzu", "ora", "pijlkruid", "pijpajuin", "rammenas", "schorseneren", "teunisbloem"]
+        listOfProducts = ["Afrikaanse baobab", "boomkalebas", "brave hendrik", "kudzu", "ora", "pijlkruid", "pijpajuin", "rammenas", "schorseneren", "teunisbloem"]
+        listOfProducts = ["boomkalebas", "brave hendrik", "kudzu", "Henkholtrop", "hahaha"]
         tableView.registerClass(ProductTableViewCell.self, forCellReuseIdentifier: "ProductCell")
 
         setNavigationbarAppearance()
@@ -35,9 +36,16 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
 
         addTableViewHeader()
         addTableView()
-//        addBottomBackground()
+        addBottomBackground()
         addShadowToNavigationbar()
-//        setScrollViewHeight()
+        setScrollViewHeight()
+//        print(scrollView)
+//        print(scrollView.bottomAnchor)
+//        print(scrollView.topAnchor)
+//        print(scrollView.bounds)
+//        print(scrollView.frame)
+//        print(scrollView.contentSize.height)
+        
     }
     
     func setScrollViewHeight() {
@@ -52,8 +60,13 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
-        
-        
+
+        for constraint in scrollView.constraints {
+            if constraint.identifier == "height" || constraint.identifier == "width" {
+                scrollView.removeConstraint(constraint)
+            }
+        }
+
         scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, height + 139)
         scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: height + 139))
     }
@@ -133,7 +146,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         scrollView.scrollEnabled = true
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-        scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2)
+//        scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2)
         self.view.addSubview(scrollView)
         
         scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
@@ -145,7 +158,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         bottomBackground.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(bottomBackground)
         
-        bottomBackground.bottomAnchor.constraintEqualToAnchor(scrollView.bottomAnchor, constant: 0).active = true
+        bottomBackground.bottomAnchor.constraintEqualToAnchor(tableView.bottomAnchor, constant: 248).active = true
         bottomBackground.centerXAnchor.constraintEqualToAnchor(scrollView.centerXAnchor).active = true
 
         bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
