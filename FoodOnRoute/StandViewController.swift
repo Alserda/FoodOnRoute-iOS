@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class StandViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDelegate {
+class StandViewController : UIViewController {
     let upperBackground: UIImageView = UIImageView(image: UIImage(named: "UpperBackground"))
     let bottomBackground: UIImageView = UIImageView(image: UIImage(named:
         "BottomBackground"))
@@ -20,17 +20,15 @@ class StandViewController : UIViewController, UICollectionViewDelegate, UICollec
     
     let productsContainer: UIView = UIView()
     let productsTitle: UILabel = UILabel()
-    let productsCells: UICollectionView = UICollectionView()
     let productsButton: UIButton = UIButton(type: UIButtonType.System) as UIButton
     
     override func viewDidLoad() {
         super.viewDidLoad()
         stand = realm.objects(Stand).first!
         print(stand)
-        
+
         self.view.backgroundColor = foodOnRouteColor.darkBlack
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        
         setNavigationbarAppearance()
         addScrollView()
         addUpperBackground()
@@ -39,11 +37,7 @@ class StandViewController : UIViewController, UICollectionViewDelegate, UICollec
         
         addProductsSection()
         
-        
-        
-        
 //        setScrollViewHeight()
-
     }
     
     func addProductsSection() {
@@ -68,7 +62,6 @@ class StandViewController : UIViewController, UICollectionViewDelegate, UICollec
         productsButton.addTarget(self, action: "showStandView:", forControlEvents: UIControlEvents.TouchUpInside)
         productsContainer.addSubview(productsButton)
         
-        
         scrollView.addSubview(productsContainer)
         
         
@@ -78,6 +71,9 @@ class StandViewController : UIViewController, UICollectionViewDelegate, UICollec
         productsTitle.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
         productsTitle.topAnchor.constraintEqualToAnchor(productsContainer.topAnchor, constant: 24).active = true
         productsTitle.constrainToSize(CGSize(width: (self.view.frame.width - 80), height: 20))
+
+        
+        
         
         productsButton.bottomAnchor.constraintEqualToAnchor(productsContainer.bottomAnchor, constant: -20).active = true
         productsButton.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
