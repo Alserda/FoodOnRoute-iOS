@@ -436,6 +436,17 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
+        for touch in touches {
+            print(touch.view)
+            if (touch.view is BubbleView) {
+                let standViewController = StandViewController()
+                
+                standViewController.stand = realm.objects(Stand).first!
+                print(standViewController)
+                
+                self.navigationController?.pushViewController(standViewController, animated: true)
+            }
+        }
     }
 
     override func prefersStatusBarHidden() -> Bool {

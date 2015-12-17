@@ -69,15 +69,11 @@ class CalloutAnnotationView : MKAnnotationView {
         addSubview(bubbleView)
         
         // Create title label stats
-//        titleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-//        titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         titleLabel.textAlignment = .Left
         titleLabel.font = titleFont
         titleLabel.textColor = foodOnRouteColor.darkBlue
         
         // Create subtitle label stats
-//        subtitleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-//        subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         subtitleLabel.textAlignment = .Left
         subtitleLabel.font = subtitleFont
         subtitleLabel.textColor = foodOnRouteColor.darkGrey
