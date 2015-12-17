@@ -96,12 +96,14 @@ class CalloutAnnotationView : MKAnnotationView {
     }
     
     func setBubbleConstraints() {
+        print(bubbleView.bounds.width)
         titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 20).active = true
         titleLabel.rightAnchor.constraintEqualToAnchor(bubbleView.rightAnchor, constant: 20).active = true
         
         subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 5).active = true
+        subtitleLabel.constrainToSize(CGSize(width: bubbleView.bounds.width - 40, height: 60))
         
         showStandButton.bottomAnchor.constraintEqualToAnchor(bubbleView.bottomAnchor, constant: -28).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true

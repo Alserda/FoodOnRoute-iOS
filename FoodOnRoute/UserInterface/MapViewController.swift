@@ -348,13 +348,19 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.title = data.name
             newAnnotation
             var products: [String] = [String]()
-            if let stand = realm.objects(Stand).first?.products {
-                for product in stand {
-                    products.append(product.name)
-                }
+            for product in data.products {
+                products.append(product.name)
+                print("\(data.id) \(product.name)")
             }
-            let productsAsString = products.joinWithSeparator(", ")
-            newAnnotation.subtitle = productsAsString
+            
+            
+            if products.count == 0 {
+                newAnnotation.subtitle = "Deze stand heeft nog geen producten toegevoegd!"
+            } else if products.count <= 3 {
+                newAnnotation.subtitle = products.joinWithSeparator(", ")
+            } else {
+                newAnnotation.subtitle = products[0..<3].joinWithSeparator(", ") + " en nog \(products.count - 3) producten"
+            }
             self.mapView.addAnnotation(newAnnotation)
         }
         
