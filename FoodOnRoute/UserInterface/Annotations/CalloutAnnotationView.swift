@@ -69,23 +69,23 @@ class CalloutAnnotationView : MKAnnotationView {
         addSubview(bubbleView)
         
         // Create title label stats
-        titleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-        titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+//        titleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
+//        titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         titleLabel.textAlignment = .Left
         titleLabel.font = titleFont
         titleLabel.textColor = foodOnRouteColor.darkBlue
         
         // Create subtitle label stats
-        subtitleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-        subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+//        subtitleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
+//        subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         subtitleLabel.textAlignment = .Left
         subtitleLabel.font = subtitleFont
         subtitleLabel.textColor = foodOnRouteColor.darkGrey
 //
 //        // Create show stand button stats
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
-        showStandButton.layer.borderWidth = 3
-        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
+//        showStandButton.layer.borderWidth = 3
+//        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
         showStandButton.layer.cornerRadius = 5
 //
         showStandButton.setImage(UIImage(named: "NavToStandButton")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
