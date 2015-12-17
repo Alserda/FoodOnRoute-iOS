@@ -352,7 +352,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
             newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
             newAnnotation.title = data.name
-            newAnnotation.subtitle = "Appels, Peren, Bananen, Druiven, Appels, Peren, Bananen, Druiven" //TODO: get ingredients from JSON
+            var products: [String] = [String]()
+            if let stand = realm.objects(Stand).first?.products {
+                for product in stand {
+                    products.append(product.name)
+                }
+            }
+            let productsAsString = products.joinWithSeparator(", ")
+            newAnnotation.subtitle = productsAsString
             self.mapView.addAnnotation(newAnnotation)
         }
         
