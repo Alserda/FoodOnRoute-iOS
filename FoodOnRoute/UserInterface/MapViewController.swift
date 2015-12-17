@@ -49,7 +49,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     
     func peterIsGeweldigSoms() {
         peterButton.setImage(UIImage(named: "UpperBackground"), forState: UIControlState.Normal)
-        peterButton.addTarget(self, action: "openProductView:", forControlEvents: .TouchUpInside)
+//        peterButton.addTarget(self, action: "openProductView:", forControlEvents: .TouchUpInside)
+        peterButton.addTarget(self, action: "openStandView:", forControlEvents: .TouchUpInside)
         peterButton.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(peterButton)
         
@@ -59,18 +60,9 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         peterButton.constrainToSize(CGSize(width: 54, height: 47))
     }
     
-    func openProductView(sender: UIButton) {
-        let productVC = ProductViewController()
-        
-        var products: [String] = [String]()
-        if let stand = realm.objects(Stand).first?.products {
-            for product in stand {
-                products.append(product.name)
-            }
-        }
-        
-        productVC.listOfProducts = products
-        self.navigationController?.pushViewController(productVC, animated: true)
+    func openStandView(sender: UIButton) {
+        let standVC = StandViewController()
+        self.navigationController?.pushViewController(standVC, animated: true)
         
     }
 
