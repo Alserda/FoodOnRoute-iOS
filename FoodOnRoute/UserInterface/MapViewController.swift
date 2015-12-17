@@ -24,12 +24,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var searchResults : Results<(Product)>?
     let tableView = UITableView()
     var selectedStand: Stand? = Stand()
-    
+
     let peterButton: UIButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         mapView.delegate = self
         searchBar.delegate = self
         tableView.delegate = self
@@ -46,24 +46,24 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         self.registerShowAndHideKeyboard()
 
     }
-    
+
     func peterIsGeweldigSoms() {
         peterButton.setImage(UIImage(named: "UpperBackground"), forState: UIControlState.Normal)
 //        peterButton.addTarget(self, action: "openProductView:", forControlEvents: .TouchUpInside)
         peterButton.addTarget(self, action: "openStandView:", forControlEvents: .TouchUpInside)
         peterButton.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(peterButton)
-        
+
         peterButton.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 20).active = true
         peterButton.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor, constant: -20).active = true
-        
+
         peterButton.constrainToSize(CGSize(width: 54, height: 47))
     }
-    
+
     func openStandView(sender: UIButton) {
         let standVC = StandViewController()
         self.navigationController?.pushViewController(standVC, animated: true)
-        
+
     }
 
 
@@ -124,12 +124,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         }
         return numOfSections
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
+
         return 63
     }
-    
+
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var cellCount = 0
@@ -156,12 +156,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func addSearchField() {
         mapView.addSubview(searchBar)
-        
+
         searchBarTextfield = searchBar.valueForKey("searchField") as! UITextField
-        
+
         searchBarTextfield.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBarTextfield.constrainToSize(CGSize(width: 250, height: 44))
-        
+
         searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBar.constrainToSize(CGSize(width: 250, height: 44))
     }
@@ -217,7 +217,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         if annotation is MKUserLocation {
             // Return nil to reset User location icon to default
             return nil
-            
+
             //
         }
         if annotation is CustomAnnotation {
@@ -242,7 +242,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 pin!.annotation = annotation
 
                 p.configure()
-                
+
             }
             return pin
         }
@@ -252,16 +252,16 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
 
     // MARK: searchBar Delegates
-    
+
 
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
 
         if searchText.characters.count >= 2 {
             addTableView()
-            
+
             searchResults = self.realm.objects(Product).filter("name CONTAINS[c] %@", searchText)
-            
+
             var standsWithProducts: [Stand] = [Stand]()
             if let products = searchResults {
                 for elements in products {
@@ -272,7 +272,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     }
                 }
             }
-            
+
             tableView.reloadData()
 
             let searchTextField: UITextField? = searchBar.valueForKey("searchField") as? UITextField
@@ -328,10 +328,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func placeAnnotations(removeOldPins: Bool, forStands: [Stand]?) {
         var allowedToPlaceAnnotations : Bool = true
-        
+
         func removeUserLocationAnnotationCount(count: [MKAnnotation]) -> Int {
             var counter = mapView.annotations.count
-            
+
             for elements in mapView.annotations {
                 if elements is MKUserLocation {
                     counter -= 1
@@ -352,8 +352,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 products.append(product.name)
                 print("\(data.id) \(product.name)")
             }
-            
-            
+
+
             if products.count == 0 {
                 newAnnotation.subtitle = "Deze stand heeft nog geen producten toegevoegd!"
             } else if products.count <= 3 {
@@ -363,7 +363,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             }
             self.mapView.addAnnotation(newAnnotation)
         }
-        
+
         /* Remove the old pins before updating. */
         if (removeOldPins) {
             if let stands = forStands {
@@ -414,12 +414,12 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                     product.name = products["name"].string!
                     stand.products.append(product)
                 }
-                
+
                 try! self.realm.write({ () -> Void in
                     self.realm.create(Stand.self, value: stand, update: true)
                 })
             }
-            
+
             print(Realm.Configuration.defaultConfiguration.path!)
             self.placeAnnotations(true, forStands: nil)
 
@@ -427,18 +427,18 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 print(error)
         }
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBar.translucent = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.view.backgroundColor = UIColor.clearColor()
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationController?.navigationBar.backgroundColor = UIColor.clearColor()
-        
+
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .ScaleAspectFit
         imageView.image = UIImage(named: "FoodOnRouteLogo")
-        
+
         self.navigationItem.titleView = imageView
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Default
     }
@@ -449,9 +449,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             print(touch.view)
             if (touch.view is BubbleView) {
                 let standViewController = StandViewController()
-                
                 standViewController.stand = selectedStand!
-                
                 self.navigationController?.pushViewController(standViewController, animated: true)
             }
         }
