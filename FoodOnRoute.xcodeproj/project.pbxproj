@@ -27,6 +27,7 @@
 		A8FE8B761C161D3400E0160C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B741C161D3400E0160C /* MapViewController.swift */; };
 		A8FE8B7B1C161D5000E0160C /* PT_Sans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */; };
 		A8FE8B7E1C161D5000E0160C /* PT_Sans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */; };
+		F8440E5A1C22FC9F00747768 /* StandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8440E591C22FC9F00747768 /* StandViewController.swift */; };
 		F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */; };
 		F8587ABE1C17184300C53630 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABD1C17184300C53630 /* BubbleView.swift */; };
 		F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */; };
@@ -74,6 +75,7 @@
 		A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Bold.ttf"; path = "Resources/Fonts/PT_Sans-Bold.ttf"; sourceTree = "<group>"; };
 		A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Regular.ttf"; path = "Resources/Fonts/PT_Sans-Regular.ttf"; sourceTree = "<group>"; };
 		D36289EAEF10F97A0D9ED599 /* Pods-FoodOnRoute.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodOnRoute.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FoodOnRoute/Pods-FoodOnRoute.debug.xcconfig"; sourceTree = "<group>"; };
+		F8440E591C22FC9F00747768 /* StandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandViewController.swift; sourceTree = "<group>"; };
 		F8587ABB1C1717A100C53630 /* CalloutAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotationView.swift; path = UserInterface/Annotations/CalloutAnnotationView.swift; sourceTree = "<group>"; };
 		F8587ABD1C17184300C53630 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BubbleView.swift; path = UserInterface/Annotations/BubbleView.swift; sourceTree = "<group>"; };
 		F8587ABF1C183F6800C53630 /* CalloutAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalloutAnnotation.swift; path = UserInterface/Annotations/CalloutAnnotation.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				A88248541C16123300AD1F4A /* UserInterface */,
 				A8FE8B731C161D3400E0160C /* DebugViewController.swift */,
 				A84B847C1C20BCF30084E551 /* ProductViewController.swift */,
+				F8440E591C22FC9F00747768 /* StandViewController.swift */,
 				A8FE8B741C161D3400E0160C /* MapViewController.swift */,
 				F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */,
 				A8345F971C15C6DC00A97D9B /* Resources */,
@@ -397,6 +400,7 @@
 				A8FE8B641C161D0700E0160C /* AppDelegate.swift in Sources */,
 				F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */,
 				F8587AC21C183FC600C53630 /* CustomAnnotation.swift in Sources */,
+				F8440E5A1C22FC9F00747768 /* StandViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

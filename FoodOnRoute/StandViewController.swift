@@ -1,13 +1,15 @@
 //
-//  ProductsTableViewController.swift
+//  StandViewController.swift
 //  FoodOnRoute
 //
-//  Created by Peter Alserda on 15/12/15.
+//  Created by Stefan Brouwer on 17-12-15.
 //  Copyright © 2015 Peter Alserda. All rights reserved.
 //
 
 import UIKit
-class ProductViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+import RealmSwift
+
+class StandViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     let headerViewBackground = UIView()
     let upperSeparator = UIView()
     let headerViewTitle = UILabel()
@@ -18,6 +20,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     var scrollView: UIScrollView = UIScrollView()
     let navigationbarBorder: UIView = UIView()
     var listOfProducts: [String] = [String]()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +29,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.view.backgroundColor = foodOnRouteColor.darkBlack
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-
+        
         tableView.registerClass(ProductTableViewCell.self, forCellReuseIdentifier: "ProductCell")
         setNavigationbarAppearance()
         addScrollView()
@@ -40,7 +43,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     
     
     func resetConstraints(InterfaceOrientation: UIInterfaceOrientation) {
-
+        
         switch InterfaceOrientation {
         case .Portrait:
             setScrollViewHeight()
@@ -52,12 +55,12 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         scrollView.removeConstraints(scrollView.constraints)
         scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
         scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-
+        
         tableView.removeConstraints(tableView.constraints)
         let tableViewHeight: CGFloat = CGFloat(((listOfProducts.count * 47) + listOfProducts.count))
         tableView.centerWithTopMarginInView(scrollView, placeUnderViews: [headerViewBackground], topMargin: 18)
         tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: tableViewHeight))
-
+        
         headerViewBackground.removeConstraints(headerViewBackground.constraints)
         headerViewBackground.centerWithTopMarginInView(scrollView, placeUnderViews: nil, topMargin: 25)
         headerViewBackground.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 66))
@@ -74,8 +77,8 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         upperBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
         upperBackground.constrainToSize(CGSize(width: 248, height: 88))
         
-
-
+        
+        
         switch InterfaceOrientation {
         case .Portrait:
             bottomBackground.removeConstraints(bottomBackground.constraints)
@@ -88,7 +91,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
             bottomBackground.centerXAnchor.constraintEqualToAnchor(scrollView.centerXAnchor).active = true
             
             bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
-
+            
             
             let viewsArray = [headerViewBackground, tableView, bottomBackground]
             
@@ -102,13 +105,13 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
             }
             
             scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, height + 75)
-
+            
             
         default:
             print("")
         }
     }
-
+    
     
     func setScrollViewHeight() {
         let viewsArray = [headerViewBackground, tableView, bottomBackground]
@@ -121,7 +124,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
                 }
             }
         }
-
+        
         scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, height + 139)
     }
     
@@ -169,7 +172,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.centerWithTopMarginInView(scrollView, placeUnderViews: [headerViewBackground], topMargin: 18)
         tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: tableViewHeight))
     }
-
+    
     func addScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = foodOnRouteColor.lightBlue
@@ -180,7 +183,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
         scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: view.frame.height))
     }
-
+    
     
     func addBottomBackground() {
         bottomBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -192,15 +195,15 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
             bottomBackground.bottomAnchor.constraintEqualToAnchor(tableView.bottomAnchor, constant: 248).active = true
         }
         bottomBackground.centerXAnchor.constraintEqualToAnchor(scrollView.centerXAnchor).active = true
-
-
+        
+        
         bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
     }
     
     func addUpperBackground() {
         upperBackground.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(upperBackground)
-
+        
         upperBackground.topAnchor.constraintEqualToAnchor(scrollView.topAnchor, constant: 6).active = true
         upperBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
         upperBackground.constrainToSize(CGSize(width: 248, height: 88))
@@ -214,6 +217,10 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack:")
         self.navigationItem.leftBarButtonItem = button
         
+        let image2 = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
+        let button2 = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.Done, target: self, action: "openProductView:")
+        self.navigationItem.rightBarButtonItem = button2
+        
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .ScaleAspectFit
@@ -223,8 +230,24 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func goBack(sender: UIBarButtonItem) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
+    
+    func openProductView(sender: UIButton) {
+        let productVC = ProductViewController()
+        
+        var products: [String] = [String]()
+        if let stand = realm.objects(Stand).first?.products {
+            for product in stand {
+                products.append(product.name)
+            }
+        }
+        
+        productVC.listOfProducts = products
+        self.navigationController?.pushViewController(productVC, animated: true)
+        
+    }
+
     
     func addShadowToNavigationbar() {
         if !navigationbarBorder.constraints.isEmpty {
@@ -234,10 +257,10 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         navigationbarBorder.opaque = true
         navigationbarBorder.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(navigationbarBorder)
-    
+        
         navigationbarBorder.constrainToSize(CGSize(width: view.frame.width, height: 3))
     }
-
+    
     
     
     // MARK: TableView Delegates
@@ -275,8 +298,9 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-            /* Resets the border under the navigationBar, otherwise the width of the border will stay the same as it was in portrait mode */
-            addShadowToNavigationbar()
-            resetConstraints(toInterfaceOrientation)
+        /* Resets the border under the navigationBar, otherwise the width of the border will stay the same as it was in portrait mode */
+        addShadowToNavigationbar()
+        resetConstraints(toInterfaceOrientation)
     }
 }
+
