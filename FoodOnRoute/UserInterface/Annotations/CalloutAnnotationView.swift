@@ -68,26 +68,19 @@ class CalloutAnnotationView : MKAnnotationView {
         
         addSubview(bubbleView)
         
-        // Create title label stats
-//        titleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-//        titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        /* Stand title */
         titleLabel.textAlignment = .Left
         titleLabel.font = titleFont
         titleLabel.textColor = foodOnRouteColor.darkBlue
         
-        // Create subtitle label stats
-//        subtitleLabel.frame = CGRectInset(bubbleView.bounds, -1, -1)
-//        subtitleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        /* Product list */
         subtitleLabel.textAlignment = .Left
         subtitleLabel.font = subtitleFont
         subtitleLabel.textColor = foodOnRouteColor.darkGrey
-//
-//        // Create show stand button stats
+
+        /* Show stand button */
         showStandButton.backgroundColor = foodOnRouteColor.lightGreen
-//        showStandButton.layer.borderWidth = 3
-//        showStandButton.layer.borderColor = foodOnRouteColor.darkGreen.CGColor
         showStandButton.layer.cornerRadius = 5
-//
         showStandButton.setImage(UIImage(named: "NavToStandButton")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
         showStandButton.addTarget(self, action: "showStandView:", forControlEvents: UIControlEvents.TouchUpInside)
         
@@ -105,18 +98,22 @@ class CalloutAnnotationView : MKAnnotationView {
     func setBubbleConstraints() {
         titleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         titleLabel.topAnchor.constraintEqualToAnchor(bubbleView.topAnchor, constant: 20).active = true
-        subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         titleLabel.rightAnchor.constraintEqualToAnchor(bubbleView.rightAnchor, constant: 20).active = true
+        
+        subtitleLabel.leftAnchor.constraintEqualToAnchor(bubbleView.leftAnchor, constant: 20).active = true
         subtitleLabel.topAnchor.constraintEqualToAnchor(titleLabel.bottomAnchor, constant: 5).active = true
         
         showStandButton.bottomAnchor.constraintEqualToAnchor(bubbleView.bottomAnchor, constant: -28).active = true
         showStandButton.centerXAnchor.constraintEqualToAnchor(bubbleView.centerXAnchor).active = true
-        print(bubbleView.bounds)
         
         let showStandWidthConstraint = showStandButton.widthAnchor.constraintEqualToAnchor(nil, constant: bubbleView.bounds.width - 40)
         let showStandHeightConstraint = showStandButton.heightAnchor.constraintEqualToAnchor(nil, constant: 42)
         NSLayoutConstraint.activateConstraints([showStandWidthConstraint, showStandHeightConstraint])
     }
+    
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        print(touches)
+//    }
 }
 
 

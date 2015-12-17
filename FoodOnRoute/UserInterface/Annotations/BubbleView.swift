@@ -23,18 +23,17 @@ import UIKit
 /// Note, this was designed as `@IBDesignable` and generally you'd put this in a separate module.
 /// But to keep this example simple, I'm just going to keep here, in this main target's module.
 
-@IBDesignable public class BubbleView: UIView {
+class BubbleView: UIView {
+    var cornerRadius      : CGFloat = 5
+    var arrowHeight       : CGFloat = 5
+    var arrowAngle        : CGFloat = CGFloat(M_PI_4)
+    var bubbleFillColor   : UIColor = UIColor.whiteColor()
+    var bubbleStrokeColor : UIColor = UIColor.clearColor()
+    var bubbleLineWidth   : CGFloat = 1
     
-    @IBInspectable public var cornerRadius      : CGFloat = 5
-    @IBInspectable public var arrowHeight       : CGFloat = 5
-    @IBInspectable public var arrowAngle        : CGFloat = CGFloat(M_PI_4)
-    @IBInspectable public var bubbleFillColor   : UIColor = UIColor.whiteColor()
-    @IBInspectable public var bubbleStrokeColor : UIColor = UIColor.clearColor()
-    @IBInspectable public var bubbleLineWidth   : CGFloat = 1
+    let contentView = UIView()
     
-    public let contentView = UIView()
-    
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         configure()
@@ -52,14 +51,13 @@ import UIKit
         addSubview(contentView)
     }
     
-    override public func layoutSubviews() {
+    override func layoutSubviews() {
         let contentViewFrame = CGRect(x: cornerRadius, y: cornerRadius, width: frame.size.width - cornerRadius * 2.0, height: frame.size.height - cornerRadius * 2.0 - arrowHeight)
         
         contentView.frame = contentViewFrame
-//        print("\(contentView.frame.height) contentViewFrame")
     }
     
-    public func setContentViewSize(size: CGSize) {
+    func setContentViewSize(size: CGSize) {
         var bubbleFrame = self.frame
         bubbleFrame.size = CGSize(width: 250 + cornerRadius * 2.0, height: 167 + cornerRadius * 2.0 + arrowHeight)
         frame = bubbleFrame
@@ -69,7 +67,7 @@ import UIKit
     
     // draw the callout/popover/bubble with rounded corners and an arrow pointing down (presumably to the item below this)
     
-    override public func drawRect(rect: CGRect) {
+    override func drawRect(rect: CGRect) {
         let path = UIBezierPath()
         let start = CGPointMake(frame.size.width / 2.0, frame.size.height)
         
