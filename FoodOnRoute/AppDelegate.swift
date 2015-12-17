@@ -20,14 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.path!)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
 
-//        let mapViewController = MapViewController()
-        let productViewController = ProductViewController()
-        let navController = UINavigationController(rootViewController: productViewController)
+        let mapViewController = MapViewController()
+//        let productViewController = ProductViewController()
+        let navController = UINavigationController(rootViewController: mapViewController)
         
         locationManager.start()
-        
-
-//        productViewController.navigationItem.titleView = imageView
         
         window?.rootViewController = navController
         

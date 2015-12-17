@@ -9,11 +9,13 @@
 import UIKit
 class ProductViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     let headerViewBackground = UIView()
+    let upperSeparator = UIView()
     let headerViewTitle = UILabel()
     let tableView = UITableView()
+    let upperBackground: UIImageView = UIImageView(image: UIImage(named: "UpperBackground"))
     let bottomBackground: UIImageView = UIImageView(image: UIImage(named:
         "BottomBackground"))
-    let scrollView: UIScrollView = UIScrollView()
+    var scrollView: UIScrollView = UIScrollView()
     let navigationbarBorder: UIView = UIView()
     var listOfProducts: [String] = [String]()
     
@@ -24,29 +26,89 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.view.backgroundColor = foodOnRouteColor.darkBlack
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
-        listOfProducts = ["Afrikaanse baobab", "boomkalebas", "brave hendrik", "kudzu", "ora", "pijlkruid", "pijpajuin", "rammenas", "schorseneren", "teunisbloem"]
-        listOfProducts = ["boomkalebas", "brave hendrik", "kudzu", "Henkholtrop", "hahaha"]
+
         tableView.registerClass(ProductTableViewCell.self, forCellReuseIdentifier: "ProductCell")
-
         setNavigationbarAppearance()
-
         addScrollView()
         addUpperBackground()
-
-
         addTableViewHeader()
         addTableView()
         addBottomBackground()
         addShadowToNavigationbar()
         setScrollViewHeight()
-//        print(scrollView)
-//        print(scrollView.bottomAnchor)
-//        print(scrollView.topAnchor)
-//        print(scrollView.bounds)
-//        print(scrollView.frame)
-//        print(scrollView.contentSize.height)
-        
     }
+    
+    
+    func resetConstraints(InterfaceOrientation: UIInterfaceOrientation) {
+
+        switch InterfaceOrientation {
+        case .Portrait:
+            setScrollViewHeight()
+        default:
+            bottomBackground.removeConstraints(bottomBackground.constraints)
+            scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.scrollView.frame.height + 169)
+        }
+        
+        scrollView.removeConstraints(scrollView.constraints)
+        scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
+        scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+
+        tableView.removeConstraints(tableView.constraints)
+        let tableViewHeight: CGFloat = CGFloat(((listOfProducts.count * 47) + listOfProducts.count))
+        tableView.centerWithTopMarginInView(scrollView, placeUnderViews: [headerViewBackground], topMargin: 18)
+        tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: tableViewHeight))
+
+        headerViewBackground.removeConstraints(headerViewBackground.constraints)
+        headerViewBackground.centerWithTopMarginInView(scrollView, placeUnderViews: nil, topMargin: 25)
+        headerViewBackground.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 66))
+        
+        upperSeparator.frame = CGRectMake(0, 0, self.view.frame.width - 40, 0.5)
+        
+        headerViewTitle.removeConstraints(headerViewTitle.constraints)
+        headerViewTitle.leftAnchor.constraintEqualToAnchor(headerViewBackground.leftAnchor, constant: 20).active = true
+        headerViewTitle.topAnchor.constraintEqualToAnchor(headerViewBackground.topAnchor, constant: 24).active = true
+        headerViewTitle.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 20))
+        
+        upperBackground.removeConstraints(upperBackground.constraints)
+        upperBackground.topAnchor.constraintEqualToAnchor(scrollView.topAnchor, constant: 6).active = true
+        upperBackground.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
+        upperBackground.constrainToSize(CGSize(width: 248, height: 88))
+        
+
+
+        switch InterfaceOrientation {
+        case .Portrait:
+            bottomBackground.removeConstraints(bottomBackground.constraints)
+            
+            if listOfProducts.count <= 3 {
+                bottomBackground.bottomAnchor.constraintEqualToAnchor(bottomLayoutGuide.topAnchor, constant: 0).active = true
+            } else {
+                bottomBackground.bottomAnchor.constraintEqualToAnchor(tableView.bottomAnchor, constant: 248).active = true
+            }
+            bottomBackground.centerXAnchor.constraintEqualToAnchor(scrollView.centerXAnchor).active = true
+            
+            bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
+
+            
+            let viewsArray = [headerViewBackground, tableView, bottomBackground]
+            
+            var height : CGFloat = 0
+            for view in viewsArray {
+                for constraint in view.constraints {
+                    if constraint.identifier == "height" {
+                        height += constraint.constant
+                    }
+                }
+            }
+            
+            scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, height + 75)
+
+            
+        default:
+            print("")
+        }
+    }
+
     
     func setScrollViewHeight() {
         let viewsArray = [headerViewBackground, tableView, bottomBackground]
@@ -55,20 +117,12 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         for view in viewsArray {
             for constraint in view.constraints {
                 if constraint.identifier == "height" {
-                    print(constraint.constant)
                     height += constraint.constant
                 }
             }
         }
 
-        for constraint in scrollView.constraints {
-            if constraint.identifier == "height" || constraint.identifier == "width" {
-                scrollView.removeConstraint(constraint)
-            }
-        }
-
         scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, height + 139)
-        scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: height + 139))
     }
     
     func addTableViewHeader() {
@@ -81,9 +135,6 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         headerViewTitle.font = UIFont(name: "Montserrat-Bold", size: 21)
         headerViewTitle.textColor = foodOnRouteColor.lightGreen
         headerViewBackground.addSubview(headerViewTitle)
-        
-        
-
         
         scrollView.addSubview(headerViewBackground)
         
@@ -106,7 +157,7 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.layer.cornerRadius = 5
         
         
-        let upperSeparator = UIView(frame: CGRectMake(0, 0, self.view.frame.width - 40, 0.5))
+        upperSeparator.frame = CGRectMake(0, 0, self.view.frame.width - 40, 0.5)
         upperSeparator.backgroundColor = self.tableView.separatorColor
         tableView.addSubview(upperSeparator)
         
@@ -119,34 +170,11 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: tableViewHeight))
     }
 
-    func resetConstraints() {
-        scrollView.removeConstraints(scrollView.constraints)
-        scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
-        scrollView.constrainToSize(CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-        
-        tableView.removeConstraints(tableView.constraints)
-        let tableViewHeight: CGFloat = CGFloat(((listOfProducts.count * 47) + listOfProducts.count))
-        tableView.centerWithTopMarginInView(scrollView, placeUnderViews: [headerViewBackground], topMargin: 18)
-        tableView.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: tableViewHeight))
-        
-        headerViewBackground.removeConstraints(headerViewBackground.constraints)
-        headerViewBackground.centerWithTopMarginInView(scrollView, placeUnderViews: nil, topMargin: 25)
-        headerViewBackground.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 66))
-        
-        headerViewTitle.removeConstraints(headerViewTitle.constraints)
-        headerViewTitle.leftAnchor.constraintEqualToAnchor(headerViewBackground.leftAnchor, constant: 20).active = true
-        headerViewTitle.topAnchor.constraintEqualToAnchor(headerViewBackground.topAnchor, constant: 24).active = true
-        headerViewTitle.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 20))
-        
-        
-    }
     func addScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = foodOnRouteColor.lightBlue
         scrollView.scrollEnabled = true
-        scrollView.showsHorizontalScrollIndicator = true
         scrollView.showsVerticalScrollIndicator = true
-//        scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 2)
         self.view.addSubview(scrollView)
         
         scrollView.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 0)
@@ -158,14 +186,18 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         bottomBackground.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(bottomBackground)
         
-        bottomBackground.bottomAnchor.constraintEqualToAnchor(tableView.bottomAnchor, constant: 248).active = true
+        if listOfProducts.count <= 3 {
+            bottomBackground.bottomAnchor.constraintEqualToAnchor(bottomLayoutGuide.topAnchor, constant: 0).active = true
+        } else {
+            bottomBackground.bottomAnchor.constraintEqualToAnchor(tableView.bottomAnchor, constant: 248).active = true
+        }
         bottomBackground.centerXAnchor.constraintEqualToAnchor(scrollView.centerXAnchor).active = true
+
 
         bottomBackground.constrainToSize(CGSize(width: view.frame.width, height: 191))
     }
     
     func addUpperBackground() {
-        let upperBackground: UIImageView = UIImageView(image: UIImage(named: "UpperBackground"))
         upperBackground.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(upperBackground)
 
@@ -234,11 +266,6 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    override func viewWillAppear(animated: Bool) {
-
-    }
-    
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
     }
@@ -250,6 +277,6 @@ class ProductViewController : UIViewController, UITableViewDelegate, UITableView
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
             /* Resets the border under the navigationBar, otherwise the width of the border will stay the same as it was in portrait mode */
             addShadowToNavigationbar()
-            resetConstraints()
+            resetConstraints(toInterfaceOrientation)
     }
 }
