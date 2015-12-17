@@ -23,7 +23,6 @@ class StandViewController : UIViewController {
     let standContainer: UIView = UIView()
     let standTitle: UILabel = UILabel()
     let standDescription: UILabel = UILabel()
-    var stand: Stand = Stand()
 
     let productsContainer: UIView = UIView()
     let productsTitle: UILabel = UILabel()
@@ -38,14 +37,14 @@ class StandViewController : UIViewController {
         self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
         setNavigationbarAppearance()
         addScrollView()
-        addStandText()
         addUpperBackground()
         addBottomBackground()
         addShadowToNavigationbar()
 
+        addStandText()
         addProductsSection()
-
-//        setScrollViewHeight()
+        
+        setScrollViewHeight()
     }
 
     func addProductsSection() {
@@ -73,7 +72,7 @@ class StandViewController : UIViewController {
         scrollView.addSubview(productsContainer)
 
 
-        productsContainer.centerWithTopMarginInView(scrollView, placeUnderViews: nil, topMargin: 25)
+        productsContainer.centerWithTopMarginInView(scrollView, placeUnderViews: [standContainer], topMargin: 45)
         productsContainer.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 260))
 
         productsTitle.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
@@ -91,7 +90,7 @@ class StandViewController : UIViewController {
 
 
     func setScrollViewHeight() {
-        let viewsArray = [bottomBackground]
+        let viewsArray = [productsContainer, standContainer]
 
         var height : CGFloat = 0
         for view in viewsArray {
