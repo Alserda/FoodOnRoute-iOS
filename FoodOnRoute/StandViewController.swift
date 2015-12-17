@@ -59,7 +59,7 @@ class StandViewController : UIViewController {
         productsButton.setTitle("Alle producten", forState: .Normal)
         productsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         productsButton.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 14)!
-        productsButton.addTarget(self, action: "showStandView:", forControlEvents: UIControlEvents.TouchUpInside)
+        productsButton.addTarget(self, action: "openProductView:", forControlEvents: UIControlEvents.TouchUpInside)
         productsContainer.addSubview(productsButton)
         
         scrollView.addSubview(productsContainer)
@@ -136,11 +136,6 @@ class StandViewController : UIViewController {
         let image = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
         let button = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Done, target: self, action: "goBack:")
         self.navigationItem.leftBarButtonItem = button
-        
-        let image2 = UIImage(named: "BarButtonItem")!.imageWithRenderingMode(.AlwaysOriginal)
-        let button2 = UIBarButtonItem(image: image2, style: UIBarButtonItemStyle.Done, target: self, action: "openProductView:")
-        self.navigationItem.rightBarButtonItem = button2
-        
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         imageView.contentMode = .ScaleAspectFit
