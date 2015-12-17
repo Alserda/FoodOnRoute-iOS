@@ -114,16 +114,16 @@ class StandViewController : UIViewController {
         standContainer.layer.cornerRadius = 5
 
         standTitle.translatesAutoresizingMaskIntoConstraints = false
-        standTitle.text = "Standnaam"
+        standTitle.text = stand.name
         standTitle.font = UIFont(name: "Montserrat-Bold", size: 21)
         standTitle.textAlignment = .Left
-        standTitle.textColor = foodOnRouteColor.lightGreen
+        standTitle.textColor = foodOnRouteColor.darkBlue
 
         standDescription.translatesAutoresizingMaskIntoConstraints = false
         standDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         standDescription.font = UIFont(name: "PT Sans", size: 14)
         standDescription.textAlignment = .Left
-        standDescription.backgroundColor = UIColor.blueColor()
+//        standDescription.backgroundColor = UIColor.blueColor()
 
         scrollView.addSubview(standContainer)
         scrollView.addSubview(standTitle)
