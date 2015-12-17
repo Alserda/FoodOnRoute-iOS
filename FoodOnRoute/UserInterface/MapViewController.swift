@@ -23,6 +23,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     var activeFilter = false
     var searchResults : Results<(Product)>?
     let tableView = UITableView()
+    var selectedStand: Stand? = Stand()
     
     let peterButton: UIButton = UIButton()
 
@@ -35,7 +36,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         tableView.dataSource = self
         tableView.registerClass(ResultsTableViewCell.self, forCellReuseIdentifier: "ResultCell")
 
-        
         retrieveAndCacheStands(clearDatabase: false)
         addMapView()
         addSearchField()
@@ -199,6 +199,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         print("\(__FUNCTION__)")
         if let annotation = view.annotation as? CustomAnnotation {
+            selectedStand = annotation.identifier
             let calloutAnnotation = CalloutAnnotation(annotation: annotation)
             mapView.addAnnotation(calloutAnnotation)
             mapView.selectAnnotation(calloutAnnotation, animated: false)
@@ -341,9 +342,11 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
         func placeAnnotation(data: Stand) {
             let newAnnotation = CustomAnnotation()
+            newAnnotation.identifier = data as Stand
             newAnnotation.coordinate.latitude = data.latitude as CLLocationDegrees
             newAnnotation.coordinate.longitude = data.longitude as CLLocationDegrees
             newAnnotation.title = data.name
+            newAnnotation
             var products: [String] = [String]()
             if let stand = realm.objects(Stand).first?.products {
                 for product in stand {
@@ -436,28 +439,14 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
-//        let bubbleView = BubbleView()
-//        
-//        let touch = touches.first! as UITouch
-//        let location = touch.locationInView(bubbleView)
-//        print("bubbleview", location)
-
         for touch in touches {
             print(touch.view)
             if (touch.view is BubbleView) {
-                print("jaa")
+                let standViewController = StandViewController()
                 
-                let productVC = ProductViewController()
+                standViewController.stand = selectedStand!
                 
-                var products: [String] = [String]()
-                if let stand = realm.objects(Stand).first?.products {
-                    for product in stand {
-                        products.append(product.name)
-                    }
-                }
-                
-                productVC.listOfProducts = products
-                self.navigationController?.pushViewController(productVC, animated: true)
+                self.navigationController?.pushViewController(standViewController, animated: true)
             }
         }
     }

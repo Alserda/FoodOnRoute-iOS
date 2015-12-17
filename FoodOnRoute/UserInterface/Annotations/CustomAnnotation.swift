@@ -14,7 +14,7 @@ import MapKit
 /// This is a simple `MKPointAnnotation` subclass, which updates its `title` using reverse geocoding.
 
 class CustomAnnotation : MKPointAnnotation {
-
+    var identifier: Stand?
 }
 
 
