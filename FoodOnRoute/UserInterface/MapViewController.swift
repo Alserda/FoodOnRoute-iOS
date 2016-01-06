@@ -25,8 +25,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     let tableView = UITableView()
     var selectedStand: Stand? = Stand()
 
-    let peterButton: UIButton = UIButton()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,31 +39,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         addSearchField()
         addFollowButton()
         placeAnnotations(false, forStands: nil)
-        peterIsGeweldigSoms()
 
         self.registerShowAndHideKeyboard()
 
     }
-
-    func peterIsGeweldigSoms() {
-        peterButton.setImage(UIImage(named: "UpperBackground"), forState: UIControlState.Normal)
-//        peterButton.addTarget(self, action: "openProductView:", forControlEvents: .TouchUpInside)
-        peterButton.addTarget(self, action: "openStandView:", forControlEvents: .TouchUpInside)
-        peterButton.translatesAutoresizingMaskIntoConstraints = false
-        mapView.addSubview(peterButton)
-
-        peterButton.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 20).active = true
-        peterButton.leftAnchor.constraintEqualToAnchor(self.view.leftAnchor, constant: -20).active = true
-
-        peterButton.constrainToSize(CGSize(width: 54, height: 47))
-    }
-
-    func openStandView(sender: UIButton) {
-        let standVC = StandViewController()
-        self.navigationController?.pushViewController(standVC, animated: true)
-
-    }
-
 
     func refreshFollowButtonConstraints(extraHeightToHeightConstraint: CGFloat?) {
         var extraHeight : CGFloat = 0
@@ -350,7 +327,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             var products: [String] = [String]()
             for product in data.products {
                 products.append(product.name)
-                print("\(data.id) \(product.name)")
+//                print("\(data.id) \(product.name)")
             }
 
 
@@ -408,6 +385,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 stand.name = value["name"].string!
                 stand.latitude = value["latitude"].double!
                 stand.longitude = value["longitude"].double!
+                stand.information = value["information"].string!
                 for (_, products) in value["products"] {
                     let product = Product()
                     product.id = products["id"].intValue

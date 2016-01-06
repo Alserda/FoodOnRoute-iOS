@@ -15,6 +15,7 @@ class Stand: Object {
     dynamic var name : String = ""
     dynamic var latitude : Double = 0.0
     dynamic var longitude : Double = 0.0
+    dynamic var information : String = ""
     let products = List<Product>()
     
     override static func primaryKey() -> String? {

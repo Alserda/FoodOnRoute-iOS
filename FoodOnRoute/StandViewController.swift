@@ -30,7 +30,8 @@ class StandViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stand = realm.objects(Stand).first!
+        stand = realm.objects(Stand).last!
+        
         print(stand)
 
         self.view.backgroundColor = foodOnRouteColor.darkBlack
@@ -120,10 +121,20 @@ class StandViewController : UIViewController {
         standTitle.textColor = foodOnRouteColor.darkBlue
 
         standDescription.translatesAutoresizingMaskIntoConstraints = false
-        standDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        standDescription.text = stand.information
         standDescription.font = UIFont(name: "PT Sans", size: 14)
         standDescription.textAlignment = .Left
-//        standDescription.backgroundColor = UIColor.blueColor()
+        standDescription.lineBreakMode = .ByWordWrapping
+        standDescription.numberOfLines = 500
+//        standDescription.backgroundColor = foodOnRouteColor.darkBlue
+        print(standDescription.text?.characters.count)
+        
+        var counter = 0
+        if let henk = standDescription.text?.characters.count {
+            counter = henk
+        }
+        
+        print(counter / 7)
 
         scrollView.addSubview(standContainer)
         scrollView.addSubview(standTitle)
@@ -131,13 +142,13 @@ class StandViewController : UIViewController {
 
 
         standContainer.centerWithTopMarginInView(scrollView, placeUnderViews: nil, topMargin: 25)
-        standContainer.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 300))
+        standContainer.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 200))
         standTitle.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 20).active = true
         standTitle.topAnchor.constraintEqualToAnchor(standContainer.topAnchor, constant: 24).active = true
-        standDescription.topAnchor.constraintEqualToAnchor(standTitle.bottomAnchor, constant: 24).active = true
+        standDescription.topAnchor.constraintEqualToAnchor(standTitle.bottomAnchor, constant: 5).active = true
         standDescription.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 20).active = true
 
-        standDescription.constrainToSize(CGSize(width: self.view.bounds.width - 80, height: 200))
+        standDescription.constrainToSize(CGSize(width: self.view.bounds.width - 80, height: 135))
     }
 
     func addScrollView() {
