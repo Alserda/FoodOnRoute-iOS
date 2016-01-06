@@ -26,12 +26,12 @@ class StandViewController : UIViewController {
 
     let productsContainer: UIView = UIView()
     let productsTitle: UILabel = UILabel()
+    var productsList: UILabel = UILabel()
     let productsButton: UIButton = UIButton(type: UIButtonType.System) as UIButton
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stand = realm.objects(Stand).last!
-        
+//        stand = realm.objects(Stand).last!
         print(stand)
 
         self.view.backgroundColor = foodOnRouteColor.darkBlack
@@ -57,35 +57,58 @@ class StandViewController : UIViewController {
         productsTitle.text = "Producten"
         productsTitle.font = UIFont(name: "Montserrat-Bold", size: 21)
         productsTitle.textColor = foodOnRouteColor.lightGreen
-        productsContainer.addSubview(productsTitle)
+
+        
+        var products: [String] = [String]()
+        for product in stand.products {
+            products.append(product.name)
+        }
+        if products.count == 0 {
+            productsList.text = "Deze stand heeft nog geen producten toegevoegd!"
+        } else if products.count <= 18 {
+            productsList.text = products.joinWithSeparator(", ")
+        } else {
+            productsList.text = products[0..<18].joinWithSeparator(", ") + " en nog \(products.count - 18) producten"
+        }
+        
+        print(products.count)
+        print(productsList.text)
+        
+        productsList.translatesAutoresizingMaskIntoConstraints = false
+        productsList.font = UIFont(name: "PT Sans", size: 14)
+        productsList.numberOfLines = 0
+        productsList.sizeToFit()
+        productsList.drawTextInRect(CGRectMake(0, 0, (self.view.frame.width - 80), 140))
 
 
         productsButton.translatesAutoresizingMaskIntoConstraints = false
         productsButton.backgroundColor = foodOnRouteColor.lightGreen
         productsButton.layer.cornerRadius = 5
-//        productsButton.setImage(UIImage(named: "NavToStandButton")?.imageWithRenderingMode(.AlwaysOriginal), forState: UIControlState.Normal)
         productsButton.setTitle("Alle producten", forState: .Normal)
         productsButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         productsButton.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 14)!
         productsButton.addTarget(self, action: "openProductView:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        productsContainer.addSubview(productsTitle)
+        productsContainer.addSubview(productsList)
         productsContainer.addSubview(productsButton)
-
         scrollView.addSubview(productsContainer)
 
 
         productsContainer.centerWithTopMarginInView(scrollView, placeUnderViews: [standContainer], topMargin: 45)
         productsContainer.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 260))
 
-        productsTitle.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
         productsTitle.topAnchor.constraintEqualToAnchor(productsContainer.topAnchor, constant: 24).active = true
+        productsTitle.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
         productsTitle.constrainToSize(CGSize(width: (self.view.frame.width - 80), height: 20))
 
-
-
+        productsList.topAnchor.constraintEqualToAnchor(productsTitle.bottomAnchor, constant: 10).active = true
+        productsList.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
+        productsList.widthAnchor.constraintEqualToAnchor(nil, constant: (self.view.frame.width - 80)).active = true
+        
 
         productsButton.bottomAnchor.constraintEqualToAnchor(productsContainer.bottomAnchor, constant: -20).active = true
         productsButton.leftAnchor.constraintEqualToAnchor(productsContainer.leftAnchor, constant: 20).active = true
-        print(productsContainer.bounds.width)
         productsButton.constrainToSize(CGSize(width: (self.view.frame.width - 80), height: 47))
     }
 
@@ -125,14 +148,6 @@ class StandViewController : UIViewController {
         standDescription.font = UIFont(name: "PT Sans", size: 14)
         standDescription.textAlignment = .Left
         standDescription.editable = false
-        print(standDescription.text?.characters.count)
-        
-        var counter = 0
-        if let henk = standDescription.text?.characters.count {
-            counter = henk
-        }
-        
-        print(counter / 7)
 
         scrollView.addSubview(standContainer)
         scrollView.addSubview(standTitle)
@@ -143,7 +158,7 @@ class StandViewController : UIViewController {
         standContainer.constrainToSize(CGSize(width: (self.view.frame.width - 40), height: 200))
         standTitle.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 20).active = true
         standTitle.topAnchor.constraintEqualToAnchor(standContainer.topAnchor, constant: 24).active = true
-        standDescription.topAnchor.constraintEqualToAnchor(standTitle.bottomAnchor, constant: 5).active = true
+        standDescription.topAnchor.constraintEqualToAnchor(standTitle.bottomAnchor, constant: 0).active = true
         standDescription.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 16).active = true
 
         standDescription.constrainToSize(CGSize(width: self.view.bounds.width - 80, height: 135))
