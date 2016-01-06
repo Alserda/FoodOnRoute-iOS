@@ -22,7 +22,7 @@ class StandViewController : UIViewController {
 
     let standContainer: UIView = UIView()
     let standTitle: UILabel = UILabel()
-    let standDescription: UILabel = UILabel()
+    let standDescription: UITextView = UITextView()
 
     let productsContainer: UIView = UIView()
     let productsTitle: UILabel = UILabel()
@@ -124,9 +124,7 @@ class StandViewController : UIViewController {
         standDescription.text = stand.information
         standDescription.font = UIFont(name: "PT Sans", size: 14)
         standDescription.textAlignment = .Left
-        standDescription.lineBreakMode = .ByWordWrapping
-        standDescription.numberOfLines = 500
-//        standDescription.backgroundColor = foodOnRouteColor.darkBlue
+        standDescription.editable = false
         print(standDescription.text?.characters.count)
         
         var counter = 0
@@ -146,7 +144,7 @@ class StandViewController : UIViewController {
         standTitle.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 20).active = true
         standTitle.topAnchor.constraintEqualToAnchor(standContainer.topAnchor, constant: 24).active = true
         standDescription.topAnchor.constraintEqualToAnchor(standTitle.bottomAnchor, constant: 5).active = true
-        standDescription.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 20).active = true
+        standDescription.leftAnchor.constraintEqualToAnchor(standContainer.leftAnchor, constant: 16).active = true
 
         standDescription.constrainToSize(CGSize(width: self.view.bounds.width - 80, height: 135))
     }
