@@ -380,21 +380,51 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     func retrieveAndCacheStands(clearDatabase clearDatabase: Bool?) {
         backend.retrievePath(endpoint.foodOnRouteStandsIndex, completion: { (response) -> () in
             for (_, value) in response {
+                var addThisStand: Bool = true
+                
                 let stand = Stand()
                 stand.id = value["id"].intValue
-                stand.name = value["name"].string!
-                stand.latitude = value["latitude"].double!
-                stand.longitude = value["longitude"].double!
-                stand.information = value["information"].string!
+
+                if let standName = value["name"].string {
+                    stand.name = standName
+                } else {
+                    addThisStand = false
+                }
+                
+                if let standLatitude = value["latitude"].double {
+                    stand.latitude = standLatitude
+                } else {
+                    addThisStand = false
+                }
+                
+                if let standLongitude = value["longitude"].double {
+                    stand.longitude = standLongitude
+                } else {
+                    addThisStand = false
+                }
+
+                if let standInformation = value["information"].string {
+                    stand.information = standInformation
+                } else {
+                    stand.information = "De eigenaar van deze stand heeft nog geen informatie gedeeld."
+                }
+                
                 for (_, products) in value["products"] {
                     let product = Product()
                     product.id = products["id"].intValue
-                    product.name = products["name"].string!
+
+                    if let productName = products["name"].string {
+                        product.name = productName
+                    } else {
+                        addThisStand = false
+                    }
                     stand.products.append(product)
                 }
 
                 try! self.realm.write({ () -> Void in
-                    self.realm.create(Stand.self, value: stand, update: true)
+                    if addThisStand {
+                        self.realm.create(Stand.self, value: stand, update: true)
+                    }
                 })
             }
 
