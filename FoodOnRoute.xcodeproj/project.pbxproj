@@ -14,7 +14,6 @@
 		A85C09B31C16194E00B05A96 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
 		A85C09B41C16195800B05A96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCBA1BA6B4CE007B811F /* MapKit.framework */; };
 		A889B30E1BA186DB0030AFB9 /* FoodOnRouteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A889B30D1BA186DB0030AFB9 /* FoodOnRouteTests.swift */; };
-		A8A0CEA71C21871900F762F2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A0CEA61C21871900F762F2 /* NavigationController.swift */; };
 		A8AAFF811C1874AC00A87A8D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AAFF801C1874AC00A87A8D /* MapView.swift */; };
 		A8AAFF831C18797000A87A8D /* ResultsSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */; };
 		A8FE8B641C161D0700E0160C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B631C161D0700E0160C /* AppDelegate.swift */; };
@@ -61,7 +60,6 @@
 		A889B3071BA186DB0030AFB9 /* FoodOnRoute.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodOnRoute.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A889B30C1BA186DB0030AFB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A889B30D1BA186DB0030AFB9 /* FoodOnRouteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOnRouteTests.swift; sourceTree = "<group>"; };
-		A8A0CEA61C21871900F762F2 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		A8AAFF801C1874AC00A87A8D /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapView.swift; path = UserInterface/MapView.swift; sourceTree = "<group>"; };
 		A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsSearchBar.swift; path = UserInterface/ResultsSearchBar.swift; sourceTree = "<group>"; };
 		A8FE8B631C161D0700E0160C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,7 +155,6 @@
 		A88248541C16123300AD1F4A /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A8A0CEA61C21871900F762F2 /* NavigationController.swift */,
 				A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */,
 				A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */,
 				A8AAFF801C1874AC00A87A8D /* MapView.swift */,
@@ -396,7 +393,6 @@
 				F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */,
 				A8FE8B6D1C161D2300E0160C /* Helper.swift in Sources */,
 				A84B847D1C20BCF30084E551 /* ProductViewController.swift in Sources */,
-				A8A0CEA71C21871900F762F2 /* NavigationController.swift in Sources */,
 				A8FE8B751C161D3400E0160C /* DebugViewController.swift in Sources */,
 				A8FE8B641C161D0700E0160C /* AppDelegate.swift in Sources */,
 				F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */,

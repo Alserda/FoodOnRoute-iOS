@@ -29,7 +29,6 @@ class LocationController : NSObject, CLLocationManagerDelegate {
     /* Triggered each time the users' location gets updated. */
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         Locations.lastLocation = (manager.location?.coordinate)!
-//        print(Locations.lastLocation)
     }
     
     /* Registers the current coordinate with the rest of the registered coordinates. */
