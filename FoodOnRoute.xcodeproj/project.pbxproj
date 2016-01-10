@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		12114C0128EED0A6E96C63A5 /* Pods_FoodOnRoute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576B773B954D9CC61B357E4 /* Pods_FoodOnRoute.framework */; };
 		A8162EEA1C41D04F005165CC /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */; };
-		A84730CA1C19E63900B60522 /* MapViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84730C91C19E63900B60522 /* MapViewExtention.swift */; };
 		A84B847B1C208C010084E551 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */; };
 		A84B847D1C20BCF30084E551 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84B847C1C20BCF30084E551 /* ProductViewController.swift */; };
 		A85C09B31C16194E00B05A96 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
@@ -122,6 +121,15 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		A84947621C42D43F002F1B4D /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */,
+				A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
 		A88248511C16101D00AD1F4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,11 +161,13 @@
 		A88248541C16123300AD1F4A /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */,
-				A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */,
 				A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */,
 				A8AAFF801C1874AC00A87A8D /* MapView.swift */,
+				A84947621C42D43F002F1B4D /* TableViewCell */,
 				A88248551C16124800AD1F4A /* Annotations */,
+				A84B847C1C20BCF30084E551 /* ProductViewController.swift */,
+				F8440E591C22FC9F00747768 /* StandViewController.swift */,
+				A8FE8B741C161D3400E0160C /* MapViewController.swift */,
 			);
 			name = UserInterface;
 			sourceTree = "<group>";
@@ -200,9 +210,6 @@
 				A88248521C1611F400AD1F4A /* API */,
 				A88248531C16121000AD1F4A /* Models */,
 				A88248541C16123300AD1F4A /* UserInterface */,
-				A84B847C1C20BCF30084E551 /* ProductViewController.swift */,
-				F8440E591C22FC9F00747768 /* StandViewController.swift */,
-				A8FE8B741C161D3400E0160C /* MapViewController.swift */,
 				F8C0F6A11C0DEBCE007EBF2F /* Images.xcassets */,
 				A8345F971C15C6DC00A97D9B /* Resources */,
 				A88248511C16101D00AD1F4A /* Frameworks */,
