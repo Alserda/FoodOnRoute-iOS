@@ -22,7 +22,7 @@ extension UIColor {
         var green: CGFloat = 0.0
         var blue:  CGFloat = 0.0
         var alpha: CGFloat = 1.0
-        
+
         if hexString.hasPrefix("#") {
             let index   = hexString.startIndex.advancedBy(1)
             let hexColor     = hexString.substringFromIndex(index)
@@ -53,7 +53,7 @@ extension UIColor {
 
 /* Gives more clear errors when breaking constraints */
 extension NSLayoutConstraint {
-    
+
     override public var description: String {
         let id = identifier ?? ""
         return "id: \(id), constant: \(constant)" //you may print whatever you want here
@@ -65,7 +65,7 @@ extension NSLayoutConstraint {
 extension UIView {
     func centerWithTopMargin(viewController: UIViewController, placeUnderViews: [UIView]?, topMargin: CGFloat) {
         var addedViewHeight : CGFloat = 0
-        
+
         if let extraViews = placeUnderViews {
             for view in extraViews {
                 addedViewHeight += view.bounds.size.height
@@ -76,12 +76,10 @@ extension UIView {
         let verticalConstraint = self.centerXAnchor.constraintEqualToAnchor(viewController.view.centerXAnchor)
         NSLayoutConstraint.activateConstraints([horizontalConstraint, verticalConstraint])
     }
-    
-    
-    
+
     func centerWithTopMarginInView(view: UIView, placeUnderViews: [UIView]?, topMargin: CGFloat) {
         var addedViewHeight : CGFloat = 0
-        
+
         if let extraViews = placeUnderViews {
             for view in extraViews {
                 for constraint in view.constraints {
@@ -91,72 +89,17 @@ extension UIView {
                 }
             }
         }
-        
+
         let horizontalConstraint = self.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: addedViewHeight + topMargin)
         let verticalConstraint = self.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor)
         NSLayoutConstraint.activateConstraints([horizontalConstraint, verticalConstraint])
     }
-    
+
     func constrainToSize (size : CGSize) {
         let widthConstraint = self.widthAnchor.constraintEqualToAnchor(nil, constant: size.width)
         widthConstraint.identifier = "width"
         let heightConstraint = self.heightAnchor.constraintEqualToAnchor(nil, constant: size.height)
         heightConstraint.identifier = "height"
         NSLayoutConstraint.activateConstraints([widthConstraint, heightConstraint])
-    }    
-}
-
-/* Makes it possible to compare coordinates. */
-extension CLLocationCoordinate2D {
-    func equals (c: CLLocationCoordinate2D) -> Bool {
-        return c.latitude == self.latitude && c.longitude == self.longitude
     }
-}
-
-/* Formats Double */
-extension Double {
-    func format() -> String {
-        return NSString(format: "%0.4f", self) as String
-    }
-}
-
-extension MapViewController {
-    
-    func registerShowAndHideKeyboard() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    func keyboardWillShow(aNotification: NSNotification) {
-        let duration = aNotification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
-        let keyboardSize = (aNotification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue().height
-        
-        UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseIn], animations: { () -> Void in
-            self.refreshFollowButtonConstraints(keyboardSize!)
-            }) { (finished) -> Void in
-                //noppes
-        }
-    }
-    
-    func keyboardWillHide(aNotification: NSNotification) {
-        let duration = aNotification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! Double
-        
-        UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseOut], animations: { () -> Void in
-            self.refreshFollowButtonConstraints(nil)
-            }) { (finished) -> Void in
-                //noppes
-        }
-    }
-    
-}
-
-/* Collects debug messages and displays this in DebugViewController. */
-struct Debugger {
-    static var messages : [String] = [String]()
-}
-
-/* Handles location-related variables. */
-struct Locations {
-    static var lastLocation : CLLocationCoordinate2D = CLLocationCoordinate2D()
-    static var pinnedLocations : [CLLocationCoordinate2D] = []
 }

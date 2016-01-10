@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		12114C0128EED0A6E96C63A5 /* Pods_FoodOnRoute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9576B773B954D9CC61B357E4 /* Pods_FoodOnRoute.framework */; };
+		A8162EEA1C41D04F005165CC /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */; };
+		A84730CA1C19E63900B60522 /* MapViewExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84730C91C19E63900B60522 /* MapViewExtention.swift */; };
 		A84B847B1C208C010084E551 /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */; };
 		A84B847D1C20BCF30084E551 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84B847C1C20BCF30084E551 /* ProductViewController.swift */; };
 		A85C09B31C16194E00B05A96 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A837CCB81BA6B4C8007B811F /* CoreLocation.framework */; };
@@ -21,7 +23,6 @@
 		A8FE8B6C1C161D2300E0160C /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B681C161D2300E0160C /* Database.swift */; };
 		A8FE8B6D1C161D2300E0160C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B691C161D2300E0160C /* Helper.swift */; };
 		A8FE8B6E1C161D2300E0160C /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B6A1C161D2300E0160C /* LocationController.swift */; };
-		A8FE8B751C161D3400E0160C /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B731C161D3400E0160C /* DebugViewController.swift */; };
 		A8FE8B761C161D3400E0160C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FE8B741C161D3400E0160C /* MapViewController.swift */; };
 		A8FE8B7B1C161D5000E0160C /* PT_Sans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */; };
 		A8FE8B7E1C161D5000E0160C /* PT_Sans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */; };
@@ -49,6 +50,7 @@
 		094176F64C5182F89F67257F /* Pods_FoodOnRoute.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodOnRoute.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EE031A0DB1F546DA03FE653 /* Pods-FoodOnRoute.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodOnRoute.release.xcconfig"; path = "Pods/Target Support Files/Pods-FoodOnRoute/Pods-FoodOnRoute.release.xcconfig"; sourceTree = "<group>"; };
 		9576B773B954D9CC61B357E4 /* Pods_FoodOnRoute.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FoodOnRoute.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductTableViewCell.swift; path = UserInterface/ProductTableViewCell.swift; sourceTree = "<group>"; };
 		A837CCB81BA6B4C8007B811F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A837CCBA1BA6B4CE007B811F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsTableViewCell.swift; path = UserInterface/ResultsTableViewCell.swift; sourceTree = "<group>"; };
@@ -66,7 +68,6 @@
 		A8FE8B681C161D2300E0160C /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Database.swift; path = Models/Database.swift; sourceTree = "<group>"; };
 		A8FE8B691C161D2300E0160C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helper.swift; path = Models/Helper.swift; sourceTree = "<group>"; };
 		A8FE8B6A1C161D2300E0160C /* LocationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationController.swift; path = Models/LocationController.swift; sourceTree = "<group>"; };
-		A8FE8B731C161D3400E0160C /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DebugViewController.swift; path = UserInterface/DebugViewController.swift; sourceTree = "<group>"; };
 		A8FE8B741C161D3400E0160C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = UserInterface/MapViewController.swift; sourceTree = "<group>"; };
 		A8FE8B771C161D5000E0160C /* PT_Sans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Bold.ttf"; path = "Resources/Fonts/PT_Sans-Bold.ttf"; sourceTree = "<group>"; };
 		A8FE8B7A1C161D5000E0160C /* PT_Sans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "PT_Sans-Regular.ttf"; path = "Resources/Fonts/PT_Sans-Regular.ttf"; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				A84B847A1C208C010084E551 /* ResultsTableViewCell.swift */,
+				A8162EE91C41D04F005165CC /* ProductTableViewCell.swift */,
 				A8AAFF821C18797000A87A8D /* ResultsSearchBar.swift */,
 				A8AAFF801C1874AC00A87A8D /* MapView.swift */,
 				A88248551C16124800AD1F4A /* Annotations */,
@@ -198,7 +200,6 @@
 				A88248521C1611F400AD1F4A /* API */,
 				A88248531C16121000AD1F4A /* Models */,
 				A88248541C16123300AD1F4A /* UserInterface */,
-				A8FE8B731C161D3400E0160C /* DebugViewController.swift */,
 				A84B847C1C20BCF30084E551 /* ProductViewController.swift */,
 				F8440E591C22FC9F00747768 /* StandViewController.swift */,
 				A8FE8B741C161D3400E0160C /* MapViewController.swift */,
@@ -387,9 +388,9 @@
 				A8FE8B661C161D1700E0160C /* Backend.swift in Sources */,
 				F8587ABE1C17184300C53630 /* BubbleView.swift in Sources */,
 				F8587AC01C183F6800C53630 /* CalloutAnnotation.swift in Sources */,
+				A8162EEA1C41D04F005165CC /* ProductTableViewCell.swift in Sources */,
 				A8FE8B6D1C161D2300E0160C /* Helper.swift in Sources */,
 				A84B847D1C20BCF30084E551 /* ProductViewController.swift in Sources */,
-				A8FE8B751C161D3400E0160C /* DebugViewController.swift in Sources */,
 				A8FE8B641C161D0700E0160C /* AppDelegate.swift in Sources */,
 				F8587ABC1C1717A100C53630 /* CalloutAnnotationView.swift in Sources */,
 				F8587AC21C183FC600C53630 /* CustomAnnotation.swift in Sources */,

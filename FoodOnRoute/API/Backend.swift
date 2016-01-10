@@ -38,7 +38,7 @@ class Backend {
         }
     }
     
-    func postRequest(endpoint: URLStringConvertible, params: [String : NSObject], completion: (response: JSON) -> ()) -> Void {
+    func postRequest(endpoint: URLStringConvertible, params: [String : NSObject], completion: (response: JSON) -> (), failed: (error: NSError) -> ()) -> Void {
         Alamofire
             .request(.POST, endpoint, parameters: params, encoding: .JSON)
             .responseJSON { response in
@@ -46,6 +46,7 @@ class Backend {
 
                 case .Failure(let error):
                     print(error)
+                    failed(error: error)
                 case .Success:
                     if let value = response.result.value {
                         let json = JSON(value)
