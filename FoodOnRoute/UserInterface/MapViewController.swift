@@ -132,12 +132,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
 
     func addSearchField() {
         mapView.addSubview(searchBar)
-
         searchBarTextfield = searchBar.valueForKey("searchField") as! UITextField
-
         searchBarTextfield.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBarTextfield.constrainToSize(CGSize(width: 250, height: 44))
-
+        
         searchBar.centerWithTopMargin(self, placeUnderViews: nil, topMargin: 10)
         searchBar.constrainToSize(CGSize(width: 250, height: 44))
     }
@@ -189,12 +187,8 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
     let customAnnotationViewIdentifier = "MyAnnotation"
 
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-//        print("\(__FUNCTION__)")
         if annotation is MKUserLocation {
-            // Return nil to reset User location icon to default
             return nil
-
-            //
         }
         if annotation is CustomAnnotation {
             var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(customAnnotationViewIdentifier)
@@ -202,7 +196,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
                 pin = MKAnnotationView(annotation: annotation, reuseIdentifier: customAnnotationViewIdentifier)
                 pin!.canShowCallout = false
                 pin!.image = UIImage(named:"AnnotationsView")
-//                print("Normal")
             } else {
                 pin!.annotation = annotation
             }
@@ -212,7 +205,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             if pin == nil {
                 pin = CalloutAnnotationView(annotation: annotation, reuseIdentifier: calloutAnnotationViewIdentifier)
                 pin!.canShowCallout = false
-                print("Callout")
             } else {
                 let p = pin as! CalloutAnnotationView
                 pin!.annotation = annotation
@@ -271,19 +263,10 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         self.view.endEditing(true)
     }
 
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        print("\(__FUNCTION__)")
-        // Wanneer je op de form tapt
-    }
-
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         print("\(__FUNCTION__)")
         // Wanneer je buiten het veld tapt
         tableView.removeFromSuperview()
-    }
-
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        print("hoi")
     }
 
 
@@ -297,7 +280,6 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
         } else {
             mapView.userTrackingMode = .Follow
             following = true
-            print("following again")
             followButton.setImage(UIImage(named: "LocationTrackerFollow"), forState: UIControlState.Normal)
         }
     }
@@ -326,9 +308,7 @@ class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelega
             var products: [String] = [String]()
             for product in data.products {
                 products.append(product.name)
-//                print("\(data.id) \(product.name)")
             }
-
 
             if products.count == 0 {
                 newAnnotation.subtitle = "Deze stand heeft nog geen producten toegevoegd!"
