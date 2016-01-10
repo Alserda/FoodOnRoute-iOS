@@ -12,7 +12,6 @@ import MapKit
 import RealmSwift
 
 class MapViewController : UIViewController, MKMapViewDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
-    let locationManager = LocationController()
     let backend = Backend()
     let mapView = MapView()
     var followButton = UIButton()

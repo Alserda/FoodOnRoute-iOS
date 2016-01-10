@@ -27,20 +27,3 @@ class ResultsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-class ProductTableViewCell: ResultsTableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        productTitle.frame = CGRectMake(20, 12.5, self.contentView.bounds.width, 20)
-        productTitle.font = UIFont(name: "PT Sans", size: 14)
-//        productTitle.backgroundColor = UIColor.blueColor()
-    }
-
-
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-

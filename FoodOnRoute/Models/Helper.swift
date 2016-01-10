@@ -77,8 +77,6 @@ extension UIView {
         NSLayoutConstraint.activateConstraints([horizontalConstraint, verticalConstraint])
     }
     
-    
-    
     func centerWithTopMarginInView(view: UIView, placeUnderViews: [UIView]?, topMargin: CGFloat) {
         var addedViewHeight : CGFloat = 0
         
@@ -104,29 +102,4 @@ extension UIView {
         heightConstraint.identifier = "height"
         NSLayoutConstraint.activateConstraints([widthConstraint, heightConstraint])
     }    
-}
-
-/* Makes it possible to compare coordinates. */
-extension CLLocationCoordinate2D {
-    func equals (c: CLLocationCoordinate2D) -> Bool {
-        return c.latitude == self.latitude && c.longitude == self.longitude
-    }
-}
-
-/* Formats Double */
-extension Double {
-    func format() -> String {
-        return NSString(format: "%0.4f", self) as String
-    }
-}
-
-/* Collects debug messages and displays this in DebugViewController. */
-struct Debugger {
-    static var messages : [String] = [String]()
-}
-
-/* Handles location-related variables. */
-struct Locations {
-    static var lastLocation : CLLocationCoordinate2D = CLLocationCoordinate2D()
-    static var pinnedLocations : [CLLocationCoordinate2D] = []
 }

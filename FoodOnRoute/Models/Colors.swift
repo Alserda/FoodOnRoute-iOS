@@ -21,5 +21,4 @@ struct foodOnRouteColor {
     static let darkGrey    : UIColor = UIColor(hexString: "#666666")
     
     static let darkBlack   : UIColor = UIColor(hexString: "#444444")
-
 }
